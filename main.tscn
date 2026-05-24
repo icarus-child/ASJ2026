@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://cfq3bkhk20pq3" path="res://player/player.tscn" id="1_0xm2m"]
 [ext_resource type="Texture2D" uid="uid://dqybuslh80c1l" path="res://icon.svg" id="2_h2yge"]
+[ext_resource type="PackedScene" uid="uid://bjdmk6kvicmng" path="res://enemies/test_enemy.tscn" id="3_h2yge"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1bvp3"]
 size = Vector2(128, 128)
@@ -9,7 +10,7 @@ size = Vector2(128, 128)
 [node name="Node2D" type="Node2D" unique_id=895117885]
 
 [node name="Player" parent="." unique_id=142514294 instance=ExtResource("1_0xm2m")]
-position = Vector2(639, 338)
+position = Vector2(495, 147)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1572839709]
 position = Vector2(254, 354)
@@ -20,3 +21,6 @@ shape = SubResource("RectangleShape2D_1bvp3")
 
 [node name="Sprite2D" type="Sprite2D" parent="StaticBody2D" unique_id=1941322182]
 texture = ExtResource("2_h2yge")
+
+[node name="TestEnemy" parent="." unique_id=575713072 instance=ExtResource("3_h2yge")]
+position = Vector2(939, 492)
