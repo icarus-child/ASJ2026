@@ -16,7 +16,7 @@ var can_attack: bool = true
 
 @onready var test_projectile := preload("res://enemies/test_projectile.tscn") as PackedScene
 @onready var attacks: Array[Attack] = [
-	Attack.new(100, func(player_ref: CharacterBody2D) -> void: _shoot_projectile(player_ref))
+	Attack.new(300, func(player_ref: CharacterBody2D) -> void: _shoot_projectile(player_ref))
 ]
 @onready var max_attack_range: float = (
 	attacks.map(func(attack: Attack) -> float: return attack.attack_range).max()
@@ -61,7 +61,7 @@ func _calculate_optimal_attack(range_to_player: float) -> Attack:
 
 
 func _get_distance_to_player() -> float:
-	return 10
+	return position.distance_to(player.position)
 
 
 # TODO: make projectile max speed owned by the projectile
