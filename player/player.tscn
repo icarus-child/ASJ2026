@@ -10,6 +10,7 @@ radius = 61.204575
 motion_mode = 1
 script = ExtResource("1_rkbax")
 max_speed = 500.0
+max_accel = 4000.0
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1214209411]
 texture = ExtResource("1_oul6g")
