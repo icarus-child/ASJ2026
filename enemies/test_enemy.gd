@@ -9,6 +9,9 @@ extends Node2D
 # NOTE: AI should try to avoid being cornered -> handle during pathfinding logic
 # NOTE: AI might attack less when the player has a lot of spells to make themselves harder to hit?
 
+# the ai needs to know how far it can move before it's cooldown is done so it can
+# move intelligently between attacks (?) i.e. it prioritizes local optimums
+
 @export var min_attack_cooldown: float = 3
 @export var max_attack_cooldown: float = 6
 
@@ -24,13 +27,6 @@ var can_attack: bool = true
 @onready var player: CharacterBody2D = get_parent().get_node("Player")
 
 
-func _ready() -> void:
-	# sort ascending by attack range
-	attacks.sort_custom(
-		func(a1: Attack, a2: Attack) -> bool: return a1.attack_range < a2.attack_range
-	)
-
-
 class Attack:
 	var attack_range: float
 	var attack_action: Callable
@@ -40,10 +36,17 @@ class Attack:
 		attack_action = action_in
 
 
+func _ready() -> void:
+	# sort ascending by attack range
+	attacks.sort_custom(
+		func(a1: Attack, a2: Attack) -> bool: return a1.attack_range < a2.attack_range
+	)
+
+
 func _process(_delta: float) -> void:
 	var distance_to_player := _get_distance_to_player()
 	if can_attack and distance_to_player <= max_attack_range:
-		_calculate_optimal_attack(distance_to_player).attack_action.bind(player).call()
+		_calculate_optimal_attack(distance_to_player).attack_action.call(player)
 		var timer := Timer.new()
 		timer.one_shot = true
 		timer.autostart = true
@@ -64,9 +67,8 @@ func _get_distance_to_player() -> float:
 	return position.distance_to(player.position)
 
 
-# TODO: make projectile max speed owned by the projectile
 func _shoot_projectile(target: Node2D) -> void:
-	var projectile := test_projectile.instantiate() as RigidBody2D
+	var projectile := test_projectile.instantiate() as Projectile
 	add_sibling(projectile)
 	projectile.position = position
-	projectile.linear_velocity = position.direction_to(target.position) * 400
+	projectile.linear_velocity = position.direction_to(target.position) * projectile.speed
