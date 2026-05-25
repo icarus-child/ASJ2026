@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://bi7880g0wx2x8"]
 
 [ext_resource type="Script" uid="uid://dyl7rg02bf1f2" path="res://ui/health.gd" id="1_nb4k0"]
-[ext_resource type="PackedScene" uid="uid://dfo6463tel5jj" path="res://ui/hp.tscn" id="2_ks8t7"]
 
 [node name="Ui" type="CanvasLayer" unique_id=1864841918]
 
@@ -9,5 +8,3 @@
 position = Vector2(40, 40)
 script = ExtResource("1_nb4k0")
 padding = 75.0
-
-[node name="Hp" parent="Health" unique_id=908619701 instance=ExtResource("2_ks8t7")]
