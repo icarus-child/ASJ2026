@@ -12,7 +12,6 @@ func _physics_process(_delta: float) -> void:
 	else:
 		var right_stick := Input.get_vector("aim_left", "aim_right", "aim_up", "aim_down").limit_length()
 		position = right_stick * aim_range
-	print(position.length())
 	visible = position.length() > hide_range
 
 
