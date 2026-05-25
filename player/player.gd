@@ -5,8 +5,12 @@ extends CharacterBody2D
 @export var max_accel: float
 @export var health: int = 5 # hollow knight style health, where damage is discrete. Not Final
 
+var facing := Vector2(0, 1)
+
 func _physics_process(delta: float) -> void:
 	var move_input: Vector2 = Input.get_vector("move_left", "move_right", "move_up", "move_down").limit_length()
+	if not move_input.is_zero_approx():
+		facing = move_input.normalized()
 	var target_vel: Vector2 = move_input * max_speed
 	velocity += (target_vel - velocity).limit_length(max_accel * delta)
 	move_and_slide()
