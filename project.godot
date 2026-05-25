@@ -27,6 +27,11 @@ gdscript/warnings/unsafe_method_access=2
 gdscript/warnings/unsafe_cast=1
 gdscript/warnings/unsafe_call_argument=2
 
+[display]
+
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
+
 [input]
 
 move_left={
