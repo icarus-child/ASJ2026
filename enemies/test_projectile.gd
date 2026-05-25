@@ -10,8 +10,8 @@ func _ready() -> void:
 	body_entered.connect(_on_body_enter)
 
 
-func _on_body_enter(body: CollisionObject2D) -> void:
-	assert(body is Player or body is StaticBody2D, "unexpected collision with %s" % body.name)
+func _on_body_enter(body: Node2D) -> void:
+	assert(body is Player or body is TileMapLayer, "unexpected collision with %s" % body.name)
 	if body is Player:
 		var player := body as Player
 		player.recieve_attack()
