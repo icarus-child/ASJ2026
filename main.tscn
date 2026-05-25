@@ -42,6 +42,7 @@ script = ExtResource("2_lquwl")
 distance = 200.0
 
 [node name="Camera2D" type="Camera2D" parent="Player/CameraTarget" unique_id=1787109863]
+process_callback = 0
 position_smoothing_enabled = true
 
 [node name="TestEnemy" parent="." unique_id=575713072 instance=ExtResource("3_h2yge")]

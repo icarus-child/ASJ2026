@@ -34,7 +34,7 @@ func _ready() -> void:
 	)
 
 
-func _process(_delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	var distance_to_player := _get_distance_to_player()
 	if can_attack and distance_to_player <= max_attack_range:
 		_calculate_optimal_attack(distance_to_player).attack_action.call(player)
@@ -60,6 +60,6 @@ func _get_distance_to_player() -> float:
 
 func _shoot_projectile(target: Node2D) -> void:
 	var projectile := test_projectile.instantiate() as Projectile
-	add_sibling(projectile)
 	projectile.position = position
 	projectile.linear_velocity = position.direction_to(target.position) * projectile.speed
+	add_sibling(projectile)
