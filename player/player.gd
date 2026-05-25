@@ -3,8 +3,8 @@ extends CharacterBody2D
 
 @export var max_speed: float
 @export var max_accel: float
-@export var health: int = 5 # hollow knight style health, where damage is discrete. Not Final
 
+# TODO: make player controller feel snappier
 func _physics_process(delta: float) -> void:
 	var move_input: Vector2 = Input.get_vector("move_left", "move_right", "move_up", "move_down").limit_length()
 	var target_vel: Vector2 = move_input * max_speed
@@ -16,7 +16,7 @@ func recieve_attack(damage: int = 1, can_parry: bool = true, custom_logic: Calla
 	if can_parry:
 		pass
 	print("got hit")
-	health = max(0, health - damage)
-	if health <= 0:
+	PlayerResources.health = max(0, PlayerResources.health - damage)
+	if PlayerResources.health <= 0:
 		print("game over") # handle game over
 	custom_logic.call(self)

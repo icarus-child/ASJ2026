@@ -18,28 +18,19 @@ extends Node2D
 var can_attack: bool = true
 
 @onready var test_projectile := preload("res://enemies/test_projectile.tscn") as PackedScene
-@onready var attacks: Array[Attack] = [
-	Attack.new(300, func(player_ref: CharacterBody2D) -> void: _shoot_projectile(player_ref))
+@onready var attacks: Array[Spell] = [
+	Spell.new(300, true, func(player_ref: CharacterBody2D) -> void: _shoot_projectile(player_ref))
 ]
 @onready var max_attack_range: float = (
-	attacks.map(func(attack: Attack) -> float: return attack.attack_range).max()
+	attacks.map(func(attack: Spell) -> float: return attack.attack_range).max()
 )
 @onready var player: CharacterBody2D = get_parent().get_node("Player")
-
-
-class Attack:
-	var attack_range: float
-	var attack_action: Callable
-
-	func _init(range_in: float, action_in: Callable) -> void:
-		attack_range = range_in
-		attack_action = action_in
 
 
 func _ready() -> void:
 	# sort ascending by attack range
 	attacks.sort_custom(
-		func(a1: Attack, a2: Attack) -> bool: return a1.attack_range < a2.attack_range
+		func(a1: Spell, a2: Spell) -> bool: return a1.attack_range < a2.attack_range
 	)
 
 
@@ -57,9 +48,9 @@ func _process(_delta: float) -> void:
 
 
 # calculate shortest range attack that is within the attack range
-func _calculate_optimal_attack(range_to_player: float) -> Attack:
+func _calculate_optimal_attack(range_to_player: float) -> Spell:
 	return attacks[attacks.find_custom(
-		func(attack: Attack) -> bool: return attack.attack_range <= range_to_player
+		func(attack: Spell) -> bool: return attack.attack_range <= range_to_player
 	)]
 
 
