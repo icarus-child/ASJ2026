@@ -1,7 +1,6 @@
 [gd_scene format=4 uid="uid://bn2rgbcn54r44"]
 
 [ext_resource type="PackedScene" uid="uid://cfq3bkhk20pq3" path="res://player/player.tscn" id="1_0xm2m"]
-[ext_resource type="Script" uid="uid://cvhpowux8jdr" path="res://player_camera_target.gd" id="2_lquwl"]
 [ext_resource type="Texture2D" uid="uid://bhj4lphmjxabs" path="res://assets/simple colision sprite.png" id="3_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://bjdmk6kvicmng" path="res://enemies/test_enemy.tscn" id="3_h2yge"]
 [ext_resource type="PackedScene" uid="uid://bi7880g0wx2x8" path="res://ui/ui.tscn" id="5_lquwl"]
@@ -37,11 +36,7 @@ sources/0 = SubResource("TileSetAtlasSource_lquwl")
 [node name="Player" parent="." unique_id=142514294 instance=ExtResource("1_0xm2m")]
 position = Vector2(495, 147)
 
-[node name="CameraTarget" type="Node2D" parent="Player" unique_id=795331526]
-script = ExtResource("2_lquwl")
-distance = 200.0
-
-[node name="Camera2D" type="Camera2D" parent="Player/CameraTarget" unique_id=1787109863]
+[node name="Camera2D" type="Camera2D" parent="Player/CameraTarget" parent_id_path=PackedInt32Array(142514294, 1228419122) index="0" unique_id=1787109863]
 process_callback = 0
 position_smoothing_enabled = true
 
@@ -54,3 +49,5 @@ tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAACAAAAAAAAAAA
 tile_set = SubResource("TileSet_7mycd")
 
 [node name="Ui" parent="." unique_id=1864841918 instance=ExtResource("5_lquwl")]
+
+[editable path="Player"]
