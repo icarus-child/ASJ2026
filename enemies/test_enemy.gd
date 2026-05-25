@@ -12,8 +12,8 @@ extends Node2D
 # the ai needs to know how far it can move before it's cooldown is done so it can
 # move intelligently between attacks (?) i.e. it prioritizes local optimums
 
-@export var min_attack_cooldown: float = 3
-@export var max_attack_cooldown: float = 6
+@export var min_attack_cooldown: float
+@export var max_attack_cooldown: float
 
 var can_attack: bool = true
 
