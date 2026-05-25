@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://dfo6463tel5jj"]
+
+[ext_resource type="Texture2D" uid="uid://dqybuslh80c1l" path="res://icon.svg" id="1_fdjou"]
+
+[node name="Hp" type="Sprite2D" unique_id=908619701]
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("1_fdjou")
