@@ -1,3 +1,4 @@
+class_name TestEnemy
 extends CharacterBody2D
 
 # Notes for self
@@ -16,6 +17,7 @@ extends CharacterBody2D
 @export var max_attack_cooldown: float
 @export var max_speed: float
 @export var acceleration: float
+@export var health: int = 3
 
 var can_attack: bool = true
 
@@ -34,6 +36,7 @@ func _ready() -> void:
 	)
 	# TODO: artificially stagger the timers so every enemy doesn't update at the same time
 	($NavigationTargetCooldown as Timer).timeout.connect(_update_navigation_target)
+	_update_navigation_target()
 
 
 # TODO: enemy attacks should have a startup and recovery time where they don't move
@@ -70,3 +73,14 @@ func _movement(delta: float) -> void:
 func _update_navigation_target() -> void:
 	var target := Vector2.ZERO
 	navigation_agent.target_position = target
+
+
+func _die() -> void:
+	print("ouch, I've been hit in the knee with an arrow")
+	queue_free()
+
+
+func take_damage() -> void:
+	health -= 1
+	if health <= 0:
+		_die()
