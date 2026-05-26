@@ -37,12 +37,12 @@ one_shot = true
 
 [node name="ParryEarlyWindow" type="Timer" parent="." unique_id=1639936526]
 process_callback = 0
-wait_time = 0.5
+wait_time = 0.2
 one_shot = true
 
 [node name="ParryLateWindow" type="Timer" parent="." unique_id=379052634]
 process_callback = 0
-wait_time = 0.2
+wait_time = 0.1
 one_shot = true
 
 [node name="AimTarget" type="Sprite2D" parent="." unique_id=1603199398]

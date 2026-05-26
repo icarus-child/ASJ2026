@@ -21,7 +21,7 @@ func _physics_process(delta: float) -> void:
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("parry") and parry_cooldown.is_stopped():
-		if not parry_late_window.is_stopped():
+		if not parry_late_window.is_stopped() and not parry_cooldown.is_stopped():
 			parry_late_window.stop()
 			defer_parry.call()
 		parry_early_window.start()
