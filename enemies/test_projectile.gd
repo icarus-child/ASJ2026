@@ -27,6 +27,8 @@ class TestSpell extends Spell:
 
 	func fire_attack(caster: Node2D, heading: Vector2) -> void:
 		var projectile := test_projectile.instantiate() as Projectile
+		if caster is CharacterBody2D:
+			projectile.collision_mask = 288
 		projectile.position = caster.position
 		projectile.linear_velocity = heading.normalized() * projectile.speed
 		caster.add_sibling(projectile)
