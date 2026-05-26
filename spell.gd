@@ -1,12 +1,11 @@
+@abstract
 class_name Spell
-extends Node
+extends Object
 
-var attack_range: float
-var attack_action: Callable
-var can_parry: bool
+@abstract func dummy() -> Node2D
 
+@abstract func fire_attack(caster: Node2D, heading: Vector2) -> void
 
-func _init(range_in: float, can_parry_in: bool, action_in: Callable) -> void:
-	attack_range = range_in
-	can_parry = can_parry_in
-	attack_action = action_in
+# This is a func so that it can be overriden
+func range() -> float:
+	return INF

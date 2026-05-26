@@ -17,12 +17,9 @@ extends Node2D
 
 var can_attack: bool = true
 
-@onready var test_projectile := preload("res://enemies/test_projectile.tscn") as PackedScene
-@onready var attacks: Array[Spell] = [
-	Spell.new(300, true, func(player_ref: CharacterBody2D) -> void: _shoot_projectile(player_ref))
-]
+@onready var attacks: Array[Spell] = [Projectile.TestSpell.new()]
 @onready var max_attack_range: float = (
-	attacks.map(func(attack: Spell) -> float: return attack.attack_range).max()
+	attacks.map(func(attack: Spell) -> float: return attack.range()).max()
 )
 @onready var player: CharacterBody2D = get_parent().get_node("Player")
 
@@ -30,14 +27,14 @@ var can_attack: bool = true
 func _ready() -> void:
 	# sort ascending by attack range
 	attacks.sort_custom(
-		func(a1: Spell, a2: Spell) -> bool: return a1.attack_range < a2.attack_range
+		func(a1: Spell, a2: Spell) -> bool: return a1.range() < a2.range()
 	)
 
 
 func _physics_process(_delta: float) -> void:
 	var distance_to_player := _get_distance_to_player()
 	if can_attack and distance_to_player <= max_attack_range:
-		_calculate_optimal_attack(distance_to_player).attack_action.call(player)
+		_calculate_optimal_attack(distance_to_player).fire_attack(self , position.direction_to(player.position))
 		var timer := Timer.new()
 		timer.one_shot = true
 		timer.autostart = true
@@ -50,16 +47,9 @@ func _physics_process(_delta: float) -> void:
 # calculate shortest range attack that is within the attack range
 func _calculate_optimal_attack(range_to_player: float) -> Spell:
 	return attacks[attacks.find_custom(
-		func(attack: Spell) -> bool: return attack.attack_range <= range_to_player
+		func(attack: Spell) -> bool: return attack.range() <= range_to_player
 	)]
 
 
 func _get_distance_to_player() -> float:
 	return position.distance_to(player.position)
-
-
-func _shoot_projectile(target: Node2D) -> void:
-	var projectile := test_projectile.instantiate() as Projectile
-	projectile.position = position
-	projectile.linear_velocity = position.direction_to(target.position) * projectile.speed
-	add_sibling(projectile)

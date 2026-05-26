@@ -18,3 +18,15 @@ func _on_body_enter(body: Node2D) -> void:
 	else:
 		pass # hit the wall animation
 	queue_free()
+
+class TestSpell extends Spell:
+	const test_projectile: PackedScene = preload("res://enemies/test_projectile.tscn")
+
+	func dummy() -> Node2D:
+		return Node2D.new()
+
+	func fire_attack(caster: Node2D, heading: Vector2) -> void:
+		var projectile := test_projectile.instantiate() as Projectile
+		projectile.position = caster.position
+		projectile.linear_velocity = heading.normalized() * projectile.speed
+		caster.add_sibling(projectile)
