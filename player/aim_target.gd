@@ -14,6 +14,16 @@ func _physics_process(_delta: float) -> void:
 		position = right_stick * aim_range
 	visible = position.length() > hide_range
 
+	var slot: int = 0
+	for slot_action: StringName in ["spell_1", "spell_2", "spell_3"]:
+		if slot > PlayerResources.spells.size():
+			break
+		if Input.is_action_just_pressed(slot_action) && not PlayerResources.spells[slot] == null:
+			PlayerResources.spells[slot].fire_attack(get_parent() as Node2D, position)
+			PlayerResources.spells[slot] = null
+			PlayerResources.spell_changed.emit(slot)
+			break
+		slot += 1
 
 func _input(event: InputEvent) -> void:
 	if (InputMap.event_is_action(event, "aim_left") or
