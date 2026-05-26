@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bi7880g0wx2x8"]
 
 [ext_resource type="Script" uid="uid://dyl7rg02bf1f2" path="res://ui/health.gd" id="1_nb4k0"]
+[ext_resource type="PackedScene" uid="uid://ctrh33la6lwsf" path="res://ui/spell_slot.tscn" id="2_ks8t7"]
 
 [node name="Ui" type="CanvasLayer" unique_id=1864841918]
 
@@ -8,3 +9,14 @@
 position = Vector2(40, 40)
 script = ExtResource("1_nb4k0")
 padding = 75.0
+
+[node name="SpellSlot" parent="." unique_id=1338756288 instance=ExtResource("2_ks8t7")]
+position = Vector2(809, 576)
+
+[node name="SpellSlot2" parent="." unique_id=1885587259 instance=ExtResource("2_ks8t7")]
+position = Vector2(944, 576)
+slot_number = 1
+
+[node name="SpellSlot3" parent="." unique_id=318228316 instance=ExtResource("2_ks8t7")]
+position = Vector2(1079, 576)
+slot_number = 2

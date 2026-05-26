@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://ctrh33la6lwsf"]
+
+[ext_resource type="Texture2D" uid="uid://dqybuslh80c1l" path="res://icon.svg" id="1_pjtqy"]
+[ext_resource type="Script" uid="uid://c5fmqqsbp7qg0" path="res://ui/spell_slot.gd" id="2_j3ms3"]
+
+[node name="SpellSlot" type="Sprite2D" unique_id=1338756288]
+self_modulate = Color(0.076, 0.1615, 0.19, 1)
+texture = ExtResource("1_pjtqy")
+script = ExtResource("2_j3ms3")

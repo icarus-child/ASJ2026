@@ -23,7 +23,7 @@ class TestSpell extends Spell:
 	const test_projectile: PackedScene = preload("res://enemies/test_projectile.tscn")
 
 	func dummy() -> Node2D:
-		return Node2D.new()
+		return test_projectile.instantiate()
 
 	func fire_attack(caster: Node2D, heading: Vector2) -> void:
 		var projectile := test_projectile.instantiate() as Projectile
