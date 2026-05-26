@@ -1,4 +1,4 @@
-extends Node2D
+extends CharacterBody2D
 
 # Notes for self
 # When attack off cooldown, calculate optimal attack based on current location
@@ -14,6 +14,8 @@ extends Node2D
 
 @export var min_attack_cooldown: float
 @export var max_attack_cooldown: float
+@export var max_speed: float
+@export var acceleration: float
 
 var can_attack: bool = true
 
@@ -22,6 +24,7 @@ var can_attack: bool = true
 	attacks.map(func(attack: Spell) -> float: return attack.range()).max()
 )
 @onready var player: CharacterBody2D = get_parent().get_node("Player")
+@onready var navigation_agent: NavigationAgent2D = $NavigationAgent2D
 
 
 func _ready() -> void:
@@ -29,10 +32,13 @@ func _ready() -> void:
 	attacks.sort_custom(
 		func(a1: Spell, a2: Spell) -> bool: return a1.range() < a2.range()
 	)
+	# TODO: artificially stagger the timers so every enemy doesn't update at the same time
+	($NavigationTargetCooldown as Timer).timeout.connect(_update_navigation_target)
 
 
-func _physics_process(_delta: float) -> void:
-	var distance_to_player := _get_distance_to_player()
+# TODO: enemy attacks should have a startup and recovery time where they don't move
+func _physics_process(delta: float) -> void:
+	var distance_to_player := position.distance_to(player.position)
 	if can_attack and distance_to_player <= max_attack_range:
 		_calculate_optimal_attack(distance_to_player).fire_attack(self , position.direction_to(player.position))
 		var timer := Timer.new()
@@ -42,6 +48,8 @@ func _physics_process(_delta: float) -> void:
 		timer.timeout.connect(func() -> void: can_attack = true)
 		can_attack = false
 		add_child(timer)
+	else:
+		_movement(delta)
 
 
 # calculate shortest range attack that is within the attack range
@@ -51,5 +59,14 @@ func _calculate_optimal_attack(range_to_player: float) -> Spell:
 	)]
 
 
-func _get_distance_to_player() -> float:
-	return position.distance_to(player.position)
+func _movement(delta: float) -> void:
+	var direction := position.direction_to(navigation_agent.get_next_path_position())
+	var target_vel: Vector2 = direction * max_speed
+	velocity += (target_vel - velocity).limit_length(acceleration * delta)
+	move_and_slide()
+	velocity = get_real_velocity()
+
+
+func _update_navigation_target() -> void:
+	var target := Vector2.ZERO
+	navigation_agent.target_position = target
