@@ -33,6 +33,9 @@ var defer_parry: Callable
 # One of these callbacks will be called depending on if a parry was performed in time or not
 # These callbacks are responsible for actually dealing damage or stocking a spell
 func parry_hit(parried: Callable, hit: Callable) -> void:
+	if not PlayerResources.can_acquire_spell():
+		hit.call()
+		
 	# if we parry early -> start timer & cooledown
 	# if we get hit when parry early timer is started -> parry and refund cooldown
 	# if we get hit without parry early timer but with parry late timer -> trigger old parry late timer and start a new one

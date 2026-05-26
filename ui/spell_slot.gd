@@ -16,4 +16,4 @@ func _on_slot_change(slot: int) -> void:
 		return
 	
 	_dummy = spell.dummy()
-	add_child(_dummy)
+	call_deferred("add_child", _dummy)

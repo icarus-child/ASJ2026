@@ -15,3 +15,9 @@ func acquire_spell(spell: Spell) -> void:
 			spells[s] = spell
 			spell_changed.emit(s)
 			break
+
+func can_acquire_spell() -> bool:
+	for s in spells:
+		if s == null:
+			return true
+	return false
