@@ -26,14 +26,6 @@ func _input(event: InputEvent) -> void:
 			parry()
 		parry_early_window.start()
 		parry_cooldown.start()
-
-# Parry has failed
-func take_damage(amount: int = 1) -> void:
-	print("got hit")
-	PlayerResources.health = max(0, PlayerResources.health - amount)
-	print(PlayerResources.health)
-	if PlayerResources.health <= 0:
-		print("game over")
 			
 
 # if we parry early -> start timer & cooledown
@@ -41,10 +33,13 @@ func take_damage(amount: int = 1) -> void:
 # if we get hit without parry early timer but with parry late timer -> trigger old parry late timer and start a new one
 # NOTE: does it feel better to keep an array backlog of grace windows and let you parry them all at once?
 # how would this function with the parry limit of 3?
-func recieve_attack(damage: int = 1, attack_can_be_parried: bool = true, custom_logic: Callable = func(_player: CharacterBody2D) -> void: return ) -> void:
+func recieve_attack(damage: int = 1, attack_can_be_parried: bool = true, custom_logic: Callable = func(_player: CharacterBody2D) -> void: return) -> void:
 	var hit_logic: Callable = func() -> void:
-		take_damage(damage)
-		custom_logic.call(self )
+		print("got hit")
+		PlayerResources.health = max(0, PlayerResources.health - damage)
+		if PlayerResources.health <= 0:
+			print("game over")
+		custom_logic.call(self)
 
 	# got hit before we parried the last attack, ending grace window
 	if not parry_late_window.is_stopped():
@@ -67,11 +62,13 @@ func recieve_attack(damage: int = 1, attack_can_be_parried: bool = true, custom_
 		hit_logic.call()
 
 
+
 func parry() -> void:
 	print("parried attack")
 
 
-func signal_disconnect_all(target_signal: Signal) -> void:
+
+func signal_disconnect_all(target_signal : Signal) -> void:
 	for n: Dictionary in target_signal.get_connections():
 		var callable_variant: Variant = n.get("callable")
 		assert(callable_variant is Callable)
