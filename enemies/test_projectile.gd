@@ -11,7 +11,6 @@ func _ready() -> void:
 
 
 func _on_body_enter(body: Node2D) -> void:
-	assert(body is StaticBody2D or body is TileMapLayer, "unexpected collision with %s" % body.name)
 	if body is StaticBody2D and (body as StaticBody2D).collision_layer == 2:
 		var player := body.get_parent() as Player
 		player.parry_hit(PlayerResources.acquire_spell.bind(TestSpell.new()), player.take_damage)
