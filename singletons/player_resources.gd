@@ -7,7 +7,7 @@ var spells: Array[Spell]
 signal spell_changed(slot: int)
 
 func _ready() -> void:
-	spells.resize(3)
+	spells.resize(4)
 	#change_spells_size(4)
 
 func acquire_spell(spell: Spell) -> void:

@@ -23,4 +23,4 @@ slot_number = 2
 
 [node name="SpellSlot4" parent="." unique_id=665227784 instance=ExtResource("2_ks8t7")]
 position = Vector2(1079, 445)
-slot_number = 2
+slot_number = 3

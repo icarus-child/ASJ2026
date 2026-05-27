@@ -3,8 +3,12 @@ extends Sprite2D
 @export var slot_number: int
 var _dummy: Node2D
 
+
 func _ready() -> void:
 	PlayerResources.spell_changed.connect(_on_slot_change)
+	if slot_number >= 3:
+		visible = false
+
 
 func _on_slot_change(slot: int) -> void:
 	if slot != slot_number:
@@ -18,4 +22,4 @@ func _on_slot_change(slot: int) -> void:
 	_dummy = spell.dummy()
 	call_deferred("add_child", _dummy)
 	
-	hidden
+	
