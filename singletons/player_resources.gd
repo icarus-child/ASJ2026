@@ -8,6 +8,7 @@ signal spell_changed(slot: int)
 
 func _ready() -> void:
 	spells.resize(3)
+	#change_spells_size(4)
 
 func acquire_spell(spell: Spell) -> void:
 	for s in range(spells.size()):
@@ -21,3 +22,7 @@ func can_acquire_spell() -> bool:
 		if s == null:
 			return true
 	return false
+
+func change_spells_size(size: int) -> void:
+	spells.resize(size)
+	# update UI
