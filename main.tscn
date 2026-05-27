@@ -75,7 +75,7 @@ process_callback = 0
 position_smoothing_enabled = true
 
 [node name="TestEnemy" parent="." unique_id=575713072 instance=ExtResource("3_h2yge")]
-position = Vector2(721, 262)
+position = Vector2(1043, 537)
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=1347056112]
 position = Vector2(721, 262)
@@ -89,5 +89,6 @@ tile_set = SubResource("TileSet_7mycd")
 navigation_visibility_mode = 1
 
 [node name="Ui" parent="." unique_id=1864841918 instance=ExtResource("5_lquwl")]
+visible = false
 
 [editable path="Player"]
