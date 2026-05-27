@@ -71,7 +71,7 @@ func _movement(delta: float) -> void:
 
 
 func _update_navigation_target() -> void:
-	var target := Vector2.ZERO
+	var target := player.position
 	navigation_agent.target_position = target
 
 
