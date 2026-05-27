@@ -1,4 +1,4 @@
-extends Sprite2D
+extends TextureRect
 
 @export var slot_number: int
 var _dummy: Node2D
@@ -17,5 +17,3 @@ func _on_slot_change(slot: int) -> void:
 	
 	_dummy = spell.dummy()
 	call_deferred("add_child", _dummy)
-	
-	hidden

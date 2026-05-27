@@ -1,8 +1,7 @@
 [gd_scene format=3 uid="uid://bi7880g0wx2x8"]
 
 [ext_resource type="Script" uid="uid://dyl7rg02bf1f2" path="res://ui/health.gd" id="1_nb4k0"]
-[ext_resource type="PackedScene" path="res://ui/spell_slot.tscn" id="2_ks8t7"]
-[ext_resource type="Texture2D" uid="uid://dqybuslh80c1l" path="res://icon.svg" id="3_wl5ax"]
+[ext_resource type="PackedScene" uid="uid://ctrh33la6lwsf" path="res://ui/spell_slot.tscn" id="2_ks8t7"]
 
 [node name="Ui" type="CanvasLayer" unique_id=1864841918]
 
@@ -22,26 +21,6 @@ slot_number = 1
 position = Vector2(1079, 576)
 slot_number = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1456301724]
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -40.0
-offset_top = -40.0
-grow_horizontal = 0
-grow_vertical = 0
-alignment = 2
-
-[node name="TextureRect" type="TextureRect" parent="HBoxContainer" unique_id=721809920]
-layout_mode = 2
-texture = ExtResource("3_wl5ax")
-
-[node name="TextureRect2" type="TextureRect" parent="HBoxContainer" unique_id=135080664]
-layout_mode = 2
-texture = ExtResource("3_wl5ax")
-
-[node name="TextureRect3" type="TextureRect" parent="HBoxContainer" unique_id=328558339]
-layout_mode = 2
-texture = ExtResource("3_wl5ax")
+[node name="SpellSlot4" parent="." unique_id=665227784 instance=ExtResource("2_ks8t7")]
+position = Vector2(1079, 445)
+slot_number = 2
