@@ -27,6 +27,9 @@ class TestSpell extends Spell:
 	func dummy() -> Node2D:
 		return test_projectile.instantiate()
 
+	func range() -> float:
+		return 400
+
 	func fire_attack(caster: Node2D, heading: Vector2) -> void:
 		var projectile := test_projectile.instantiate() as Projectile
 		if caster is Player:
