@@ -77,6 +77,15 @@ position_smoothing_enabled = true
 [node name="TestEnemy" parent="." unique_id=575713072 instance=ExtResource("3_h2yge")]
 position = Vector2(1043, 537)
 
+[node name="TestEnemy2" parent="." unique_id=1794130473 instance=ExtResource("3_h2yge")]
+position = Vector2(904, 546)
+
+[node name="TestEnemy3" parent="." unique_id=1677985692 instance=ExtResource("3_h2yge")]
+position = Vector2(1000, 425)
+
+[node name="TestEnemy4" parent="." unique_id=1156096573 instance=ExtResource("3_h2yge")]
+position = Vector2(797, 486)
+
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=1347056112]
 position = Vector2(721, 262)
 navigation_polygon = SubResource("NavigationPolygon_1bvp3")

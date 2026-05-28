@@ -9,13 +9,16 @@ radius = 61.204575
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2bghh"]
 size = Vector2(86, 86)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_8ifd5"]
+radius = 74.3
+
 [node name="TestEnemy" type="CharacterBody2D" unique_id=1794130473]
 collision_layer = 16
 collision_mask = 256
 script = ExtResource("1_pegq0")
 min_attack_cooldown = 2.0
 max_attack_cooldown = 4.0
-max_speed = 150.0
+speed = 150.0
 acceleration = 300.0
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1694667638]
@@ -34,9 +37,14 @@ collision_mask = 0
 shape = SubResource("RectangleShape2D_2bghh")
 debug_color = Color(0.9015615, 0.25354874, 0.46391654, 0.41960785)
 
-[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1503169185]
-debug_enabled = true
+[node name="AvoidShape" type="Area2D" parent="." unique_id=496320859]
+collision_layer = 64
+collision_mask = 64
 
-[node name="NavigationTargetCooldown" type="Timer" parent="." unique_id=1293739049]
-wait_time = 0.5
-autostart = true
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AvoidShape" unique_id=1514964437]
+shape = SubResource("CircleShape2D_8ifd5")
+debug_color = Color(0.9015615, 0.25354874, 0.46391654, 0.41960785)
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1503169185]
+avoidance_enabled = true
+debug_enabled = true

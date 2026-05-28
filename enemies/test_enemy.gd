@@ -13,14 +13,19 @@ extends CharacterBody2D
 # the ai needs to know how far it can move before it's cooldown is done so it can
 # move intelligently between attacks (?) i.e. it prioritizes local optimums
 
+
+
 @export var min_attack_cooldown: float
 @export var max_attack_cooldown: float
-@export var max_speed: float
+@export var speed: float
 @export var acceleration: float
 @export var health: int = 3
 
+const IDEAL_DISTANCE := 300.0
+
 var can_attack: bool = true
 var attack_recovery: bool = false
+var reposition_target: Vector2
 
 @onready var attacks: Array[Spell] = [Projectile.TestSpell.new()]
 @onready var max_attack_range: float = (
@@ -28,6 +33,7 @@ var attack_recovery: bool = false
 )
 @onready var player: CharacterBody2D = get_parent().get_node("Player")
 @onready var navigation_agent: NavigationAgent2D = $NavigationAgent2D
+@onready var avoid_shape: Area2D = $AvoidShape
 
 
 func _ready() -> void:
@@ -36,11 +42,15 @@ func _ready() -> void:
 		func(a1: Spell, a2: Spell) -> bool: return a1.range() < a2.range()
 	)
 	# TODO: artificially stagger the timers so every enemy doesn't update at the same time
-	($NavigationTargetCooldown as Timer).timeout.connect(_update_navigation_target)
-	_update_navigation_target()
+	var timer := Timer.new()
+	timer.autostart = true
+	timer.wait_time = randf_range(0.5, 1)
+	timer.timeout.connect(_update_navigation_target)
+	add_child(timer)
 
 
 # TODO: enemy attacks should have a startup and recovery time where they don't move
+# TODO: enemy won't stop and attack when inside of an obstacle
 func _physics_process(delta: float) -> void:
 	var distance_to_player := position.distance_to(player.position)
 	if can_attack and distance_to_player <= max_attack_range and _has_line_of_sight():
@@ -76,38 +86,118 @@ func _calculate_optimal_attack(range_to_player: float) -> Spell:
 
 
 func _movement(delta: float) -> void:
-	var direction := position.direction_to(navigation_agent.get_next_path_position())
-	var target_vel: Vector2 = direction * max_speed
-	velocity += (target_vel - velocity).limit_length(acceleration * delta)
+	var move_dir := position.direction_to(
+		navigation_agent.get_next_path_position()
+	)
+
+	var separation := _get_separation_force()
+
+	# only keep component perpendicular to movement
+	var forward_strength := separation.dot(move_dir)
+
+	var lateral_separation := (
+		separation
+		- move_dir * forward_strength
+	)
+
+	var final_dir := (
+		move_dir
+		+ lateral_separation * 1.2
+	).normalized()
+
+	var target_vel := final_dir * speed
+
+	velocity += (
+		target_vel - velocity
+	).limit_length(acceleration * delta)
+
 
 # Too far → move closer
 # Too close → back away
 # Good distance + LOS → strafe / hold position
 # No LOS → move to regain visibility
 func _update_navigation_target() -> void:
-	var IDEAL_DISTANCE := 300.0
-	var DISTANCE_TOLERANCE := 200.0
+	navigation_agent.target_position = _find_flank_position()
 
-	var target: Vector2
-	var distance := player.position.distance_to(position)
-	var has_los := _has_line_of_sight()
-	var desired_position := (
-		player.global_position - global_position.direction_to(player.global_position)
-		* IDEAL_DISTANCE
+
+func _get_separation_force() -> Vector2:
+	var force := Vector2.ZERO
+
+	for neighbour: Area2D in avoid_shape.get_overlapping_areas():
+		var offset := global_position - neighbour.global_position
+		var dist := offset.length()
+
+		if dist <= 0.01:
+			continue
+
+		var strength := 1.0 - (dist / ((avoid_shape.get_child(0) as CollisionShape2D).shape as CircleShape2D).radius)
+
+		force += offset.normalized() * strength
+
+	return force.limit_length(0.4)
+
+
+func _find_flank_position() -> Vector2:
+	const NUM_SAMPLES := 8
+	const FLANK_ANGLE_STEP := 360.0/NUM_SAMPLES
+
+
+	var best_pos := player.global_position
+	var best_score := -INF
+
+	for i in range(NUM_SAMPLES):
+		var angle := deg_to_rad(i * FLANK_ANGLE_STEP)
+
+		var dir := global_position.direction_to(player.global_position).rotated(angle)
+
+		var candidate := (
+			player.global_position
+			+ dir * IDEAL_DISTANCE
 		)
+		# get closest valid navmesh point
+		candidate = NavigationServer2D.map_get_closest_point(get_world_2d().navigation_map, candidate)
+		var score := _rate_position(candidate)
+		# _display_flanks_for_testing(score, candidate, i)
+
+		if score > best_score:
+			best_score = score
+			best_pos = candidate
+
+	return best_pos
 
 
-	if not has_los:
-		target = _find_flank_position()
-	elif (
-		distance > IDEAL_DISTANCE + DISTANCE_TOLERANCE 
-		or distance < IDEAL_DISTANCE - DISTANCE_TOLERANCE
-	):
-		target = desired_position
-	else:
-		target = _find_flank_position()
+func _rate_position(candidate: Vector2) -> float:
+	var score := 0.0
 
-	navigation_agent.target_position = target
+	# Prefer LOS
+	if not _has_line_of_sight(candidate):
+		return -INF
+
+	# Prefer a specific distance
+	var res := -absf(candidate.distance_to(player.global_position) - IDEAL_DISTANCE) * 2
+	score += res
+	# print("gained for distance %s" % res)
+
+	# Prefer shorter movement
+	res = -global_position.distance_to(candidate)
+	score += res
+	# print("gained for movement %s" % res)
+
+	# Prefer changing spots once we've reached one
+	res = 0
+	if global_position.distance_to(candidate) < 10:
+		res = -300
+	score += res
+	# print("gained for position %s" % res)
+
+	# Prefer positions that aren't crowded
+	for neighbour: Area2D in avoid_shape.get_overlapping_areas():
+		var dist := neighbour.global_position.distance_to(candidate)
+
+		if dist < 100:
+			score -= (100 - dist) * 10
+
+	return score
 
 
 func _has_line_of_sight(from: Vector2 = global_position) -> bool:
@@ -118,7 +208,7 @@ func _has_line_of_sight(from: Vector2 = global_position) -> bool:
 		player.global_position
 	)
 
-	query.collision_mask = 0b100000011
+	query.collision_mask = 0b110000001
 
 	var result := space.intersect_ray(query)
 
@@ -128,52 +218,16 @@ func _has_line_of_sight(from: Vector2 = global_position) -> bool:
 	return result.collider == player
 
 
-func _find_flank_position() -> Vector2:
-	const IDEAL_DISTANCE := 300.0
-	const FLANK_ANGLE_STEP := 45.0
-	const NUM_SAMPLES := 8
-
-	var to_enemy := (global_position - player.global_position).normalized()
-
-	var best_pos := player.global_position
-	var best_score := -INF
-
-	for i in range(NUM_SAMPLES):
-		var angle := deg_to_rad(i * FLANK_ANGLE_STEP)
-
-		var dir := to_enemy.rotated(angle)
-
-		var candidate := (
-			player.global_position
-			+ dir * IDEAL_DISTANCE
-		)
-
-		if not _is_position_reachable(candidate):
-			continue
-
-		var score := 0.0
-
-		# Prefer LOS
-		if _has_line_of_sight(candidate):
-			score += 1000.0
-
-		# Prefer shorter movement
-		score -= global_position.distance_to(candidate)
-
-		# Prefer keeping current side slightly
-		score += to_enemy.dot(dir) * 50.0
-
-		if score > best_score:
-			best_score = score
-			best_pos = candidate
-
-	return best_pos
-
-
-func _is_position_reachable(target_point: Vector2) -> bool:
-	var map := get_world_2d().navigation_map
-	var closest_point := NavigationServer2D.map_get_closest_point(map, target_point)
-	return (closest_point - target_point).is_zero_approx()
+func _display_flanks_for_testing(score: float, candidate: Vector2, i: int) -> void:
+	var label := Label.new()
+	label.text = "%s : %s" % [i, snappedf(score, 5)]
+	label.global_position = candidate
+	var timer := Timer.new()
+	timer.autostart = true
+	timer.wait_time = 1
+	timer.timeout.connect(label.queue_free)
+	label.add_child(timer)
+	add_sibling(label)
 
 
 func _die() -> void:
