@@ -1,19 +1,6 @@
 class_name TestEnemy
 extends CharacterBody2D
 
-# Notes for self
-# When attack off cooldown, calculate optimal attack based on current location
-#     'optimal' attack prioritizes shortest range attack that will hit
-# Calculate path to optimal range for this enemy
-# Attack when off cooldown, move when on cooldown
-
-# NOTE: AI should try to avoid being cornered -> handle during pathfinding logic
-# NOTE: AI might attack less when the player has a lot of spells to make themselves harder to hit?
-
-# the ai needs to know how far it can move before it's cooldown is done so it can
-# move intelligently between attacks (?) i.e. it prioritizes local optimums
-
-
 
 @export var min_attack_cooldown: float
 @export var max_attack_cooldown: float
@@ -41,7 +28,6 @@ func _ready() -> void:
 	attacks.sort_custom(
 		func(a1: Spell, a2: Spell) -> bool: return a1.range() < a2.range()
 	)
-	# TODO: artificially stagger the timers so every enemy doesn't update at the same time
 	var timer := Timer.new()
 	timer.autostart = true
 	timer.wait_time = randf_range(0.5, 1)
