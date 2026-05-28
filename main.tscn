@@ -65,6 +65,12 @@ physics_layer_0/collision_mask = 0
 navigation_layer_0/layers = 1
 sources/0 = SubResource("TileSetAtlasSource_lquwl")
 
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_1bvp3"]
+vertices = PackedVector2Array(512.03906, 478.9375, 1112, 604, 35.046875, 604, 321, 480.0625, 37.953125, 34, 321, 223.9375, 1112, 34, 510.96094, 225.0625)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2), PackedInt32Array(3, 0, 2), PackedInt32Array(3, 2, 4), PackedInt32Array(5, 3, 4), PackedInt32Array(5, 4, 6), PackedInt32Array(7, 5, 6), PackedInt32Array(7, 6, 1), PackedInt32Array(7, 1, 0)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(28, 24, 25, 614, 1122, 614, 1122, 24)])
+sample_partition_type = 1
+
 [node name="Node2D" type="Node2D" unique_id=895117885]
 
 [node name="Player" parent="." unique_id=142514294 instance=ExtResource("1_0xm2m")]
@@ -75,7 +81,7 @@ process_callback = 0
 position_smoothing_enabled = true
 
 [node name="TestEnemy" parent="." unique_id=575713072 instance=ExtResource("3_h2yge")]
-position = Vector2(1043, 537)
+position = Vector2(721, 262)
 
 [node name="TestEnemy2" parent="." unique_id=1794130473 instance=ExtResource("3_h2yge")]
 position = Vector2(904, 546)
@@ -97,7 +103,16 @@ tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAACAAAAAAAAAAA
 tile_set = SubResource("TileSet_7mycd")
 navigation_visibility_mode = 1
 
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="TileMapLayer" unique_id=1655661669]
+position = Vector2(1, 0)
+navigation_polygon = SubResource("NavigationPolygon_1bvp3")
+
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="TileMapLayer/NavigationRegion2D" unique_id=1595295969]
+position = Vector2(459.72534, 313.94608)
+vertices = PackedVector2Array(-128.72534, -79.946075, -128.72534, 156.05392, 42.27466, 155.05392, 41.27466, -78.946075)
+affect_navigation_mesh = true
+avoidance_enabled = false
+
 [node name="Ui" parent="." unique_id=1864841918 instance=ExtResource("5_lquwl")]
-visible = false
 
 [editable path="Player"]
