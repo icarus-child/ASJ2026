@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bky7powk5m710"]
 
 [ext_resource type="Texture2D" uid="uid://dqybuslh80c1l" path="res://icon.svg" id="1_feumd"]
-[ext_resource type="Script" uid="uid://b7ckkyy6nlcck" path="res://enemies/test_projectile.gd" id="1_t7fah"]
+[ext_resource type="Script" uid="uid://b7ckkyy6nlcck" path="res://enemies/spells/test_projectile.gd" id="1_t7fah"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_feumd"]
 
