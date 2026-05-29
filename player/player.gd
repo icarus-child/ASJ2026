@@ -61,10 +61,7 @@ func parry_hit(parried: Callable, hit: Callable) -> void:
 # Parry has failed
 func take_damage(amount: int = 1) -> void:
 	print("got hit")
-	PlayerResources.health = max(0, PlayerResources.health - amount)
-	print(PlayerResources.health)
-	if PlayerResources.health <= 0:
-		print("game over")
+	PlayerResources.health -= amount
 
 func signal_disconnect_all(target_signal: Signal) -> void:
 	for n: Dictionary in target_signal.get_connections():

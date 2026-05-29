@@ -1,6 +1,20 @@
 extends Node
 
-var health: int = 5 # hollow knight style health, where damage is discrete. Not Final
+var max_health: int = 20
+var _health: int = max_health
+var health: int:
+	get:
+		return _health
+	set(value):
+		var new_health := clampi(value, 0, max_health)
+		print(new_health)
+		if new_health != _health:
+			_health = new_health
+			health_changed.emit(new_health)
+		if _health == 0:
+			print("game over")
+
+signal health_changed(health: int)
 
 var spells: Array[Spell]
 

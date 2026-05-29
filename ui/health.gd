@@ -2,18 +2,20 @@ extends Node2D
 
 @export var padding: float
 
-var last_health: int = 0
+const HP = preload("res://ui/hp.gd")
+var pips: Array[HP]
 
-func _process(_delta: float) -> void:
-	if PlayerResources.health == last_health:
-		return
-	
-	if PlayerResources.health < last_health:
-		get_child(-1).queue_free()
-		last_health -= 1
+func _ready() -> void:
+	PlayerResources.health_changed.connect(_update_health)
 
-	if PlayerResources.health > last_health:
+	@warning_ignore("integer_division")
+	for i in range((PlayerResources.max_health + 3) / 4):
 		var new_hp: Node2D = preload("res://ui/hp.tscn").instantiate()
-		new_hp.position.x += padding * last_health
+		new_hp.position.x += padding * i
 		add_child(new_hp)
-		last_health += 1
+		pips.push_back(new_hp)
+
+func _update_health(value: int) -> void:
+	for pip in pips:
+		pip._update_health(value)
+		value -= 4
