@@ -10,8 +10,8 @@ extends CharacterBody2D
 @export var attack_recovery: float
 @export var speed: float
 @export var acceleration: float
-@export var health: int = 3
-@export var ideal_distance := 300.0
+@export var ideal_distance: float
+@export var health: int
 
 var can_attack: bool = true
 var recovering_from_attack: bool = false
