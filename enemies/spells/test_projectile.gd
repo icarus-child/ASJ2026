@@ -15,14 +15,14 @@ func _on_body_enter(body: Node2D) -> void:
 		var player := body.get_parent() as Player
 		player.parry_hit(PlayerResources.acquire_spell.bind(TestSpell.new()), player.take_damage)
 	elif body is StaticBody2D and (body as StaticBody2D).collision_layer == 32:
-		var enemy := body.get_parent() as TestEnemy
+		var enemy := body.get_parent() as Enemy
 		enemy.take_damage()
 	else:
 		pass # hit the wall animation
 	queue_free()
 
 class TestSpell extends Spell:
-	const test_projectile: PackedScene = preload("res://enemies/test_projectile.tscn")
+	const test_projectile: PackedScene = preload("res://enemies/spells/test_projectile.tscn")
 
 	func dummy() -> Node2D:
 		return test_projectile.instantiate()
