@@ -42,7 +42,7 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	var distance_to_player := position.distance_to(player.position)
 	if can_attack and distance_to_player <= max_attack_range and _has_line_of_sight():
-		_calculate_optimal_attack(distance_to_player).fire_attack(self , position.direction_to(player.position))
+		_calculate_optimal_attack(distance_to_player).fire_attack(self , player.position - position)
 		var wait_time := randf_range(min_attack_cooldown, max_attack_cooldown)
 		var timer := Timer.new()
 		timer.one_shot = true

@@ -14,7 +14,7 @@ var can_attack: bool = true
 var attack_recovery: bool = false
 var reposition_target: Vector2
 
-@onready var attacks: Array[Spell] = [Projectile.TestSpell.new()]
+@onready var attacks: Array[Spell] = [Projectile.TestSpell.new(), Lob.PSpell.new()]
 @onready var max_attack_range: float = (
 	attacks.map(func(attack: Spell) -> float: return attack.range()).max()
 )
@@ -40,7 +40,7 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	var distance_to_player := position.distance_to(player.position)
 	if can_attack and distance_to_player <= max_attack_range and _has_line_of_sight():
-		_calculate_optimal_attack(distance_to_player).fire_attack(self , position.direction_to(player.position))
+		_calculate_optimal_attack(distance_to_player).fire_attack(self , player.position - position)
 		var wait_time := randf_range(min_attack_cooldown, max_attack_cooldown)
 		var timer := Timer.new()
 		timer.one_shot = true
@@ -125,7 +125,7 @@ func _get_separation_force() -> Vector2:
 
 func _find_flank_position() -> Vector2:
 	const NUM_SAMPLES := 8
-	const FLANK_ANGLE_STEP := 360.0/NUM_SAMPLES
+	const FLANK_ANGLE_STEP := 360.0 / NUM_SAMPLES
 
 
 	var best_pos := player.global_position
@@ -165,7 +165,7 @@ func _rate_position(candidate: Vector2) -> float:
 	# print("gained for distance %s" % res)
 
 	# Prefer shorter movement
-	res = -global_position.distance_to(candidate)
+	res = - global_position.distance_to(candidate)
 	score += res
 	# print("gained for movement %s" % res)
 
