@@ -1,8 +1,8 @@
 [gd_scene format=4 uid="uid://bn2rgbcn54r44"]
 
 [ext_resource type="PackedScene" uid="uid://cfq3bkhk20pq3" path="res://player/player.tscn" id="1_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://bghrag6aan4bj" path="res://enemies/electrician.tscn" id="2_1bvp3"]
 [ext_resource type="Texture2D" uid="uid://bhj4lphmjxabs" path="res://assets/simple colision sprite.png" id="3_1bvp3"]
-[ext_resource type="PackedScene" uid="uid://bjdmk6kvicmng" path="res://enemies/test_enemy.tscn" id="3_h2yge"]
 [ext_resource type="PackedScene" uid="uid://bi7880g0wx2x8" path="res://ui/ui.tscn" id="5_lquwl"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_1bvp3"]
@@ -75,19 +75,11 @@ position = Vector2(495, 147)
 process_callback = 0
 position_smoothing_enabled = true
 
-[node name="TestEnemy" parent="." unique_id=575713072 instance=ExtResource("3_h2yge")]
-position = Vector2(721, 262)
-
-[node name="TestEnemy2" parent="." unique_id=1794130473 instance=ExtResource("3_h2yge")]
-position = Vector2(904, 546)
-
-[node name="TestEnemy3" parent="." unique_id=1677985692 instance=ExtResource("3_h2yge")]
-position = Vector2(1000, 425)
-
-[node name="TestEnemy4" parent="." unique_id=1156096573 instance=ExtResource("3_h2yge")]
-position = Vector2(797, 486)
+[node name="Electrician" parent="." unique_id=1794130473 instance=ExtResource("2_1bvp3")]
+position = Vector2(853, 271)
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=1347056112]
+z_index = -2
 navigation_polygon = SubResource("NavigationPolygon_1bvp3")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="NavigationRegion2D" unique_id=952851721]

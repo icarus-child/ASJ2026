@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://bghrag6aan4bj"]
+
+[ext_resource type="Script" uid="uid://q8fr7pkiqge3" path="res://enemies/electrician.gd" id="1_s6tkt"]
+[ext_resource type="Texture2D" uid="uid://dqybuslh80c1l" path="res://icon.svg" id="2_k44xw"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2bghh"]
+radius = 61.204575
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2bghh"]
+size = Vector2(86, 86)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8ifd5"]
+radius = 74.3
+
+[node name="Electrician" type="CharacterBody2D" unique_id=1794130473]
+position = Vector2(1, 0)
+collision_layer = 16
+collision_mask = 256
+script = ExtResource("1_s6tkt")
+health = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1694667638]
+scale = Vector2(0.6293247, 0.6293247)
+texture = ExtResource("2_k44xw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1971040039]
+scale = Vector2(0.6293247, 0.6293247)
+shape = SubResource("CircleShape2D_2bghh")
+
+[node name="Hurtbox" type="StaticBody2D" parent="." unique_id=708869839]
+collision_layer = 32
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=1126957334]
+shape = SubResource("RectangleShape2D_2bghh")
+debug_color = Color(0.9015615, 0.25354874, 0.46391654, 0.41960785)
+
+[node name="AvoidShape" type="Area2D" parent="." unique_id=496320859]
+collision_layer = 64
+collision_mask = 64
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AvoidShape" unique_id=1514964437]
+shape = SubResource("CircleShape2D_8ifd5")
+debug_color = Color(0.9015615, 0.25354874, 0.46391654, 0.41960785)
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1503169185]
+avoidance_enabled = true
+debug_enabled = true
