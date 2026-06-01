@@ -1,8 +1,8 @@
 class_name ElectricCircle
 extends RigidBody2D
 
-@export var max_radius: float = 200
-@export var speed: float = 3
+@export var max_radius: float = 400
+@export var speed: float = 5
 
 @onready var sprite := $Sprite2D as Sprite2D
 @onready var shape := ($CollisionShape2D as CollisionShape2D).shape as CircleShape2D
