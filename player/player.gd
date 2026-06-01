@@ -5,10 +5,15 @@ extends CharacterBody2D
 @export var max_accel: float
 
 @onready var hurtbox: StaticBody2D = $Hurtbox
-@onready var parry_cooldown: Timer = $ParryCooldown
+@onready var parry_cooldown_timer: Timer = $ParryCooldown
 @onready var parry_early_window: Timer = $ParryEarlyWindow
 @onready var parry_late_window: Timer = $ParryLateWindow
+@onready var parry_freeze_timer: Timer = $ParryFreeze
 @onready var anim: PlayerAnimTree = $AnimationTree
+
+
+func _ready() -> void:
+	parry_freeze_timer.timeout.connect(func() -> void: get_tree().paused = false)
 
 
 # TODO: make player controller feel snappier
@@ -21,13 +26,13 @@ func _physics_process(delta: float) -> void:
 
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("parry") and parry_cooldown.is_stopped() and PlayerResources.can_acquire_spell():
+	if event.is_action_pressed("parry") and parry_cooldown_timer.is_stopped() and PlayerResources.can_acquire_spell():
 		anim.parry()
-		if not parry_late_window.is_stopped() and not parry_cooldown.is_stopped():
+		if not parry_late_window.is_stopped() and not parry_cooldown_timer.is_stopped():
 			parry_late_window.stop()
 			defer_parry.call()
 		parry_early_window.start()
-		parry_cooldown.start()
+		parry_cooldown_timer.start()
 
 var defer_parry: Callable
 
@@ -37,6 +42,11 @@ var defer_parry: Callable
 func parry_hit(parried: Callable, hit: Callable) -> void:
 	if not PlayerResources.can_acquire_spell():
 		hit.call()
+
+	var on_parry: Callable = func() -> void:
+		parried.call()
+		parry_freeze_timer.start()
+		get_tree().paused = true
 		
 	# if we parry early -> start timer & cooledown
 	# if we get hit when parry early timer is started -> parry and refund cooldown
@@ -52,13 +62,13 @@ func parry_hit(parried: Callable, hit: Callable) -> void:
 
 	if not parry_early_window.is_stopped():
 		parry_early_window.stop()
-		parry_cooldown.stop()
-		parried.call()
+		parry_cooldown_timer.stop()
+		on_parry.call()
 	else:
 		signal_disconnect_all(parry_late_window.timeout)
 		parry_late_window.timeout.connect(hit)
 		parry_late_window.start()
-		defer_parry = parried
+		defer_parry = on_parry
 
 # Parry has failed
 func take_damage(amount: int = 1) -> void:

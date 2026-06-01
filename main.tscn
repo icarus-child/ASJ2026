@@ -13,6 +13,7 @@ sample_partition_type = 1
 agent_radius = 50.0
 
 [node name="Node2D" type="Node2D" unique_id=895117885]
+process_mode = 1
 y_sort_enabled = true
 
 [node name="Player" parent="." unique_id=142514294 instance=ExtResource("1_0xm2m")]
