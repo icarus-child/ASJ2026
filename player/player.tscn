@@ -10,7 +10,7 @@ radius = 20.0
 height = 128.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rkbax"]
-size = Vector2(100, 70)
+size = Vector2(114, 109)
 
 [node name="Player" type="CharacterBody2D" unique_id=142514294]
 collision_mask = 257
@@ -32,21 +32,22 @@ collision_layer = 2
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=280334961]
-position = Vector2(0, 15)
+position = Vector2(0, 4.5)
 shape = SubResource("RectangleShape2D_rkbax")
 debug_color = Color(0.9015615, 0.25354874, 0.46391654, 0.41960785)
 
 [node name="ParryCooldown" type="Timer" parent="." unique_id=88528472]
+wait_time = 0.5
 one_shot = true
 
 [node name="ParryEarlyWindow" type="Timer" parent="." unique_id=1639936526]
 process_callback = 0
-wait_time = 0.2
+wait_time = 0.4
 one_shot = true
 
 [node name="ParryLateWindow" type="Timer" parent="." unique_id=379052634]
 process_callback = 0
-wait_time = 0.1
+wait_time = 0.2
 one_shot = true
 
 [node name="AimTarget" type="Sprite2D" parent="." unique_id=1603199398]
@@ -58,3 +59,8 @@ aim_range = 500.0
 
 [node name="CameraTarget" type="Node2D" parent="." unique_id=1228419122]
 script = ExtResource("4_yw30f")
+
+[node name="ParryFreeze" type="Timer" parent="." unique_id=1475635766]
+process_mode = 3
+wait_time = 0.1
+one_shot = true
