@@ -3,13 +3,118 @@
 [ext_resource type="Texture2D" uid="uid://dqybuslh80c1l" path="res://icon.svg" id="1_oul6g"]
 [ext_resource type="Script" uid="uid://cgt8i2arm7reo" path="res://player/player.gd" id="1_rkbax"]
 [ext_resource type="Script" uid="uid://bu161ou786e55" path="res://player/aim_target.gd" id="3_g1dw6"]
+[ext_resource type="Texture2D" uid="uid://bpru4j6ak3h0q" path="res://player/Wizard_Walk_Pose_Right_01.png" id="3_rgyib"]
+[ext_resource type="Texture2D" uid="uid://dmysmjf284xer" path="res://player/Wizard_Parry_Pose_Right_01.png" id="4_hg6s5"]
 [ext_resource type="Script" uid="uid://hl2jdxa4x3nq" path="res://player/camera_target.gd" id="4_yw30f"]
+[ext_resource type="Texture2D" uid="uid://cewsm0mqta8qc" path="res://player/Wizard_Attack_Pose_Right_01.png" id="6_boad6"]
+[ext_resource type="Script" uid="uid://ultb40nadr46" path="res://player/animation_tree.gd" id="8_rgyib"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_rkbax"]
-radius = 61.204575
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g6k8r"]
+height = 46.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rkbax"]
-size = Vector2(100, 100)
+size = Vector2(32, 58)
+
+[sub_resource type="Animation" id="Animation_rgyib"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_rgyib")]
+}
+
+[sub_resource type="Animation" id="Animation_hg6s5"]
+resource_name = "attack"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("6_boad6")]
+}
+
+[sub_resource type="Animation" id="Animation_8t03j"]
+resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_rgyib")]
+}
+
+[sub_resource type="Animation" id="Animation_2ieo8"]
+resource_name = "parry"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("4_hg6s5")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ebec5"]
+_data = {
+&"RESET": SubResource("Animation_rgyib"),
+&"attack": SubResource("Animation_hg6s5"),
+&"idle": SubResource("Animation_8t03j"),
+&"parry": SubResource("Animation_2ieo8")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_hg6s5"]
+animation = &"attack"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_g6k8r"]
+animation = &"idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_boad6"]
+animation = &"parry"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_rgyib"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_boad6"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_8t03j"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_hg6s5"]
+states/attack/node = SubResource("AnimationNodeAnimation_hg6s5")
+states/attack/position = Vector2(511, 26)
+states/idle/node = SubResource("AnimationNodeAnimation_g6k8r")
+states/idle/position = Vector2(380, 100)
+states/parry/node = SubResource("AnimationNodeAnimation_boad6")
+states/parry/position = Vector2(511, 184)
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_rgyib"), "parry", "idle", SubResource("AnimationNodeStateMachineTransition_boad6"), "attack", "idle", SubResource("AnimationNodeStateMachineTransition_8t03j")]
+graph_offset = Vector2(2, -85)
 
 [node name="Player" type="CharacterBody2D" unique_id=142514294]
 collision_mask = 257
@@ -18,17 +123,22 @@ script = ExtResource("1_rkbax")
 max_speed = 500.0
 max_accel = 4000.0
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1214209411]
-texture = ExtResource("1_oul6g")
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1381318254]
+position = Vector2(0, -22)
+texture = ExtResource("3_rgyib")
+offset = Vector2(9, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1511822475]
-shape = SubResource("CircleShape2D_rkbax")
+position = Vector2(0, 7)
+rotation = -1.5707964
+shape = SubResource("CapsuleShape2D_g6k8r")
 
 [node name="Hurtbox" type="StaticBody2D" parent="." unique_id=1905274435]
 collision_layer = 2
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=280334961]
+position = Vector2(0, -7)
 shape = SubResource("RectangleShape2D_rkbax")
 debug_color = Color(0.9015615, 0.25354874, 0.46391654, 0.41960785)
 
@@ -54,3 +164,11 @@ aim_range = 500.0
 
 [node name="CameraTarget" type="Node2D" parent="." unique_id=1228419122]
 script = ExtResource("4_yw30f")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1623289334]
+libraries/ = SubResource("AnimationLibrary_ebec5")
+
+[node name="AnimationTree" type="AnimationTree" parent="." unique_id=215960497]
+tree_root = SubResource("AnimationNodeStateMachine_hg6s5")
+anim_player = NodePath("../AnimationPlayer")
+script = ExtResource("8_rgyib")

@@ -6,12 +6,15 @@
 texture = ExtResource("1_kfwk1")
 texture_region_size = Vector2i(128, 128)
 0:0/0 = 0
-0:0/0/z_index = -1
+0:0/0/z_index = -10
 1:0/0 = 0
+1:0/0/y_sort_origin = 64
 1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
 2:0/0 = 0
+2:0/0/y_sort_origin = 64
 2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
 3:0/0 = 0
+3:0/0/y_sort_origin = 64
 3:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
 
 [resource]

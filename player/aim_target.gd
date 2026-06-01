@@ -6,6 +6,9 @@ extends Sprite2D
 
 var mouse_active: bool = false
 
+@onready var sprite: Sprite2D = $"../Sprite2D"
+@onready var anim: PlayerAnimTree = $"../AnimationTree"
+
 func _physics_process(_delta: float) -> void:
 	if mouse_active:
 		global_position = get_viewport().get_camera_2d().get_global_mouse_position()
@@ -13,12 +16,18 @@ func _physics_process(_delta: float) -> void:
 		var right_stick := Input.get_vector("aim_left", "aim_right", "aim_up", "aim_down").limit_length()
 		position = right_stick * aim_range
 	visible = position.length() > hide_range
+	if visible:
+		var flip := position.x < 0
+		if sprite.flip_h != flip:
+			sprite.flip_h = flip
+			sprite.offset.x = - sprite.offset.x
 
 	var slot: int = 0
 	for slot_action: StringName in ["spell_1", "spell_2", "spell_3"]:
 		if slot > PlayerResources.spells.size():
 			break
 		if Input.is_action_just_pressed(slot_action) && not PlayerResources.spells[slot] == null:
+			anim.attack()
 			PlayerResources.spells[slot].fire_attack(get_parent() as Node2D, position)
 			PlayerResources.spells[slot] = null
 			PlayerResources.spell_changed.emit(slot)

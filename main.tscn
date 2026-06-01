@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://cfq3bkhk20pq3" path="res://player/player.tscn" id="1_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://bghrag6aan4bj" path="res://enemies/electrician.tscn" id="2_1bvp3"]
-[ext_resource type="TileSet" path="res://tile_set.tres" id="3_1bvp3"]
+[ext_resource type="TileSet" uid="uid://74uvo3fcruv3" path="res://tile_set.tres" id="3_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://bi7880g0wx2x8" path="res://ui/ui.tscn" id="5_lquwl"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_1bvp3"]
@@ -26,7 +26,6 @@ position_smoothing_enabled = true
 position = Vector2(853, 271)
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=1347056112]
-z_index = -2
 y_sort_enabled = true
 position = Vector2(1, 0)
 navigation_polygon = SubResource("NavigationPolygon_1bvp3")

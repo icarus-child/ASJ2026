@@ -8,6 +8,7 @@ extends CharacterBody2D
 @onready var parry_cooldown: Timer = $ParryCooldown
 @onready var parry_early_window: Timer = $ParryEarlyWindow
 @onready var parry_late_window: Timer = $ParryLateWindow
+@onready var anim: PlayerAnimTree = $AnimationTree
 
 
 # TODO: make player controller feel snappier
@@ -20,7 +21,8 @@ func _physics_process(delta: float) -> void:
 
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("parry") and parry_cooldown.is_stopped():
+	if event.is_action_pressed("parry") and parry_cooldown.is_stopped() and PlayerResources.can_acquire_spell():
+		anim.parry()
 		if not parry_late_window.is_stopped() and not parry_cooldown.is_stopped():
 			parry_late_window.stop()
 			defer_parry.call()
