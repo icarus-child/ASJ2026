@@ -23,8 +23,6 @@ func _on_body_enter(body: Node2D) -> void:
 	elif body is StaticBody2D and (body as StaticBody2D).collision_layer == 32:
 		var enemy := body.get_parent() as Enemy
 		enemy.take_damage()
-	else:
-		pass # hit the wall animation
 	queue_free()
 
 
@@ -33,7 +31,6 @@ func _physics_process(delta: float) -> void:
 		queue_free()
 	shape.radius += shape_scale_amount * delta
 	sprite.scale += art_scale_amount * delta
-	# print("shape: %s - sprite: %s" % [shape.radius/10, sprite.scale/0.156])
 
 
 class PSpell extends Spell:
@@ -49,6 +46,7 @@ class PSpell extends Spell:
 		var projectile := spell_scene.instantiate() as ElectricCircle
 		if caster is Player:
 			projectile.collision_mask = 32
+			caster.global_position = caster.global_position + heading
 		projectile.position = caster.position
 		projectile.linear_velocity = heading.normalized() * projectile.speed
 		caster.add_sibling(projectile)
