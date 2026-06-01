@@ -46,7 +46,11 @@ class PSpell extends Spell:
 		var projectile := spell_scene.instantiate() as ElectricCircle
 		if caster is Player:
 			projectile.collision_mask = 32
-			caster.global_position = caster.global_position + heading
+			var target := NavigationServer2D.map_get_closest_point(
+				caster.get_world_2d().navigation_map,
+				caster.global_position + heading
+			)
+			caster.global_position = target
 		projectile.position = caster.position
 		projectile.linear_velocity = heading.normalized() * projectile.speed
 		caster.add_sibling(projectile)
