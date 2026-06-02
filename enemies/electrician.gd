@@ -19,6 +19,7 @@ var attack_recovery: float = 1
 var attack_range: float = 500
 var ideal_distance: float = 400
 
+@onready var sprite: Sprite2D = $Sprite2D
 @onready var navigation_agent: NavigationAgent2D = $NavigationAgent2D
 @onready var avoid_shape: Area2D = $AvoidShape
 @onready var electric_ball: Spell = ElectricShot.PSpell.new()
@@ -45,7 +46,10 @@ func _physics_process(delta: float) -> void:
 			)
 		)
 	elif can_attack and distance_to_player <= attack_range and _has_line_of_sight():
-		electric_ball.fire_attack(self, position.direction_to(player.position))
+		var attack_direction := position.direction_to(player.position)
+		sprite.flip_h = attack_direction.x < 0
+		anim.attack()
+		electric_ball.fire_attack(self, attack_direction)
 		can_attack = false
 		recovering_from_attack = true
 		add_child(
@@ -102,6 +106,7 @@ func _movement(delta: float) -> void:
 	velocity += (
 		target_vel - velocity
 	).limit_length(acceleration * delta)
+	sprite.flip_h = velocity.x < 0
 
 
 func _get_separation_force() -> Vector2:

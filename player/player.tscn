@@ -4,11 +4,13 @@
 [ext_resource type="Script" uid="uid://cgt8i2arm7reo" path="res://player/player.gd" id="1_rkbax"]
 [ext_resource type="Shader" uid="uid://sca5p05glnc6" path="res://assets/player/damage.gdshader" id="2_hg6s5"]
 [ext_resource type="Script" uid="uid://bu161ou786e55" path="res://player/aim_target.gd" id="3_g1dw6"]
+[ext_resource type="Texture2D" uid="uid://qqxsoc60xw0w" path="res://assets/enemies/electrician/Electrician_Walk_Pose_Right_01.png" id="3_hg6s5"]
 [ext_resource type="Texture2D" uid="uid://bpru4j6ak3h0q" path="res://player/Wizard_Walk_Pose_Right_01.png" id="3_rgyib"]
 [ext_resource type="Texture2D" uid="uid://dmysmjf284xer" path="res://player/Wizard_Parry_Pose_Right_01.png" id="4_hg6s5"]
 [ext_resource type="Script" uid="uid://hl2jdxa4x3nq" path="res://player/camera_target.gd" id="4_yw30f"]
 [ext_resource type="Texture2D" uid="uid://cewsm0mqta8qc" path="res://player/Wizard_Attack_Pose_Right_01.png" id="6_boad6"]
-[ext_resource type="Script" path="res://player/animation_tree.gd" id="8_rgyib"]
+[ext_resource type="Script" uid="uid://ultb40nadr46" path="res://player/animation_tree.gd" id="8_rgyib"]
+[ext_resource type="Texture2D" uid="uid://4627nbakiyxs" path="res://player/Wizard_Hurt_Pose_Right_01.png" id="10_2ieo8"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8t03j"]
 shader = ExtResource("2_hg6s5")
@@ -24,8 +26,7 @@ height = 112.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rkbax"]
 size = Vector2(32, 58)
 
-[sub_resource type="Animation" id="Animation_rgyib"]
-length = 0.001
+[sub_resource type="Animation" id="Animation_2ieo8"]
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -39,9 +40,8 @@ tracks/0/keys = {
 "values": [ExtResource("3_rgyib")]
 }
 
-[sub_resource type="Animation" id="Animation_hg6s5"]
-resource_name = "attack"
-length = 0.2
+[sub_resource type="Animation" id="Animation_yllr7"]
+length = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -55,9 +55,22 @@ tracks/0/keys = {
 "values": [ExtResource("6_boad6")]
 }
 
-[sub_resource type="Animation" id="Animation_8t03j"]
-resource_name = "idle"
-loop_mode = 1
+[sub_resource type="Animation" id="Animation_kb6p2"]
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("10_2ieo8")]
+}
+
+[sub_resource type="Animation" id="Animation_wodsf"]
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -71,8 +84,7 @@ tracks/0/keys = {
 "values": [ExtResource("3_rgyib")]
 }
 
-[sub_resource type="Animation" id="Animation_2ieo8"]
-resource_name = "parry"
+[sub_resource type="Animation" id="Animation_32hag"]
 length = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -87,44 +99,54 @@ tracks/0/keys = {
 "values": [ExtResource("4_hg6s5")]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_ebec5"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tqiix"]
 _data = {
-&"RESET": SubResource("Animation_rgyib"),
-&"attack": SubResource("Animation_hg6s5"),
-&"idle": SubResource("Animation_8t03j"),
-&"parry": SubResource("Animation_2ieo8")
+&"RESET": SubResource("Animation_2ieo8"),
+&"attack": SubResource("Animation_yllr7"),
+&"hurt": SubResource("Animation_kb6p2"),
+&"idle": SubResource("Animation_wodsf"),
+&"parry": SubResource("Animation_32hag")
 }
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_rgyib"]
+animation = &"Player/attack"
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_hg6s5"]
-animation = &"attack"
+animation = &"Player/hurt"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_g6k8r"]
-animation = &"idle"
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_8t03j"]
+animation = &"Player/idle"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_boad6"]
-animation = &"parry"
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2ieo8"]
+animation = &"Player/parry"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_rgyib"]
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_boad6"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ebec5"]
 switch_mode = 2
 advance_mode = 2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_8t03j"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_yllr7"]
 switch_mode = 2
 advance_mode = 2
 
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_hg6s5"]
-states/End/position = Vector2(899.0156, 100)
-states/attack/node = SubResource("AnimationNodeAnimation_hg6s5")
-states/attack/position = Vector2(511, 26)
-states/idle/node = SubResource("AnimationNodeAnimation_g6k8r")
-states/idle/position = Vector2(380, 100)
-states/parry/node = SubResource("AnimationNodeAnimation_boad6")
-states/parry/position = Vector2(511, 184)
-transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_rgyib"), "parry", "idle", SubResource("AnimationNodeStateMachineTransition_boad6"), "attack", "idle", SubResource("AnimationNodeStateMachineTransition_8t03j")]
-graph_offset = Vector2(-44.558594, -4.5234375)
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_kb6p2"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_wodsf"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_32hag"]
+states/Start/position = Vector2(199.1836, 100)
+states/attack/node = SubResource("AnimationNodeAnimation_rgyib")
+states/attack/position = Vector2(518.20703, 37.789063)
+states/hurt/node = SubResource("AnimationNodeAnimation_hg6s5")
+states/hurt/position = Vector2(618.1914, 108.19922)
+states/idle/node = SubResource("AnimationNodeAnimation_8t03j")
+states/idle/position = Vector2(354.03906, 100)
+states/parry/node = SubResource("AnimationNodeAnimation_2ieo8")
+states/parry/position = Vector2(518.20703, 170.40625)
+transitions = ["attack", "idle", SubResource("AnimationNodeStateMachineTransition_ebec5"), "hurt", "idle", SubResource("AnimationNodeStateMachineTransition_yllr7"), "parry", "idle", SubResource("AnimationNodeStateMachineTransition_kb6p2"), "Start", "idle", SubResource("AnimationNodeStateMachineTransition_wodsf")]
+graph_offset = Vector2(-165.51172, -75.4375)
 
 [node name="Player" type="CharacterBody2D" unique_id=142514294]
 collision_mask = 257
@@ -136,7 +158,7 @@ max_accel = 4000.0
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1381318254]
 material = SubResource("ShaderMaterial_8t03j")
 position = Vector2(0, -22)
-texture = ExtResource("3_rgyib")
+texture = ExtResource("3_hg6s5")
 offset = Vector2(9, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1511822475]
@@ -196,9 +218,10 @@ aim_range = 500.0
 script = ExtResource("4_yw30f")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1623289334]
-libraries/ = SubResource("AnimationLibrary_ebec5")
+libraries/Player = SubResource("AnimationLibrary_tqiix")
 
-[node name="AnimationTree" type="AnimationTree" parent="." unique_id=215960497]
-tree_root = SubResource("AnimationNodeStateMachine_hg6s5")
+[node name="AnimationTree" type="AnimationTree" parent="." unique_id=985671176]
+deterministic = false
+tree_root = SubResource("AnimationNodeStateMachine_32hag")
 anim_player = NodePath("../AnimationPlayer")
 script = ExtResource("8_rgyib")

@@ -8,6 +8,7 @@ extends CharacterBody2D
 @export var health: int
 
 @onready var player: Player = get_parent().get_node("Player")
+@onready var anim: EnemyAnimTree = $AnimationTree
 
 
 func _ready() -> void:
@@ -44,5 +45,7 @@ func _has_line_of_sight(from: Vector2 = global_position) -> bool:
 
 func take_damage(damage: int = 1) -> void:
 	health -= damage
+	if anim:
+		anim.hurt()
 	if health <= 0:
 		_die()

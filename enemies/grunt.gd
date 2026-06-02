@@ -70,7 +70,6 @@ func _movement(delta: float) -> void:
 		accel = acceleration
 
 	var target_vel := final_dir * target_speed
-	print(target_vel)
 
 	velocity = velocity.move_toward(
 		target_vel,

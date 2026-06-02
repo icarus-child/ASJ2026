@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://cfq3bkhk20pq3" path="res://player/player.tscn" id="1_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://bghrag6aan4bj" path="res://enemies/electrician.tscn" id="2_1bvp3"]
 [ext_resource type="TileSet" uid="uid://74uvo3fcruv3" path="res://tile_set.tres" id="3_1bvp3"]
+[ext_resource type="PackedScene" uid="uid://dj7intpg1gv1b" path="res://enemies/grunt.tscn" id="3_7mycd"]
 [ext_resource type="AudioStream" uid="uid://bqf8ikxhrfv8i" path="res://assets/sound/Wizard city funk full.wav" id="5_7mycd"]
 [ext_resource type="PackedScene" uid="uid://bi7880g0wx2x8" path="res://ui/ui.tscn" id="5_lquwl"]
 
@@ -26,6 +27,24 @@ position_smoothing_enabled = true
 
 [node name="Electrician" parent="." unique_id=1794130473 instance=ExtResource("2_1bvp3")]
 position = Vector2(853, 271)
+
+[node name="Electrician2" parent="." unique_id=787783367 instance=ExtResource("2_1bvp3")]
+position = Vector2(1830, 100)
+
+[node name="Electrician3" parent="." unique_id=268329664 instance=ExtResource("2_1bvp3")]
+position = Vector2(636, 489)
+
+[node name="Grunt" parent="." unique_id=985045908 instance=ExtResource("3_7mycd")]
+position = Vector2(1352, -11)
+
+[node name="Grunt2" parent="." unique_id=1556306338 instance=ExtResource("3_7mycd")]
+position = Vector2(1172.0001, 752.99994)
+
+[node name="Grunt3" parent="." unique_id=552179540 instance=ExtResource("3_7mycd")]
+position = Vector2(987.0001, 864.00006)
+
+[node name="Grunt4" parent="." unique_id=1821879068 instance=ExtResource("3_7mycd")]
+position = Vector2(170.00006, 874)
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=1347056112]
 y_sort_enabled = true
