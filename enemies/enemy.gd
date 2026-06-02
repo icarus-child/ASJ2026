@@ -7,7 +7,7 @@ extends CharacterBody2D
 
 @export var health: int
 
-@onready var player: CharacterBody2D = get_parent().get_node("Player")
+@onready var player: Player = get_parent().get_node("Player")
 
 
 func _ready() -> void:
