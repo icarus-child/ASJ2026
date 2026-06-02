@@ -5,6 +5,7 @@ extends CharacterBody2D
 @export var max_accel: float
 
 @onready var hurtbox: StaticBody2D = $Hurtbox
+@onready var parrybox: CollisionShape2D = $Parrybox/CollisionShape2D
 @onready var parry_cooldown_timer: Timer = $ParryCooldown
 @onready var parry_early_window: Timer = $ParryEarlyWindow
 @onready var parry_late_window: Timer = $ParryLateWindow
@@ -14,6 +15,7 @@ extends CharacterBody2D
 
 func _ready() -> void:
 	parry_freeze_timer.timeout.connect(func() -> void: get_tree().paused = false)
+	parry_early_window.timeout.connect(func() -> void: parrybox.disabled = true)
 
 
 # TODO: make player controller feel snappier
@@ -27,6 +29,7 @@ func _physics_process(delta: float) -> void:
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("parry") and parry_cooldown_timer.is_stopped() and PlayerResources.can_acquire_spell():
+		parrybox.disabled = false
 		anim.parry()
 		if not parry_late_window.is_stopped() and not parry_cooldown_timer.is_stopped():
 			parry_late_window.stop()
@@ -36,10 +39,11 @@ func _input(event: InputEvent) -> void:
 
 var defer_parry: Callable
 
-# This function called by projectiles that can be parried
+# This function is called by projectiles that can be parried
 # One of these callbacks will be called depending on if a parry was performed in time or not
 # These callbacks are responsible for actually dealing damage or stocking a spell
 func parry_hit(parried: Callable, hit: Callable) -> void:
+	call_deferred("_disable_parrybox")
 	if not PlayerResources.can_acquire_spell():
 		hit.call()
 
@@ -48,11 +52,9 @@ func parry_hit(parried: Callable, hit: Callable) -> void:
 		parry_freeze_timer.start()
 		get_tree().paused = true
 		
-	# if we parry early -> start timer & cooledown
+	# if we parry early -> start timer & cooldown
 	# if we get hit when parry early timer is started -> parry and refund cooldown
 	# if we get hit without parry early timer but with parry late timer -> trigger old parry late timer and start a new one
-	# NOTE: does it feel better to keep an array backlog of grace windows and let you parry them all at once?
-	# how would this function with the parry limit of 3?
 	if not parry_late_window.is_stopped():
 		parry_late_window.stop()
 		parry_late_window.timeout.emit()
@@ -80,3 +82,7 @@ func signal_disconnect_all(target_signal: Signal) -> void:
 		assert(callable_variant is Callable)
 		var callable: Callable = callable_variant
 		target_signal.disconnect(callable as Callable)
+
+
+func _disable_parrybox() -> void:
+	parrybox.disabled = true

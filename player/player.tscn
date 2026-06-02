@@ -7,10 +7,14 @@
 [ext_resource type="Texture2D" uid="uid://dmysmjf284xer" path="res://player/Wizard_Parry_Pose_Right_01.png" id="4_hg6s5"]
 [ext_resource type="Script" uid="uid://hl2jdxa4x3nq" path="res://player/camera_target.gd" id="4_yw30f"]
 [ext_resource type="Texture2D" uid="uid://cewsm0mqta8qc" path="res://player/Wizard_Attack_Pose_Right_01.png" id="6_boad6"]
-[ext_resource type="Script" uid="uid://ultb40nadr46" path="res://player/animation_tree.gd" id="8_rgyib"]
+[ext_resource type="Script" path="res://player/animation_tree.gd" id="8_rgyib"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g6k8r"]
 height = 46.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rgyib"]
+radius = 31.0
+height = 112.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rkbax"]
 size = Vector2(32, 58)
@@ -132,6 +136,15 @@ offset = Vector2(9, 0)
 position = Vector2(0, 7)
 rotation = -1.5707964
 shape = SubResource("CapsuleShape2D_g6k8r")
+
+[node name="Parrybox" type="StaticBody2D" parent="." unique_id=1401252808]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Parrybox" unique_id=461707841]
+position = Vector2(3, -20)
+shape = SubResource("CapsuleShape2D_rgyib")
+disabled = true
 
 [node name="Hurtbox" type="StaticBody2D" parent="." unique_id=1905274435]
 collision_layer = 2
