@@ -19,7 +19,14 @@ func _on_body_enter(body: Node2D) -> void:
 		enemy.take_damage()
 	else:
 		pass # hit the wall animation
-	queue_free()
+
+	var particles: GPUParticles2D = $Particles2D
+	particles.emitting = false
+	particles.finished.connect(particles.queue_free)
+	remove_child(particles)
+	particles.position = position
+	get_parent().add_child(particles)
+	call_deferred("queue_free")
 
 
 class PSpell extends Spell:

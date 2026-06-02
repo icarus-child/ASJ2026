@@ -66,6 +66,8 @@ shape = SubResource("CircleShape2D_feumd")
 [node name="Particles2D" type="GPUParticles2D" parent="." unique_id=229841019]
 amount = 64
 texture = SubResource("GradientTexture2D_cv3xs")
+lifetime = 0.3
+speed_scale = 0.46
 fixed_fps = 60
 interpolate = false
 process_material = SubResource("ParticleProcessMaterial_cv3xs")
