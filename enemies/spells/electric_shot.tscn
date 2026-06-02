@@ -1,9 +1,49 @@
 [gd_scene format=3 uid="uid://cuqus86aawhbc"]
 
 [ext_resource type="Script" uid="uid://db1wssx5k7fb3" path="res://enemies/spells/electric_shot.gd" id="1_iacpl"]
-[ext_resource type="Texture2D" uid="uid://dqybuslh80c1l" path="res://icon.svg" id="1_xuvx6"]
+
+[sub_resource type="Gradient" id="Gradient_iacpl"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0.08409091, 0.66136366, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0.95678884, 0.7416681, 1, 9.62615e-07, 0.9297718, 0.9354039, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_cv3xs"]
+gradient = SubResource("Gradient_iacpl")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_feumd"]
+
+[sub_resource type="Curve" id="Curve_xuvx6"]
+_data = [Vector2(0.028436016, 0), 0.0, 0.0, 0, 0, Vector2(0.08530806, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_cv3xs"]
+curve = SubResource("Curve_xuvx6")
+
+[sub_resource type="Curve" id="Curve_iacpl"]
+_data = [Vector2(0, 1), -2.540723e-07, -2.540723e-07, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_iacpl"]
+curve = SubResource("Curve_iacpl")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_cv3xs"]
+particle_flag_align_y = true
+particle_flag_disable_z = true
+particle_flag_damping_as_friction = true
+inherit_velocity_ratio = 1.0
+spread = 180.0
+initial_velocity_min = 200.0
+initial_velocity_max = 200.0
+gravity = Vector3(0, 0, 0)
+damping_min = 0.2
+damping_max = 0.2
+scale_min = 0.19999999
+scale_max = 0.19999999
+scale_curve = SubResource("CurveTexture_iacpl")
+alpha_curve = SubResource("CurveTexture_cv3xs")
 
 [node name="ElectricShot" type="RigidBody2D" unique_id=2521761]
 collision_layer = 0
@@ -16,8 +56,16 @@ script = ExtResource("1_iacpl")
 speed = 300.0
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1049832624]
-scale = Vector2(0.15593939, 0.15593939)
-texture = ExtResource("1_xuvx6")
+scale = Vector2(0.333, 0.333)
+texture = SubResource("GradientTexture2D_cv3xs")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=38254022]
+visible = false
 shape = SubResource("CircleShape2D_feumd")
+
+[node name="Particles2D" type="GPUParticles2D" parent="." unique_id=229841019]
+amount = 64
+texture = SubResource("GradientTexture2D_cv3xs")
+fixed_fps = 60
+interpolate = false
+process_material = SubResource("ParticleProcessMaterial_cv3xs")
