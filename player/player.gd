@@ -11,11 +11,14 @@ extends CharacterBody2D
 @onready var parry_late_window: Timer = $ParryLateWindow
 @onready var parry_freeze_timer: Timer = $ParryFreeze
 @onready var anim: PlayerAnimTree = $AnimationTree
+@onready var shader: ShaderMaterial = ($Sprite2D as Sprite2D).material
+@onready var hit_recolor_timer: Timer = $HitRecolorTime
 
 
 func _ready() -> void:
 	parry_freeze_timer.timeout.connect(func() -> void: get_tree().paused = false)
 	parry_early_window.timeout.connect(func() -> void: parrybox.disabled = true)
+	hit_recolor_timer.timeout.connect(shader.set_shader_parameter.bind("hit", false))
 
 
 # TODO: make player controller feel snappier
@@ -67,6 +70,8 @@ func parry_hit(parried: Callable, hit: Callable) -> void:
 		parry_cooldown_timer.stop()
 		on_parry.call()
 	else:
+		shader.set_shader_parameter("hit", true)
+		hit_recolor_timer.start()
 		signal_disconnect_all(parry_late_window.timeout)
 		parry_late_window.timeout.connect(hit)
 		parry_late_window.start()

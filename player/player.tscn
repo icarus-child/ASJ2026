@@ -2,12 +2,17 @@
 
 [ext_resource type="Texture2D" uid="uid://dqybuslh80c1l" path="res://icon.svg" id="1_oul6g"]
 [ext_resource type="Script" uid="uid://cgt8i2arm7reo" path="res://player/player.gd" id="1_rkbax"]
+[ext_resource type="Shader" uid="uid://sca5p05glnc6" path="res://assets/player/damage.gdshader" id="2_hg6s5"]
 [ext_resource type="Script" uid="uid://bu161ou786e55" path="res://player/aim_target.gd" id="3_g1dw6"]
 [ext_resource type="Texture2D" uid="uid://bpru4j6ak3h0q" path="res://player/Wizard_Walk_Pose_Right_01.png" id="3_rgyib"]
 [ext_resource type="Texture2D" uid="uid://dmysmjf284xer" path="res://player/Wizard_Parry_Pose_Right_01.png" id="4_hg6s5"]
 [ext_resource type="Script" uid="uid://hl2jdxa4x3nq" path="res://player/camera_target.gd" id="4_yw30f"]
 [ext_resource type="Texture2D" uid="uid://cewsm0mqta8qc" path="res://player/Wizard_Attack_Pose_Right_01.png" id="6_boad6"]
 [ext_resource type="Script" path="res://player/animation_tree.gd" id="8_rgyib"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8t03j"]
+shader = ExtResource("2_hg6s5")
+shader_parameter/hit = false
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g6k8r"]
 height = 46.0
@@ -111,6 +116,7 @@ switch_mode = 2
 advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_hg6s5"]
+states/End/position = Vector2(899.0156, 100)
 states/attack/node = SubResource("AnimationNodeAnimation_hg6s5")
 states/attack/position = Vector2(511, 26)
 states/idle/node = SubResource("AnimationNodeAnimation_g6k8r")
@@ -118,7 +124,7 @@ states/idle/position = Vector2(380, 100)
 states/parry/node = SubResource("AnimationNodeAnimation_boad6")
 states/parry/position = Vector2(511, 184)
 transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_rgyib"), "parry", "idle", SubResource("AnimationNodeStateMachineTransition_boad6"), "attack", "idle", SubResource("AnimationNodeStateMachineTransition_8t03j")]
-graph_offset = Vector2(2, -85)
+graph_offset = Vector2(-44.558594, -4.5234375)
 
 [node name="Player" type="CharacterBody2D" unique_id=142514294]
 collision_mask = 257
@@ -128,6 +134,7 @@ max_speed = 500.0
 max_accel = 4000.0
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1381318254]
+material = SubResource("ShaderMaterial_8t03j")
 position = Vector2(0, -22)
 texture = ExtResource("3_rgyib")
 offset = Vector2(9, 0)
@@ -169,6 +176,15 @@ process_callback = 0
 wait_time = 0.2
 one_shot = true
 
+[node name="ParryFreeze" type="Timer" parent="." unique_id=1475635766]
+process_mode = 3
+wait_time = 0.1
+one_shot = true
+
+[node name="HitRecolorTime" type="Timer" parent="." unique_id=2134192578]
+wait_time = 0.1
+one_shot = true
+
 [node name="AimTarget" type="Sprite2D" parent="." unique_id=1603199398]
 process_physics_priority = 1
 scale = Vector2(0.1, 0.1)
@@ -186,8 +202,3 @@ libraries/ = SubResource("AnimationLibrary_ebec5")
 tree_root = SubResource("AnimationNodeStateMachine_hg6s5")
 anim_player = NodePath("../AnimationPlayer")
 script = ExtResource("8_rgyib")
-
-[node name="ParryFreeze" type="Timer" parent="." unique_id=1475635766]
-process_mode = 3
-wait_time = 0.1
-one_shot = true
