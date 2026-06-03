@@ -5,6 +5,7 @@
 [ext_resource type="TileSet" uid="uid://74uvo3fcruv3" path="res://tile_set.tres" id="3_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://dj7intpg1gv1b" path="res://enemies/grunt.tscn" id="3_7mycd"]
 [ext_resource type="AudioStream" uid="uid://bqf8ikxhrfv8i" path="res://assets/sound/Wizard city funk masterloop.wav" id="5_7mycd"]
+[ext_resource type="PackedScene" uid="uid://dgwgx0lt3bpa2" path="res://enemies/area_denial/acid.tscn" id="5_272bh"]
 [ext_resource type="PackedScene" uid="uid://bi7880g0wx2x8" path="res://ui/ui.tscn" id="5_lquwl"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_1bvp3"]
@@ -45,6 +46,9 @@ position = Vector2(987.0001, 864.00006)
 
 [node name="Grunt4" parent="." unique_id=1821879068 instance=ExtResource("3_7mycd")]
 position = Vector2(170.00006, 874)
+
+[node name="Acid" parent="." unique_id=826684296 instance=ExtResource("5_272bh")]
+position = Vector2(192, 4)
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=1347056112]
 y_sort_enabled = true

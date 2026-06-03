@@ -91,3 +91,30 @@ func signal_disconnect_all(target_signal: Signal) -> void:
 
 func _disable_parrybox() -> void:
 	parrybox.disabled = true
+
+
+@onready var poison_timer: Timer = $PoisonTimer
+@onready var poison_particles: GPUParticles2D = $PoisonParticles
+
+var _in_poison: int = 0
+var in_poison: int:
+	get:
+		return _in_poison
+	set(value):
+		if (_in_poison > 0) == (value > 0):
+			_in_poison = value
+			return
+		_in_poison = value
+
+		if in_poison > 0:
+			if poison_timer.is_stopped():
+				_take_poison_damage()
+				poison_timer.start()
+			poison_timer.one_shot = false
+		else:
+			poison_timer.one_shot = true
+
+func _take_poison_damage() -> void:
+	if in_poison > 0:
+		poison_particles.restart()
+		take_damage()

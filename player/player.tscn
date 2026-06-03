@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://cewsm0mqta8qc" path="res://player/Wizard_Attack_Pose_Right_01.png" id="6_boad6"]
 [ext_resource type="Script" uid="uid://ultb40nadr46" path="res://player/animation_tree.gd" id="8_rgyib"]
 [ext_resource type="Texture2D" uid="uid://4627nbakiyxs" path="res://player/Wizard_Hurt_Pose_Right_01.png" id="10_2ieo8"]
+[ext_resource type="Texture2D" uid="uid://cfi73juvhrdms" path="res://enemies/area_denial/acid_bubble.tres" id="12_ebec5"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8t03j"]
 shader = ExtResource("2_hg6s5")
@@ -148,6 +149,29 @@ states/parry/position = Vector2(518.20703, 170.40625)
 transitions = ["attack", "idle", SubResource("AnimationNodeStateMachineTransition_ebec5"), "hurt", "idle", SubResource("AnimationNodeStateMachineTransition_yllr7"), "parry", "idle", SubResource("AnimationNodeStateMachineTransition_kb6p2"), "Start", "idle", SubResource("AnimationNodeStateMachineTransition_wodsf")]
 graph_offset = Vector2(-165.51172, -75.4375)
 
+[sub_resource type="Curve" id="Curve_yllr7"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.09952608, 0.7352942), 0.0, 0.0, 0, 0, Vector2(0.94549763, 0.74117655), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_3jhxb"]
+curve = SubResource("Curve_yllr7")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_kb6p2"]
+lifetime_randomness = 0.5
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(0, -10, 0)
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 0.0
+emission_ring_radius = 20.0
+emission_ring_inner_radius = 0.0
+emission_ring_cone_angle = 90.0
+spread = 180.0
+initial_velocity_min = 10.0
+initial_velocity_max = 50.0
+gravity = Vector3(0, -98, 0)
+scale_curve = SubResource("CurveTexture_3jhxb")
+
 [node name="Player" type="CharacterBody2D" unique_id=142514294]
 collision_mask = 257
 motion_mode = 1
@@ -230,3 +254,20 @@ deterministic = false
 tree_root = SubResource("AnimationNodeStateMachine_32hag")
 anim_player = NodePath("../AnimationPlayer")
 script = ExtResource("8_rgyib")
+
+[node name="PoisonParticles" type="GPUParticles2D" parent="." unique_id=573244967]
+emitting = false
+amount = 32
+texture = ExtResource("12_ebec5")
+lifetime = 1.5
+one_shot = true
+explosiveness = 1.0
+fixed_fps = 60
+interpolate = false
+process_material = SubResource("ParticleProcessMaterial_kb6p2")
+
+[node name="PoisonTimer" type="Timer" parent="." unique_id=2046601601]
+process_callback = 0
+wait_time = 2.0
+
+[connection signal="timeout" from="PoisonTimer" to="." method="_take_poison_damage"]
