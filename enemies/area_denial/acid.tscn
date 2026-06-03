@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://dgwgx0lt3bpa2"]
 
 [ext_resource type="Shader" uid="uid://c8vx2v3db6p5r" path="res://enemies/area_denial/acid.gdshader" id="1_p3fvi"]
-[ext_resource type="Script" uid="uid://buehf25n6etyk" path="res://enemies/area_denial/acid.gd" id="1_qb80n"]
 [ext_resource type="Texture2D" uid="uid://cfi73juvhrdms" path="res://enemies/area_denial/acid_bubble.tres" id="2_3jhxb"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fc1ol"]
@@ -39,14 +38,14 @@ gravity = Vector3(0, -98, 0)
 scale_curve = SubResource("CurveTexture_qb80n")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_p3fvi"]
-radius = 100.0
+radius = 123.07056
 
 [node name="Node2D" type="Node2D" unique_id=1668714962]
 
 [node name="Acid" type="Area2D" parent="." unique_id=826684296]
 scale = Vector2(1, 0.48)
 collision_layer = 128
-script = ExtResource("1_qb80n")
+collision_mask = 0
 
 [node name="Icon" type="Sprite2D" parent="Acid" unique_id=2135629242]
 z_index = -9
@@ -61,7 +60,6 @@ interpolate = false
 process_material = SubResource("ParticleProcessMaterial_qb80n")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Acid" unique_id=1030193628]
-position = Vector2(0, -14.583334)
 shape = SubResource("CircleShape2D_p3fvi")
 debug_color = Color(0.99739856, 0, 0.17665747, 0.41960785)
 
