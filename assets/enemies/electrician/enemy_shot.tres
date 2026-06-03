@@ -2,8 +2,8 @@
 
 [sub_resource type="Gradient" id="Gradient_tifct"]
 interpolation_mode = 2
-offsets = PackedFloat32Array(0.08409091, 0.66136366, 1)
-colors = PackedColorArray(0.9957914, 0.9179414, 0.94172364, 1, 0.8810442, 0.61532634, 0.4858039, 1, 0.79242855, 0.15519056, 0.18913102, 0)
+offsets = PackedFloat32Array(0.5953244, 0.6381289, 0.7271946, 0.7797796, 0.9946679, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.9950341, 0.8747511, 0.9324431, 1, 0.8148793, 0.8624577, 1.0011889, 1.0555456, 0.612807, 0.6554064, 0.98892576, 1, 0.58903193, 0.17510158, 0.87884706, 0.06275457, 0.79242855, 0.15519056, 0.18913102, 0)
 
 [resource]
 gradient = SubResource("Gradient_tifct")

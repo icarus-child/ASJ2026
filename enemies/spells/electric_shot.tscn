@@ -5,6 +5,31 @@
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_feumd"]
 
+[sub_resource type="Gradient" id="Gradient_cv3xs"]
+interpolation_mode = 2
+interpolation_color_space = 2
+offsets = PackedFloat32Array(0, 0.4117609, 1)
+colors = PackedColorArray(0.21449637, 0.2144964, 0.2144964, 1, 0.27378714, 0.27378714, 0.2737871, 0.22745098, 0.29754832, 0.29754826, 0.29754803, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_o4wfu"]
+gradient = SubResource("Gradient_cv3xs")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.774172, 0.19739917)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_65q27"]
+particle_flag_disable_z = true
+particle_flag_damping_as_friction = true
+gravity = Vector3(0, 0, 0)
+linear_accel_min = -100.0
+linear_accel_max = 99.99999
+radial_accel_min = 88.409996
+radial_accel_max = 99.99999
+tangential_accel_min = -100.0
+tangential_accel_max = 99.99999
+damping_max = 0.24800001
+scale_min = 0.099999994
+
 [sub_resource type="Curve" id="Curve_xuvx6"]
 _data = [Vector2(0.028436016, 0), 0.0, 0.0, 0, 0, Vector2(0.08530806, 1), 0.0, 0.0, 0, 0]
 point_count = 2
@@ -60,6 +85,12 @@ texture = ExtResource("3_cv3xs")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=38254022]
 shape = SubResource("CircleShape2D_feumd")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=1775120702]
+amount = 20
+texture = SubResource("GradientTexture2D_o4wfu")
+lifetime = 0.2
+process_material = SubResource("ParticleProcessMaterial_65q27")
 
 [node name="Particles2D" type="GPUParticles2D" parent="." unique_id=229841019]
 amount = 64

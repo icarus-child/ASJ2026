@@ -2,8 +2,8 @@
 
 [sub_resource type="Gradient" id="Gradient_u5dps"]
 interpolation_mode = 2
-offsets = PackedFloat32Array(0.08409091, 0.66136366, 1)
-colors = PackedColorArray(0.80294454, 0.89449126, 0.69855696, 1, 0.70813674, 0.8673736, 0.33101666, 1, 9.62615e-07, 0.9297718, 0.9354039, 0)
+offsets = PackedFloat32Array(0.10793429, 0.66136366, 0.8134951, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.39414662, 0.8974111, 0.8005944, 1, 0.59615326, 0.87678903, 0.453838, 0.8666667, 0.8353664, 0.8534031, 0.26148352, 0)
 
 [resource]
 gradient = SubResource("Gradient_u5dps")
