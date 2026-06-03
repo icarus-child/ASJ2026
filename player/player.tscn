@@ -2,9 +2,9 @@
 
 [ext_resource type="Texture2D" uid="uid://dqybuslh80c1l" path="res://icon.svg" id="1_oul6g"]
 [ext_resource type="Script" uid="uid://cgt8i2arm7reo" path="res://player/player.gd" id="1_rkbax"]
+[ext_resource type="Texture2D" uid="uid://wll32upo16ek" path="res://assets/shadow.png" id="2_2ieo8"]
 [ext_resource type="Shader" uid="uid://sca5p05glnc6" path="res://assets/player/damage.gdshader" id="2_hg6s5"]
 [ext_resource type="Script" uid="uid://bu161ou786e55" path="res://player/aim_target.gd" id="3_g1dw6"]
-[ext_resource type="Texture2D" uid="uid://qqxsoc60xw0w" path="res://assets/enemies/electrician/Electrician_Walk_Pose_Right_01.png" id="3_hg6s5"]
 [ext_resource type="Texture2D" uid="uid://bpru4j6ak3h0q" path="res://player/Wizard_Walk_Pose_Right_01.png" id="3_rgyib"]
 [ext_resource type="Texture2D" uid="uid://dmysmjf284xer" path="res://player/Wizard_Parry_Pose_Right_01.png" id="4_hg6s5"]
 [ext_resource type="Script" uid="uid://hl2jdxa4x3nq" path="res://player/camera_target.gd" id="4_yw30f"]
@@ -155,10 +155,15 @@ script = ExtResource("1_rkbax")
 max_speed = 500.0
 max_accel = 4000.0
 
+[node name="Shadow" type="Sprite2D" parent="." unique_id=1087250698]
+position = Vector2(0, 19)
+scale = Vector2(0.63841206, 0.63841206)
+texture = ExtResource("2_2ieo8")
+
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1381318254]
 material = SubResource("ShaderMaterial_8t03j")
 position = Vector2(0, -22)
-texture = ExtResource("3_hg6s5")
+texture = ExtResource("3_rgyib")
 offset = Vector2(9, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1511822475]

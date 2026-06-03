@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://q8fr7pkiqge3" path="res://enemies/electrician.gd" id="1_s6tkt"]
 [ext_resource type="Texture2D" uid="uid://d25exj6c34ndg" path="res://assets/enemies/electrician/Electrician_Attack_Pose_Right_01.png" id="3_1c1pl"]
+[ext_resource type="Texture2D" uid="uid://wll32upo16ek" path="res://assets/shadow.png" id="3_ls2rm"]
 [ext_resource type="Texture2D" uid="uid://s1y32vxhafo2" path="res://assets/enemies/electrician/Electrician_Hurt_Pose_Right_01.png" id="4_1c1pl"]
 [ext_resource type="Texture2D" uid="uid://qqxsoc60xw0w" path="res://assets/enemies/electrician/Electrician_Walk_Pose_Right_01.png" id="4_ls2rm"]
 [ext_resource type="Script" uid="uid://dn7bnqml7fonk" path="res://enemies/enemy_animation_tree.gd" id="5_1c1pl"]
@@ -32,7 +33,6 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_ls2rm"]
 resource_name = "attack"
-length = 2.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -134,6 +134,11 @@ collision_layer = 16
 collision_mask = 256
 script = ExtResource("1_s6tkt")
 health = 3
+
+[node name="Shadow" type="Sprite2D" parent="." unique_id=1922325810]
+position = Vector2(0, 39)
+scale = Vector2(0.48309416, 0.48309416)
+texture = ExtResource("3_ls2rm")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1694667638]
 scale = Vector2(1.015598, 1.015598)

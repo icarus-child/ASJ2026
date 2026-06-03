@@ -3,6 +3,10 @@ extends RigidBody2D
 
 @export var speed: float = 400
 
+var ally_shot: GradientTexture2D = preload("res://assets/enemies/electrician/ally_shot.tres")
+
+@onready var particles: GPUParticles2D = $Particles2D
+
 # A projectile owns the logic for it's own attack
 
 
@@ -20,7 +24,6 @@ func _on_body_enter(body: Node2D) -> void:
 	else:
 		pass # hit the wall animation
 
-	var particles: GPUParticles2D = $Particles2D
 	particles.emitting = false
 	particles.finished.connect(particles.queue_free)
 	remove_child(particles)
@@ -41,7 +44,10 @@ class PSpell extends Spell:
 	func fire_attack(caster: Node2D, heading: Vector2) -> void:
 		var projectile := spell_scene.instantiate() as ElectricShot
 		if caster is Player:
+			(projectile.get_child(0) as Sprite2D).texture = projectile.ally_shot
 			projectile.collision_mask = 288
 		projectile.position = caster.position
 		projectile.linear_velocity = heading.normalized() * projectile.speed
 		caster.add_sibling(projectile)
+		if caster is Player:
+			projectile.particles.texture = projectile.ally_shot
