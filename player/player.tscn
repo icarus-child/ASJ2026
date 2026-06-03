@@ -178,6 +178,8 @@ motion_mode = 1
 script = ExtResource("1_rkbax")
 max_speed = 500.0
 max_accel = 4000.0
+acid_speed = 300.0
+acid_accel = 1000.0
 
 [node name="Shadow" type="Sprite2D" parent="." unique_id=1087250698]
 position = Vector2(0, 19)

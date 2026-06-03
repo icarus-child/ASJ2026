@@ -3,6 +3,8 @@ extends CharacterBody2D
 
 @export var max_speed: float
 @export var max_accel: float
+@export var acid_speed: float
+@export var acid_accel: float
 
 @onready var hurtbox: StaticBody2D = $Hurtbox
 @onready var parrybox: CollisionShape2D = $Parrybox/CollisionShape2D
@@ -22,9 +24,15 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
+	var mspeed := max_speed
+	var maccel := max_accel
+	if in_poison:
+		mspeed = acid_speed
+		maccel = acid_accel
+
 	var move_input: Vector2 = Input.get_vector("move_left", "move_right", "move_up", "move_down").limit_length()
-	var target_vel: Vector2 = move_input * max_speed
-	velocity += (target_vel - velocity).limit_length(max_accel * delta)
+	var target_vel: Vector2 = move_input * mspeed
+	velocity += (target_vel - velocity).limit_length(maccel * delta)
 	move_and_slide()
 	velocity = get_real_velocity()
 
