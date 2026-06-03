@@ -20,6 +20,7 @@ scale = Vector2(0.57432866, 0.57432866)
 collision_layer = 16
 collision_mask = 256
 script = ExtResource("1_1ydv4")
+health = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1694667638]
 scale = Vector2(0.6293247, 0.6293247)

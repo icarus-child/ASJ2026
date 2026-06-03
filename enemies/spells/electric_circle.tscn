@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bsusf4fwi3fvk"]
 
 [ext_resource type="Script" uid="uid://ciop68mdc15m1" path="res://enemies/spells/electric_circle.gd" id="1_2xhni"]
-[ext_resource type="Texture2D" uid="uid://dqybuslh80c1l" path="res://icon.svg" id="2_2l5tp"]
+[ext_resource type="Texture2D" uid="uid://dlkqs2qumre7m" path="res://assets/enemies/electrician/enemy_ring.tres" id="2_2xhni"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2xhni"]
 resource_local_to_scene = true
@@ -17,8 +17,8 @@ linear_damp_mode = 1
 script = ExtResource("1_2xhni")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1049832624]
-scale = Vector2(0.15593939, 0.15593939)
-texture = ExtResource("2_2l5tp")
+scale = Vector2(0.038975157, 0.038975157)
+texture = ExtResource("2_2xhni")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=487365507]
 shape = SubResource("CircleShape2D_2xhni")

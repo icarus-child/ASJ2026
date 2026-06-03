@@ -142,7 +142,7 @@ texture = ExtResource("3_ls2rm")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1694667638]
 scale = Vector2(1.015598, 1.015598)
-texture = ExtResource("3_1c1pl")
+texture = ExtResource("4_ls2rm")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1971040039]
 scale = Vector2(0.6293247, 0.6293247)

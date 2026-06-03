@@ -12,6 +12,12 @@ point_count = 2
 [sub_resource type="CurveTexture" id="CurveTexture_cv3xs"]
 curve = SubResource("Curve_xuvx6")
 
+[sub_resource type="Gradient" id="Gradient_iacpl"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_cv3xs"]
+gradient = SubResource("Gradient_iacpl")
+
 [sub_resource type="Curve" id="Curve_iacpl"]
 _data = [Vector2(0, 1), -2.540723e-07, -2.540723e-07, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
@@ -30,10 +36,13 @@ initial_velocity_max = 200.0
 gravity = Vector3(0, 0, 0)
 damping_min = 0.2
 damping_max = 0.2
-scale_min = 0.19999999
-scale_max = 0.19999999
+scale_min = 0.099999994
+scale_max = 0.29999998
 scale_curve = SubResource("CurveTexture_iacpl")
+color_ramp = SubResource("GradientTexture1D_cv3xs")
 alpha_curve = SubResource("CurveTexture_cv3xs")
+turbulence_enabled = true
+turbulence_noise_speed_random = 0.81
 
 [node name="ElectricShot" type="RigidBody2D" unique_id=2521761]
 collision_layer = 0
@@ -57,6 +66,6 @@ amount = 64
 texture = ExtResource("3_cv3xs")
 lifetime = 0.3
 speed_scale = 0.46
+randomness = 0.44
 fixed_fps = 60
-interpolate = false
 process_material = SubResource("ParticleProcessMaterial_cv3xs")

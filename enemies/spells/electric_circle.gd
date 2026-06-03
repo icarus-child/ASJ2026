@@ -4,6 +4,8 @@ extends RigidBody2D
 @export var max_radius: float = 400
 @export var speed: float = 5
 
+var ally_ring: GradientTexture2D = preload("res://assets/enemies/electrician/ally_ring.tres")
+
 @onready var sprite := $Sprite2D as Sprite2D
 @onready var shape := ($CollisionShape2D as CollisionShape2D).shape as CircleShape2D
 @onready var shape_scale_amount: float = shape.radius * speed
@@ -17,6 +19,12 @@ func _ready() -> void:
 
 
 func _on_body_enter(body: Node2D) -> void:
+	print("-")
+	print(global_position.distance_to(body.global_position))
+	print(shape.radius)
+	print(global_position.distance_to(body.global_position) < shape.radius - (shape.radius * 0.2))
+	if global_position.distance_to(body.global_position) < shape.radius - (shape.radius * 0.2):
+		return
 	if body is StaticBody2D and (body as StaticBody2D).collision_layer == 2:
 		var player := body.get_parent() as Player
 		player.parry_hit(PlayerResources.acquire_spell.bind(PSpell.new()), player.take_damage.bind(4))
@@ -51,6 +59,7 @@ class PSpell extends Spell:
 				caster.global_position + heading
 			)
 			caster.global_position = target
-		projectile.position = caster.position
-		projectile.linear_velocity = heading.normalized() * projectile.speed
-		caster.add_sibling(projectile)
+		if caster is not Player:
+			projectile.position = caster.position
+			projectile.linear_velocity = heading.normalized() * projectile.speed
+			caster.add_sibling(projectile)

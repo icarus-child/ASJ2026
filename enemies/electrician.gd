@@ -19,6 +19,8 @@ var attack_recovery: float = 1
 var attack_range: float = 500
 var ideal_distance: float = 400
 
+var beam_scene: PackedScene = preload("res://enemies/spells/teleport_beam.tscn")
+
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var navigation_agent: NavigationAgent2D = $NavigationAgent2D
 @onready var avoid_shape: Area2D = $AvoidShape
@@ -35,6 +37,14 @@ func _physics_process(delta: float) -> void:
 	var distance_to_player := position.distance_to(player.position)
 	if distance_to_player <= blink_trigger_range and not blink_on_cooldown:
 		var target := _find_flank_position(true)
+
+		var beam := beam_scene.instantiate() as Line2D
+		beam.global_position = global_position
+		beam.points[1].x = target.x - beam.global_position.x
+		beam.points[1].y = target.y - beam.global_position.y
+		beam.add_child(_create_timer(0.1, beam.queue_free))
+		add_sibling(beam)
+
 		global_position = target
 		_update_navigation_target()
 		electric_circle.fire_attack(self, position.direction_to(player.position))
