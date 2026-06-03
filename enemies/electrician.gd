@@ -31,13 +31,12 @@ var beam_scene: PackedScene = preload("res://enemies/spells/teleport_beam.tscn")
 func _custom_ready() -> void:
 	pass
 
-# TODO: enemy attacks should have a startup and recovery time where they don't move
-# TODO: enemy won't stop and attack when inside of an obstacle
 func _physics_process(delta: float) -> void:
 	var distance_to_player := position.distance_to(player.position)
 	if distance_to_player <= blink_trigger_range and not blink_on_cooldown:
 		var target := _find_flank_position(true)
 
+		# TODO: make pretty
 		var beam := beam_scene.instantiate() as Line2D
 		beam.global_position = global_position
 		beam.points[1].x = target.x - beam.global_position.x

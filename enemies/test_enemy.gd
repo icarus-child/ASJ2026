@@ -35,8 +35,6 @@ func _ready() -> void:
 	add_child(timer)
 
 
-# TODO: enemy attacks should have a startup and recovery time where they don't move
-# TODO: enemy won't stop and attack when inside of an obstacle
 func _physics_process(delta: float) -> void:
 	var distance_to_player := position.distance_to(player.position)
 	if can_attack and distance_to_player <= max_attack_range and _has_line_of_sight():

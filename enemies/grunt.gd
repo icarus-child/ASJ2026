@@ -23,7 +23,6 @@ var lunge_direction: Vector2
 func _custom_ready() -> void:
 	hitbox.body_entered.connect(_on_hit_player)
 
-# TODO: enemy won't stop and attack when inside of an obstacle
 func _physics_process(delta: float) -> void:
 	var distance_to_player := position.distance_to(player.position)
 	if distance_to_player <= attack_range and _has_line_of_sight() and not recovering_from_attack:
