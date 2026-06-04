@@ -15,8 +15,6 @@ fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0, 0.5107143)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_feumd"]
-
 [sub_resource type="Animation" id="Animation_lyew0"]
 length = 0.001
 tracks/0/type = "value"
@@ -34,22 +32,10 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("CollisionShape2D:disabled")
+tracks/1/path = NodePath(".:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -58,7 +44,7 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id="Animation_n34b5"]
 resource_name = "lob"
-length = 1.1
+length = 2.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -66,7 +52,7 @@ tracks/0/path = NodePath("Sprite2D:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5, 1),
+"times": PackedFloat32Array(0, 1, 2),
 "transitions": PackedFloat32Array(0.5, 2, 1),
 "update": 0,
 "values": [Vector2(0, 0), Vector2(0, -100), Vector2(0, 0)]
@@ -74,23 +60,11 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("CollisionShape2D:disabled")
+tracks/1/path = NodePath(".:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 1.01),
+"times": PackedFloat32Array(0, 2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
@@ -102,14 +76,10 @@ _data = {
 &"lob": SubResource("Animation_n34b5")
 }
 
-[node name="TestProjectile" type="RigidBody2D" unique_id=2521761]
-collision_layer = 0
-collision_mask = 2
-lock_rotation = true
-contact_monitor = true
-max_contacts_reported = 1
-linear_damp_mode = 1
+[node name="Lob" type="RigidBody2D" unique_id=440662529]
+z_index = 2
 script = ExtResource("1_lyew0")
+hang_time = null
 
 [node name="Shadow" type="Sprite2D" parent="." unique_id=1598182493]
 modulate = Color(1, 1, 1, 0.627451)
@@ -121,13 +91,9 @@ texture = SubResource("GradientTexture2D_n34b5")
 scale = Vector2(0.15593939, 0.15593939)
 texture = ExtResource("2_n34b5")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=38254022]
-shape = SubResource("CircleShape2D_feumd")
-disabled = true
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=382101441]
 reset_on_save = false
 libraries/ = SubResource("AnimationLibrary_x0lkn")
 autoplay = &"lob"
 
-[connection signal="animation_finished" from="AnimationPlayer" to="." method="queue_free" unbinds=1]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="queue_free"]

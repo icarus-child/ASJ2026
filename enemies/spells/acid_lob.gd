@@ -1,9 +1,14 @@
-class_name Lob
+class_name AcidLob
 extends RigidBody2D
 
-@export var hang_time: float = 2.0
+@export var hang_time: float = 5.0
+const max_range: float = 500
 
 # A projectile owns the logic for it's own attack
+
+
+func _ready() -> void:
+	body_entered.connect(_on_body_enter)
 
 
 func _on_body_enter(body: Node2D) -> void:
@@ -18,24 +23,22 @@ func _on_body_enter(body: Node2D) -> void:
 	queue_free()
 
 class PSpell extends Spell:
-	const projectile_scene: PackedScene = preload("res://enemies/spells/lob.tscn")
-	const target_scene: PackedScene = preload("res://enemies/spells/lob_target.tscn")
+	const scene: PackedScene = preload("res://enemies/spells/lob.tscn")
 
 	func dummy() -> Node2D:
-		var d: Node = projectile_scene.instantiate()
+		var d: Node = scene.instantiate()
 		(d.get_node("AnimationPlayer") as AnimationPlayer).active = false
 		return d
 
 	func range() -> float:
-		return INF
+		return max_range
 
 	func fire_attack(caster: Node2D, heading: Vector2) -> void:
-		var target := target_scene.instantiate() as LobTarget
-		var projectile := projectile_scene.instantiate() as Lob
+		var projectile := scene.instantiate() as Lob
 		if caster is Player:
-			var area: Area2D = target.get_child(4)
-			area.set_collision_mask_value(2, false)
-			area.set_collision_mask_value(6, true)
+			projectile.set_collision_mask_value(2, false)
+			projectile.set_collision_mask_value(6, true)
 		projectile.position = caster.position
-		projectile.linear_velocity = heading / projectile.hang_time
+		projectile.linear_velocity = heading.limit_length(max_range) / projectile.hang_time
+		print(heading)
 		caster.add_sibling(projectile)

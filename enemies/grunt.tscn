@@ -1,7 +1,11 @@
 [gd_scene format=3 uid="uid://dj7intpg1gv1b"]
 
 [ext_resource type="Script" uid="uid://b271eqlg37e8f" path="res://enemies/grunt.gd" id="1_1ydv4"]
-[ext_resource type="Texture2D" uid="uid://dqybuslh80c1l" path="res://icon.svg" id="2_nawkf"]
+[ext_resource type="Texture2D" uid="uid://clii3v8s5dyhr" path="res://assets/enemies/grunt/Grunt_Attack_Pose_Right_01.png" id="2_15hvj"]
+[ext_resource type="Texture2D" uid="uid://dv2jnqafk2mff" path="res://assets/enemies/grunt/Grunt_Hurt_Pose_Right_01.png" id="2_kcgqv"]
+[ext_resource type="Texture2D" uid="uid://biilieuj4cv2e" path="res://assets/enemies/grunt/Grunt_Walk_Pose_Right_01.png" id="2_yisfy"]
+[ext_resource type="Texture2D" uid="uid://wll32upo16ek" path="res://assets/shadow.png" id="3_15hvj"]
+[ext_resource type="Script" uid="uid://dn7bnqml7fonk" path="res://enemies/enemy_animation_tree.gd" id="5_u8hdr"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2bghh"]
 radius = 61.204575
@@ -13,18 +17,146 @@ size = Vector2(86, 86)
 size = Vector2(106, 110)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8ifd5"]
-radius = 74.3
+radius = 108.07842
+
+[sub_resource type="Animation" id="Animation_yisfy"]
+resource_name = "RESET"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:process_mode")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_yisfy")]
+}
+
+[sub_resource type="Animation" id="Animation_15hvj"]
+resource_name = "attack"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_15hvj")]
+}
+
+[sub_resource type="Animation" id="Animation_kcgqv"]
+resource_name = "parry"
+length = 0.53333336
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_kcgqv")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:process_mode")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.53333336),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [4, 0]
+}
+
+[sub_resource type="Animation" id="Animation_u8hdr"]
+resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_yisfy")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_brp71"]
+_data = {
+&"RESET": SubResource("Animation_yisfy"),
+&"attack": SubResource("Animation_15hvj"),
+&"hurt": SubResource("Animation_kcgqv"),
+&"idle": SubResource("Animation_u8hdr")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_yisfy"]
+animation = &"attack"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_15hvj"]
+animation = &"hurt"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_kcgqv"]
+animation = &"idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_u8hdr"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_brp71"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ynhef"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_ynhef"]
+states/attack/node = SubResource("AnimationNodeAnimation_yisfy")
+states/attack/position = Vector2(474.9453, 170.35156)
+states/hurt/node = SubResource("AnimationNodeAnimation_15hvj")
+states/hurt/position = Vector2(468.53125, 40.98047)
+states/idle/node = SubResource("AnimationNodeAnimation_kcgqv")
+states/idle/position = Vector2(340.82813, 100)
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_u8hdr"), "hurt", "idle", SubResource("AnimationNodeStateMachineTransition_brp71"), "attack", "idle", SubResource("AnimationNodeStateMachineTransition_ynhef")]
+graph_offset = Vector2(-26, -14.035156)
 
 [node name="Grunt" type="CharacterBody2D" unique_id=1794130473]
-scale = Vector2(0.57432866, 0.57432866)
 collision_layer = 16
 collision_mask = 256
 script = ExtResource("1_1ydv4")
-health = 1
+health = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1694667638]
-scale = Vector2(0.6293247, 0.6293247)
-texture = ExtResource("2_nawkf")
+texture = ExtResource("2_yisfy")
+
+[node name="Shadow" type="Sprite2D" parent="." unique_id=1069080668]
+position = Vector2(0, 39)
+scale = Vector2(0.48309416, 0.48309416)
+texture = ExtResource("3_15hvj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1971040039]
 scale = Vector2(0.6293247, 0.6293247)
@@ -47,7 +179,6 @@ shape = SubResource("RectangleShape2D_1ydv4")
 debug_color = Color(0.19836539, 0.55586034, 0.8556525, 0.41960785)
 
 [node name="AvoidShape" type="Area2D" parent="." unique_id=496320859]
-visible = false
 collision_layer = 64
 collision_mask = 64
 
@@ -57,3 +188,12 @@ shape = SubResource("CircleShape2D_8ifd5")
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1503169185]
 avoidance_enabled = true
 debug_enabled = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1262832056]
+libraries/ = SubResource("AnimationLibrary_brp71")
+
+[node name="AnimationTree" type="AnimationTree" parent="." unique_id=2084440971]
+process_mode = 3
+tree_root = SubResource("AnimationNodeStateMachine_ynhef")
+anim_player = NodePath("../AnimationPlayer")
+script = ExtResource("5_u8hdr")

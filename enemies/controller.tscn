@@ -1,11 +1,11 @@
-[gd_scene format=3 uid="uid://bghrag6aan4bj"]
+[gd_scene format=3 uid="uid://b5k8yiknx6yhx"]
 
-[ext_resource type="Script" uid="uid://q8fr7pkiqge3" path="res://enemies/electrician.gd" id="1_s6tkt"]
-[ext_resource type="Texture2D" uid="uid://d25exj6c34ndg" path="res://assets/enemies/electrician/Electrician_Attack_Pose_Right_01.png" id="3_1c1pl"]
-[ext_resource type="Texture2D" uid="uid://wll32upo16ek" path="res://assets/shadow.png" id="3_ls2rm"]
-[ext_resource type="Texture2D" uid="uid://s1y32vxhafo2" path="res://assets/enemies/electrician/Electrician_Hurt_Pose_Right_01.png" id="4_1c1pl"]
-[ext_resource type="Texture2D" uid="uid://qqxsoc60xw0w" path="res://assets/enemies/electrician/Electrician_Walk_Pose_Right_01.png" id="4_ls2rm"]
-[ext_resource type="Script" uid="uid://dn7bnqml7fonk" path="res://enemies/enemy_animation_tree.gd" id="5_1c1pl"]
+[ext_resource type="Script" uid="uid://bi34d1y5m3wy0" path="res://enemies/controller.gd" id="1_yr6gm"]
+[ext_resource type="Texture2D" uid="uid://wll32upo16ek" path="res://assets/shadow.png" id="2_pgoh7"]
+[ext_resource type="Texture2D" uid="uid://dwbuuohnyn2es" path="res://assets/enemies/controller/AreaDenial_Walk_Right_Pose_01.png" id="3_bh577"]
+[ext_resource type="Texture2D" uid="uid://b3l6jjibp1y04" path="res://assets/enemies/controller/AreaDenial_Hurt_Right_Pose_01.png" id="3_pgoh7"]
+[ext_resource type="Texture2D" uid="uid://cebr6k3jwjwww" path="res://assets/enemies/controller/AreaDenial_LobbedAttack_Right_Pose_01.png" id="3_yr6gm"]
+[ext_resource type="Script" uid="uid://dn7bnqml7fonk" path="res://enemies/enemy_animation_tree.gd" id="6_3cqep"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2bghh"]
 radius = 61.204575
@@ -14,7 +14,7 @@ radius = 61.204575
 size = Vector2(86, 86)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8ifd5"]
-radius = 100.005
+radius = 154.01299
 
 [sub_resource type="Animation" id="Animation_1c1pl"]
 length = 0.001
@@ -43,7 +43,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("3_1c1pl")]
+"values": [ExtResource("3_yr6gm")]
 }
 
 [sub_resource type="Animation" id="Animation_dbr6m"]
@@ -59,7 +59,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("4_1c1pl")]
+"values": [ExtResource("3_pgoh7")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -87,7 +87,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("4_ls2rm")]
+"values": [ExtResource("3_bh577")]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ls2rm"]
@@ -98,51 +98,50 @@ _data = {
 &"idle": SubResource("Animation_vhge7")
 }
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_hg6s5"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_yr6gm"]
 animation = &"attack"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ls2rm"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_pgoh7"]
 animation = &"hurt"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_g6k8r"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_bh577"]
 animation = &"idle"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_rgyib"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_wrmtc"]
 advance_mode = 2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_8t03j"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_l04n3"]
 switch_mode = 2
 advance_mode = 2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_vhge7"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3cqep"]
 switch_mode = 2
 advance_mode = 2
 
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_1ff11"]
-states/End/position = Vector2(899.0156, 100)
-states/attack/node = SubResource("AnimationNodeAnimation_hg6s5")
-states/attack/position = Vector2(511, 26)
-states/hurt/node = SubResource("AnimationNodeAnimation_ls2rm")
-states/hurt/position = Vector2(511, 165.21094)
-states/idle/node = SubResource("AnimationNodeAnimation_g6k8r")
-states/idle/position = Vector2(380, 100)
-transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_rgyib"), "attack", "idle", SubResource("AnimationNodeStateMachineTransition_8t03j"), "hurt", "idle", SubResource("AnimationNodeStateMachineTransition_vhge7")]
-graph_offset = Vector2(14.972656, -73.39453)
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_yr6gm"]
+states/attack/node = SubResource("AnimationNodeAnimation_yr6gm")
+states/attack/position = Vector2(496.26953, 33.13672)
+states/hurt/node = SubResource("AnimationNodeAnimation_pgoh7")
+states/hurt/position = Vector2(489.5586, 165.66406)
+states/idle/node = SubResource("AnimationNodeAnimation_bh577")
+states/idle/position = Vector2(377.2539, 100)
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_wrmtc"), "attack", "idle", SubResource("AnimationNodeStateMachineTransition_l04n3"), "hurt", "idle", SubResource("AnimationNodeStateMachineTransition_3cqep")]
+graph_offset = Vector2(0.05859375, -62.242188)
 
-[node name="Electrician" type="CharacterBody2D" unique_id=1794130473]
+[node name="Controller" type="CharacterBody2D" unique_id=1794130473]
 collision_layer = 16
 collision_mask = 256
-script = ExtResource("1_s6tkt")
+script = ExtResource("1_yr6gm")
 health = 3
 
 [node name="Shadow" type="Sprite2D" parent="." unique_id=1922325810]
 position = Vector2(0, 39)
 scale = Vector2(0.48309416, 0.48309416)
-texture = ExtResource("3_ls2rm")
+texture = ExtResource("2_pgoh7")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1694667638]
 scale = Vector2(1.015598, 1.015598)
-texture = ExtResource("4_ls2rm")
+texture = ExtResource("3_bh577")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1971040039]
 scale = Vector2(0.6293247, 0.6293247)
@@ -173,6 +172,6 @@ libraries/ = SubResource("AnimationLibrary_ls2rm")
 
 [node name="AnimationTree" type="AnimationTree" parent="." unique_id=439171374]
 process_mode = 3
-tree_root = SubResource("AnimationNodeStateMachine_1ff11")
+tree_root = SubResource("AnimationNodeStateMachine_yr6gm")
 anim_player = NodePath("../AnimationPlayer")
-script = ExtResource("5_1c1pl")
+script = ExtResource("6_3cqep")

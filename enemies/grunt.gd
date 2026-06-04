@@ -15,6 +15,7 @@ var lunge_velocity: float = 600
 
 var lunge_direction: Vector2
 
+@onready var sprite: Sprite2D = $Sprite2D
 @onready var navigation_agent: NavigationAgent2D = $NavigationAgent2D
 @onready var avoid_shape: Area2D = $AvoidShape
 @onready var hitbox: Area2D = $Hitbox
@@ -74,6 +75,7 @@ func _movement(delta: float) -> void:
 		target_vel,
 		accel * delta
 	)
+	sprite.flip_h = velocity.x < 0
 
 
 func _get_separation_force() -> Vector2:
@@ -112,8 +114,10 @@ func _create_timer(duration: float, callback: Callable) -> Timer:
 
 
 func _lunge() -> void:
+	sprite.flip_h = lunge_direction.x < 0
 	add_child(_create_timer(attack_startup,
 		func() -> void: 
+			anim.attack()
 			velocity = lunge_velocity * lunge_direction
 			add_child(_create_timer(attack_recovery,
 				func() -> void: 
