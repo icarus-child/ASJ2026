@@ -79,7 +79,6 @@ _data = {
 [node name="Lob" type="RigidBody2D" unique_id=440662529]
 z_index = 2
 script = ExtResource("1_lyew0")
-hang_time = null
 
 [node name="Shadow" type="Sprite2D" parent="." unique_id=1598182493]
 modulate = Color(1, 1, 1, 0.627451)

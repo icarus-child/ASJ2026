@@ -162,7 +162,7 @@ texture = ExtResource("3_15hvj")
 scale = Vector2(0.6293247, 0.6293247)
 shape = SubResource("CircleShape2D_2bghh")
 
-[node name="Hurtbox" type="StaticBody2D" parent="." unique_id=708869839]
+[node name="Hurtbox" type="Area2D" parent="." unique_id=373387026]
 collision_layer = 32
 collision_mask = 0
 

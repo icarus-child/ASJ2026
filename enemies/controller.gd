@@ -17,7 +17,7 @@ var min_attack_cooldown: float = 4
 var max_attack_cooldown: float = 6
 
 var recovering_from_attack: bool = false
-var attack_recovery: float = 1
+var attack_recovery: float = 2
 
 var attack_range: float = 800
 var ideal_distance: float = 750
@@ -50,11 +50,10 @@ func _physics_process(delta: float) -> void:
 			)
 		)
 	if distance_to_player <= attack_range and not slow_on_cooldown and false:
-		var attack_direction := player.position - position
-		_display_flanks_for_testing(0, attack_direction, 0)
+		var attack_direction := player.global_position
 		sprite.flip_h = attack_direction.x < 0
 		anim.attack()
-		slow_attack.fire_attack(self, player.position)
+		slow_attack.fire_attack(self, attack_direction)
 		slow_on_cooldown = true
 		add_child(
 			_create_timer(
@@ -77,7 +76,7 @@ func _physics_process(delta: float) -> void:
 			)
 		)
 	elif can_attack and distance_to_player <= attack_range:
-		var attack_direction := player.global_position - global_position
+		var attack_direction := player.global_position
 		sprite.flip_h = attack_direction.x < 0
 		anim.attack()
 		lob_attack.fire_attack(self, attack_direction)

@@ -1,10 +1,10 @@
 [gd_scene format=4 uid="uid://bn2rgbcn54r44"]
 
 [ext_resource type="PackedScene" uid="uid://cfq3bkhk20pq3" path="res://player/player.tscn" id="1_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://b5k8yiknx6yhx" path="res://enemies/controller.tscn" id="2_lquwl"]
 [ext_resource type="TileSet" uid="uid://74uvo3fcruv3" path="res://tile_set.tres" id="3_1bvp3"]
 [ext_resource type="AudioStream" uid="uid://bqf8ikxhrfv8i" path="res://assets/sound/Wizard city funk masterloop.wav" id="5_7mycd"]
 [ext_resource type="PackedScene" uid="uid://bi7880g0wx2x8" path="res://ui/ui.tscn" id="5_lquwl"]
-[ext_resource type="PackedScene" uid="uid://dlm8wgth75ef4" path="res://enemies/spells/lob_target.tscn" id="7_272bh"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_1bvp3"]
 vertices = PackedVector2Array(1714, 818, 1998, 974, 50, 974, 1230, 818, 562, 818, 206, 818, 50, -78, 206, 462, 1998, -78, 1714, 78, 1230, 78, 434, 462, 562, 590, 434, 590)
@@ -43,7 +43,9 @@ process_mode = 3
 stream = ExtResource("5_7mycd")
 autoplay = true
 
-[node name="LobTarget" parent="." unique_id=880136874 instance=ExtResource("7_272bh")]
-position = Vector2(460, 218)
+[node name="Controller" parent="." unique_id=1794130473 instance=ExtResource("2_lquwl")]
+position = Vector2(304, -8)
+
+[connection signal="take_damage" from="Player/AcidTarget" to="Player" method="take_damage"]
 
 [editable path="Player"]

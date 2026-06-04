@@ -6,7 +6,7 @@ extends CharacterBody2D
 @export var acid_speed: float
 @export var acid_accel: float
 
-@onready var hurtbox: StaticBody2D = $Hurtbox
+@onready var hurtbox: Area2D = $Hurtbox
 @onready var parrybox: CollisionShape2D = $Parrybox/CollisionShape2D
 @onready var parry_cooldown_timer: Timer = $ParryCooldown
 @onready var parry_early_window: Timer = $ParryEarlyWindow

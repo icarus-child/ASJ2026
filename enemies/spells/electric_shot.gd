@@ -15,10 +15,10 @@ func _ready() -> void:
 
 
 func _on_body_enter(body: Node2D) -> void:
-	if body is StaticBody2D and (body as StaticBody2D).collision_layer == 2:
+	if body is Area2D and (body as Area2D).collision_layer == 2:
 		var player := body.get_parent() as Player
 		player.parry_hit(PlayerResources.acquire_spell.bind(PSpell.new()), player.take_damage.bind(4))
-	elif body is StaticBody2D and (body as StaticBody2D).collision_layer == 32:
+	elif body is Area2D and (body as Area2D).collision_layer == 32:
 		var enemy := body.get_parent() as Enemy
 		enemy.take_damage()
 	else:
