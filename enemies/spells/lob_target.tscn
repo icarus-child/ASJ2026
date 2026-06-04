@@ -27,7 +27,7 @@ fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.5, 0)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_saj2p"]
-radius = 108.79765
+radius = 221.88904
 
 [sub_resource type="Animation" id="Animation_7kic1"]
 resource_name = "RESET"
@@ -110,7 +110,7 @@ tracks/2/keys = {
 tracks/3/type = "method"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("..")
+tracks/3/path = NodePath("../..")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -137,22 +137,25 @@ animation = &"land"
 [node name="LobTarget" type="Node2D" unique_id=1537051187]
 script = ExtResource("1_7kic1")
 
-[node name="Target" type="Sprite2D" parent="." unique_id=880136874]
+[node name="Node2D" type="Node2D" parent="." unique_id=973427462]
+scale = Vector2(1.9689934, 1.9689934)
+
+[node name="Target" type="Sprite2D" parent="Node2D" unique_id=880136874]
 z_index = -1
 scale = Vector2(0.7078861, 0.44605377)
 texture = SubResource("GradientTexture2D_7kic1")
 
-[node name="IndicatorOut" type="Sprite2D" parent="." unique_id=657951578]
+[node name="IndicatorOut" type="Sprite2D" parent="Node2D" unique_id=657951578]
 z_index = -1
 scale = Vector2(1.045029, 0.6583092)
 texture = SubResource("GradientTexture2D_7kic1")
 
-[node name="IndicatorIn" type="Sprite2D" parent="." unique_id=1493423837]
+[node name="IndicatorIn" type="Sprite2D" parent="Node2D" unique_id=1493423837]
 z_index = -1
 scale = Vector2(0.44759643, 0.28196046)
 texture = SubResource("GradientTexture2D_7kic1")
 
-[node name="Fill" type="Sprite2D" parent="." unique_id=266426154]
+[node name="Fill" type="Sprite2D" parent="Node2D" unique_id=266426154]
 visible = false
 z_index = -1
 scale = Vector2(0.708, 0.446)
@@ -167,10 +170,10 @@ collision_mask = 2
 shape = SubResource("CircleShape2D_saj2p")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=203360235]
-root_node = NodePath("../Target")
+root_node = NodePath("../Node2D/Target")
 libraries/ = SubResource("AnimationLibrary_7kic1")
 
 [node name="AnimationTree" type="AnimationTree" parent="." unique_id=1872031221]
-root_node = NodePath("../Target")
+root_node = NodePath("../Node2D/Target")
 tree_root = SubResource("AnimationNodeAnimation_7kic1")
 anim_player = NodePath("../AnimationPlayer")

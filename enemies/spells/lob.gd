@@ -5,18 +5,6 @@ extends RigidBody2D
 
 # A projectile owns the logic for it's own attack
 
-
-func _on_body_enter(body: Node2D) -> void:
-	if body is Area2D and (body as Area2D).collision_layer == 2:
-		var player := body.get_parent() as Player
-		player.parry_hit(PlayerResources.acquire_spell.bind(PSpell.new()), player.take_damage)
-	elif body is Area2D and (body as Area2D).collision_layer == 32:
-		var enemy := body.get_parent() as Enemy
-		enemy.take_damage()
-	else:
-		pass # hit the wall animation
-	queue_free()
-
 class PSpell extends Spell:
 	const projectile_scene: PackedScene = preload("res://enemies/spells/lob.tscn")
 	const target_scene: PackedScene = preload("res://enemies/spells/lob_target.tscn")
@@ -34,7 +22,7 @@ class PSpell extends Spell:
 		var projectile := projectile_scene.instantiate() as Lob
 		if caster is Player:
 			target_pos += caster.global_position
-			var area: Area2D = target.get_child(4)
+			var area: Area2D = target.get_child(1)
 			area.set_collision_mask_value(2, false)
 			area.set_collision_mask_value(6, true)
 		target.global_position = target_pos

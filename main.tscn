@@ -44,7 +44,7 @@ stream = ExtResource("5_7mycd")
 autoplay = true
 
 [node name="Controller" parent="." unique_id=1794130473 instance=ExtResource("2_lquwl")]
-position = Vector2(304, -8)
+position = Vector2(1160, 14)
 
 [connection signal="take_damage" from="Player/AcidTarget" to="Player" method="take_damage"]
 
