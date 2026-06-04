@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dfo6463tel5jj"]
 
 [ext_resource type="Texture2D" uid="uid://dqybuslh80c1l" path="res://icon.svg" id="1_fdjou"]
-[ext_resource type="Script" uid="uid://besrfw4rsyhmh" path="res://ui/hp.gd" id="2_ya2sx"]
+[ext_resource type="Script" path="res://ui/hp.gd" id="2_ya2sx"]
 
 [node name="Hp" type="Sprite2D" unique_id=785864400]
 self_modulate = Color(0.17, 0.17, 0.17, 1)

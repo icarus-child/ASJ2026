@@ -3,6 +3,9 @@
 [ext_resource type="Script" uid="uid://db1wssx5k7fb3" path="res://enemies/spells/electric_shot.gd" id="1_iacpl"]
 [ext_resource type="Texture2D" uid="uid://dy6am2kpb6v56" path="res://assets/enemies/electrician/enemy_shot.tres" id="3_cv3xs"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_iacpl"]
+radius = 4.0
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_feumd"]
 
 [sub_resource type="Gradient" id="Gradient_cv3xs"]
@@ -71,7 +74,7 @@ turbulence_noise_speed_random = 0.81
 
 [node name="ElectricShot" type="RigidBody2D" unique_id=2521761]
 collision_layer = 0
-collision_mask = 258
+collision_mask = 256
 lock_rotation = true
 contact_monitor = true
 max_contacts_reported = 1
@@ -83,7 +86,14 @@ speed = 300.0
 scale = Vector2(0.333, 0.333)
 texture = ExtResource("3_cv3xs")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=38254022]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1358357301]
+shape = SubResource("CircleShape2D_iacpl")
+
+[node name="Hitbox" type="Area2D" parent="." unique_id=1771710216]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=38254022]
 shape = SubResource("CircleShape2D_feumd")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=1775120702]

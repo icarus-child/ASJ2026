@@ -3,11 +3,13 @@ extends RigidBody2D
 
 @export var hang_time: float = 1.8
 
-# A projectile owns the logic for it's own attack
 
 class PSpell extends Spell:
 	const projectile_scene: PackedScene = preload("res://enemies/spells/lob.tscn")
 	const target_scene: PackedScene = preload("res://enemies/spells/lob_target.tscn")
+
+	const ally_colour: GradientTexture2D = preload("res://assets/enemies/controller/ally_target.tres")
+	const ally_colour_fill: GradientTexture2D = preload("res://assets/enemies/controller/ally_target_fill.tres")
 
 	func dummy() -> Node2D:
 		var d: Node = projectile_scene.instantiate()
@@ -21,6 +23,13 @@ class PSpell extends Spell:
 		var target := target_scene.instantiate() as LobTarget
 		var projectile := projectile_scene.instantiate() as Lob
 		if caster is Player:
+			var sprites: Array[Sprite2D]
+			sprites.assign(target.get_child(0).get_children())
+			for i: int in sprites.size():
+				if i == 3:
+					sprites[i].texture = ally_colour_fill
+				else:
+					sprites[i].texture = ally_colour
 			target_pos += caster.global_position
 			var area: Area2D = target.get_child(1)
 			area.set_collision_mask_value(2, false)

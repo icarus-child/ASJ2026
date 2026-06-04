@@ -1,0 +1,235 @@
+[gd_scene format=3 uid="uid://n35tm3hmcer"]
+
+[ext_resource type="Script" uid="uid://cw64c263sxqhu" path="res://enemies/spells/lob_target2.gd" id="1_vhept"]
+[ext_resource type="Shader" uid="uid://ccmyhb3eqkxp4" path="res://enemies/spells/white.gdshader" id="2_jk044"]
+[ext_resource type="Texture2D" uid="uid://baao8rehdtwwg" path="res://assets/enemies/controller/target.png" id="2_qetnu"]
+[ext_resource type="Gradient" uid="uid://dsibmjw60ruak" path="res://assets/enemies/controller/ally_target_acid.tres" id="2_r5eot"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_obe02"]
+gradient = ExtResource("2_r5eot")
+width = 256
+height = 256
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_vhept"]
+gradient = ExtResource("2_r5eot")
+width = 256
+height = 256
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_r5eot"]
+gradient = ExtResource("2_r5eot")
+width = 256
+height = 256
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vhept"]
+shader = ExtResource("2_jk044")
+shader_parameter/color = Color(0.39787096, 0.6346132, 0.2611401, 1)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_r5eot"]
+radius = 221.88904
+
+[sub_resource type="Animation" id="Animation_7kic1"]
+resource_name = "RESET"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../IndicatorOut:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1.045029, 0.6583092)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../IndicatorIn:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.44759643, 0.28196046)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Fill:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_13ycv"]
+resource_name = "RESET"
+length = 3.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../IndicatorOut:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1.045029, 0.6583092), Vector2(0.708, 0.445)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../IndicatorIn:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.44759643, 0.28196046), Vector2(0.708, 0.446)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../..")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(3, 3.3),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"_hit_area"
+}, {
+"args": [],
+"method": &"queue_free"
+}]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../Fill:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="Animation" id="Animation_vhept"]
+resource_name = "RESET"
+length = 3.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../IndicatorOut:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1.045029, 0.6583092), Vector2(0.708, 0.445)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../IndicatorIn:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.44759643, 0.28196046), Vector2(0.708, 0.446)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../..")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(3, 3.3),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"_hit_area_acid"
+}, {
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_obe02"]
+_data = {
+&"RESET": SubResource("Animation_7kic1"),
+&"land": SubResource("Animation_13ycv"),
+&"land_acid": SubResource("Animation_vhept")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_vhept"]
+animation = &"land_acid"
+
+[node name="AcidLobTarget" type="Node2D" unique_id=1537051187]
+script = ExtResource("1_vhept")
+
+[node name="Node2D" type="Node2D" parent="." unique_id=1657822546]
+scale = Vector2(1.9689934, 1.9689934)
+
+[node name="Target" type="Sprite2D" parent="Node2D" unique_id=866539387]
+z_index = -1
+scale = Vector2(1.1346754, 0.68895596)
+texture = SubResource("GradientTexture2D_obe02")
+
+[node name="IndicatorOut" type="Sprite2D" parent="Node2D" unique_id=1426910493]
+visible = false
+z_index = -1
+scale = Vector2(1.045029, 0.6583092)
+texture = SubResource("GradientTexture2D_vhept")
+
+[node name="IndicatorIn" type="Sprite2D" parent="Node2D" unique_id=579193139]
+visible = false
+z_index = -1
+scale = Vector2(0.44759643, 0.28196046)
+texture = SubResource("GradientTexture2D_r5eot")
+
+[node name="Plus" type="Sprite2D" parent="Node2D" unique_id=1089391137]
+z_index = -1
+material = SubResource("ShaderMaterial_vhept")
+scale = Vector2(0.014582977, 0.014582977)
+texture = ExtResource("2_qetnu")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1191188161]
+visible = false
+scale = Vector2(0.7078861, 0.44605377)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=268720070]
+shape = SubResource("CircleShape2D_r5eot")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1319157449]
+root_node = NodePath("../Node2D/Target")
+libraries/ = SubResource("AnimationLibrary_obe02")
+
+[node name="AnimationTree" type="AnimationTree" parent="." unique_id=1427750487]
+root_node = NodePath("../Node2D/Target")
+tree_root = SubResource("AnimationNodeAnimation_vhept")
+anim_player = NodePath("../AnimationPlayer")

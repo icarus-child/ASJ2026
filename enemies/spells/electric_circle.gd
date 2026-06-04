@@ -1,5 +1,5 @@
 class_name ElectricCircle
-extends RigidBody2D
+extends Node2D
 
 @export var max_radius: float = 400
 @export var speed: float = 5
@@ -7,31 +7,24 @@ extends RigidBody2D
 var ally_ring: GradientTexture2D = preload("res://assets/enemies/electrician/ally_ring.tres")
 
 @onready var sprite := $Sprite2D as Sprite2D
-@onready var shape := ($CollisionShape2D as CollisionShape2D).shape as CircleShape2D
+@onready var shape := ($Hitbox/CollisionShape2D as CollisionShape2D).shape as CircleShape2D
 @onready var shape_scale_amount: float = shape.radius * speed
 @onready var art_scale_amount: Vector2 = sprite.scale * speed
-
-# A projectile owns the logic for it's own attack
+@onready var hitbox: Area2D = $Hitbox
 
 
 func _ready() -> void:
-	body_entered.connect(_on_body_enter)
+	hitbox.area_entered.connect(_on_area_enter)
 
 
-func _on_body_enter(body: Node2D) -> void:
-	print("-")
-	print(global_position.distance_to(body.global_position))
-	print(shape.radius)
-	print(global_position.distance_to(body.global_position) < shape.radius - (shape.radius * 0.2))
-	if global_position.distance_to(body.global_position) < shape.radius - (shape.radius * 0.2):
-		return
-	if body is Area2D and (body as Area2D).collision_layer == 2:
+func _on_area_enter(body: Area2D) -> void:
+	if body.collision_layer == 2:
 		var player := body.get_parent() as Player
 		player.parry_hit(PlayerResources.acquire_spell.bind(PSpell.new()), player.take_damage.bind(4))
-	elif body is Area2D and (body as Area2D).collision_layer == 32:
+	elif body.collision_layer == 32:
 		var enemy := body.get_parent() as Enemy
 		enemy.take_damage()
-	queue_free()
+	call_deferred("queue_free")
 
 
 func _physics_process(delta: float) -> void:
@@ -53,7 +46,7 @@ class PSpell extends Spell:
 	func fire_attack(caster: Node2D, heading: Vector2) -> void:
 		var projectile := spell_scene.instantiate() as ElectricCircle
 		if caster is Player:
-			projectile.collision_mask = 32
+			(projectile.get_child(1) as Area2D).collision_mask = 32
 			var target := NavigationServer2D.map_get_closest_point(
 				caster.get_world_2d().navigation_map,
 				caster.global_position + heading
@@ -61,5 +54,4 @@ class PSpell extends Spell:
 			caster.global_position = target
 		if caster is not Player:
 			projectile.position = caster.position
-			projectile.linear_velocity = heading.normalized() * projectile.speed
 			caster.add_sibling(projectile)

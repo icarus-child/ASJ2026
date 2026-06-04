@@ -46,6 +46,13 @@ autoplay = true
 [node name="Controller" parent="." unique_id=1794130473 instance=ExtResource("2_lquwl")]
 position = Vector2(1160, 14)
 
-[connection signal="take_damage" from="Player/AcidTarget" to="Player" method="take_damage"]
+[node name="Controller2" parent="." unique_id=1398307081 instance=ExtResource("2_lquwl")]
+position = Vector2(382, 321)
+
+[node name="Controller3" parent="." unique_id=1235188320 instance=ExtResource("2_lquwl")]
+position = Vector2(1825, 574)
+
+[node name="Controller4" parent="." unique_id=1304541668 instance=ExtResource("2_lquwl")]
+position = Vector2(762, 802)
 
 [editable path="Player"]

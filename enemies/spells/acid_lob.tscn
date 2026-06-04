@@ -1,7 +1,7 @@
-[gd_scene format=3 uid="uid://qrxnlvj3hle6"]
+[gd_scene format=3 uid="uid://5aivqpya0u2v"]
 
-[ext_resource type="Script" uid="uid://d1o4fm6jgqxk5" path="res://enemies/spells/lob.gd" id="1_lyew0"]
-[ext_resource type="Texture2D" uid="uid://dqybuslh80c1l" path="res://icon.svg" id="2_n34b5"]
+[ext_resource type="Script" uid="uid://d0b3hpeakmh2c" path="res://enemies/spells/acid_lob.gd" id="1_rsk27"]
+[ext_resource type="Texture2D" uid="uid://dqybuslh80c1l" path="res://icon.svg" id="2_saqnj"]
 
 [sub_resource type="Gradient" id="Gradient_lyew0"]
 offsets = PackedFloat32Array(0.9318182, 1)
@@ -78,7 +78,7 @@ _data = {
 
 [node name="Lob" type="RigidBody2D" unique_id=440662529]
 z_index = 2
-script = ExtResource("1_lyew0")
+script = ExtResource("1_rsk27")
 
 [node name="Shadow" type="Sprite2D" parent="." unique_id=1598182493]
 modulate = Color(1, 1, 1, 0.627451)
@@ -88,7 +88,7 @@ texture = SubResource("GradientTexture2D_n34b5")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1049832624]
 scale = Vector2(0.15593939, 0.15593939)
-texture = ExtResource("2_n34b5")
+texture = ExtResource("2_saqnj")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=382101441]
 reset_on_save = false

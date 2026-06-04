@@ -6,7 +6,7 @@ extends CharacterBody2D
 @export var acid_speed: float
 @export var acid_accel: float
 
-@onready var hurtbox: Area2D = $Hurtbox
+@onready var hurtbox: CollisionShape2D = $Hurtbox/CollisionShape2D
 @onready var parrybox: CollisionShape2D = $Parrybox/CollisionShape2D
 @onready var parry_cooldown_timer: Timer = $ParryCooldown
 @onready var parry_early_window: Timer = $ParryEarlyWindow
@@ -19,7 +19,7 @@ extends CharacterBody2D
 
 func _ready() -> void:
 	parry_freeze_timer.timeout.connect(func() -> void: get_tree().paused = false)
-	parry_early_window.timeout.connect(func() -> void: parrybox.disabled = true)
+	parry_early_window.timeout.connect(_disable_parrybox)
 	# hit_recolor_timer.timeout.connect(shader.set_shader_parameter.bind("hit", false))
 
 
@@ -39,7 +39,7 @@ func _physics_process(delta: float) -> void:
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("parry") and parry_cooldown_timer.is_stopped() and PlayerResources.can_acquire_spell():
-		parrybox.disabled = false
+		_enable_parrybox()
 		anim.parry()
 		if not parry_late_window.is_stopped() and not parry_cooldown_timer.is_stopped():
 			parry_late_window.stop()
@@ -56,6 +56,7 @@ func parry_hit(parried: Callable, hit: Callable) -> void:
 	call_deferred("_disable_parrybox")
 	if not PlayerResources.can_acquire_spell():
 		hit.call()
+		return
 
 	var on_parry: Callable = func() -> void:
 		parried.call()
@@ -99,3 +100,9 @@ func signal_disconnect_all(target_signal: Signal) -> void:
 
 func _disable_parrybox() -> void:
 	parrybox.disabled = true
+	hurtbox.disabled = false
+
+
+func _enable_parrybox() -> void:
+	parrybox.disabled = false
+	hurtbox.disabled = true

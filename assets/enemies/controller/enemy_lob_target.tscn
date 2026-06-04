@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://dbo4se5bpv1el"]
+
+[ext_resource type="Texture2D" uid="uid://bv7orgqv24utl" path="res://assets/enemies/controller/enemy_target.tres" id="1_k8j8r"]
+[ext_resource type="Texture2D" uid="uid://bgwvb008ffjaw" path="res://assets/enemies/controller/enemy_target_fill.tres" id="2_cphkh"]
+
+[node name="Node2D" type="Node2D" unique_id=1461994932]
+scale = Vector2(1.9689934, 1.9689934)
+
+[node name="Target" type="Sprite2D" parent="." unique_id=2085400641]
+z_index = -1
+scale = Vector2(0.7078861, 0.44605377)
+texture = ExtResource("1_k8j8r")
+
+[node name="IndicatorOut" type="Sprite2D" parent="." unique_id=2089900256]
+z_index = -1
+scale = Vector2(0.708, 0.445)
+texture = ExtResource("1_k8j8r")
+
+[node name="IndicatorIn" type="Sprite2D" parent="." unique_id=1324098431]
+z_index = -1
+scale = Vector2(0.708, 0.446)
+texture = ExtResource("1_k8j8r")
+
+[node name="Fill" type="Sprite2D" parent="." unique_id=269571367]
+z_index = -1
+scale = Vector2(0.708, 0.446)
+texture = ExtResource("2_cphkh")

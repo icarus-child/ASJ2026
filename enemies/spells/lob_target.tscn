@@ -1,30 +1,8 @@
 [gd_scene format=3 uid="uid://dlm8wgth75ef4"]
 
 [ext_resource type="Script" uid="uid://b7sufs0k2g3hj" path="res://enemies/spells/lob_target.gd" id="1_7kic1"]
-
-[sub_resource type="Gradient" id="Gradient_saj2p"]
-offsets = PackedFloat32Array(0.82517505, 0.84295577, 0.872747, 0.89848614)
-colors = PackedColorArray(0.92941177, 0.38039216, 0.3764706, 0, 0.93, 0.38130003, 0.38130003, 1, 0.93, 0.38130003, 0.38130003, 1, 0.9285012, 0.3795058, 0.37681282, 0)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_7kic1"]
-gradient = SubResource("Gradient_saj2p")
-width = 256
-height = 256
-fill = 1
-fill_from = Vector2(0.5, 0.5)
-fill_to = Vector2(0.5, 0)
-
-[sub_resource type="Gradient" id="Gradient_7kic1"]
-offsets = PackedFloat32Array(0.872747, 0.89848614)
-colors = PackedColorArray(0.93, 0.38130003, 0.38130003, 1, 0.9285012, 0.3795058, 0.37681282, 0)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_saj2p"]
-gradient = SubResource("Gradient_7kic1")
-width = 256
-height = 256
-fill = 1
-fill_from = Vector2(0.5, 0.5)
-fill_to = Vector2(0.5, 0)
+[ext_resource type="Texture2D" uid="uid://bv7orgqv24utl" path="res://assets/enemies/controller/enemy_target.tres" id="2_13ycv"]
+[ext_resource type="Texture2D" uid="uid://bgwvb008ffjaw" path="res://assets/enemies/controller/enemy_target_fill.tres" id="3_kdyba"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_saj2p"]
 radius = 221.88904
@@ -34,38 +12,38 @@ resource_name = "RESET"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../Fill:visible")
+tracks/0/path = NodePath("../IndicatorOut:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
+"update": 0,
+"values": [Vector2(1.045029, 0.6583092)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../IndicatorOut:scale")
+tracks/1/path = NodePath("../IndicatorIn:scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(1.045029, 0.6583092)]
+"values": [Vector2(0.44759643, 0.28196046)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("../IndicatorIn:scale")
+tracks/2/path = NodePath("../Fill:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0.44759643, 0.28196046)]
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_13ycv"]
@@ -74,46 +52,34 @@ length = 3.3
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../Fill:visible")
+tracks/0/path = NodePath("../IndicatorOut:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 3),
 "transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [false, true]
+"update": 0,
+"values": [Vector2(1.045029, 0.6583092), Vector2(0.708, 0.445)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../IndicatorOut:scale")
+tracks/1/path = NodePath("../IndicatorIn:scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0, 3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(1.045029, 0.6583092), Vector2(0.708, 0.445)]
+"values": [Vector2(0.44759643, 0.28196046), Vector2(0.708, 0.446)]
 }
-tracks/2/type = "value"
+tracks/2/type = "method"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("../IndicatorIn:scale")
+tracks/2/path = NodePath("../..")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(0.44759643, 0.28196046), Vector2(0.708, 0.446)]
-}
-tracks/3/type = "method"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("../..")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
 "times": PackedFloat32Array(3, 3.3),
 "transitions": PackedFloat32Array(1, 1),
 "values": [{
@@ -123,6 +89,18 @@ tracks/3/keys = {
 "args": [],
 "method": &"queue_free"
 }]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../Fill:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7kic1"]
@@ -137,31 +115,32 @@ animation = &"land"
 [node name="LobTarget" type="Node2D" unique_id=1537051187]
 script = ExtResource("1_7kic1")
 
-[node name="Node2D" type="Node2D" parent="." unique_id=973427462]
+[node name="Node2D" type="Node2D" parent="." unique_id=1461994932]
 scale = Vector2(1.9689934, 1.9689934)
 
-[node name="Target" type="Sprite2D" parent="Node2D" unique_id=880136874]
+[node name="Target" type="Sprite2D" parent="Node2D" unique_id=2085400641]
 z_index = -1
 scale = Vector2(0.7078861, 0.44605377)
-texture = SubResource("GradientTexture2D_7kic1")
+texture = ExtResource("2_13ycv")
 
-[node name="IndicatorOut" type="Sprite2D" parent="Node2D" unique_id=657951578]
+[node name="IndicatorOut" type="Sprite2D" parent="Node2D" unique_id=2089900256]
 z_index = -1
 scale = Vector2(1.045029, 0.6583092)
-texture = SubResource("GradientTexture2D_7kic1")
+texture = ExtResource("2_13ycv")
 
-[node name="IndicatorIn" type="Sprite2D" parent="Node2D" unique_id=1493423837]
+[node name="IndicatorIn" type="Sprite2D" parent="Node2D" unique_id=1324098431]
 z_index = -1
 scale = Vector2(0.44759643, 0.28196046)
-texture = SubResource("GradientTexture2D_7kic1")
+texture = ExtResource("2_13ycv")
 
-[node name="Fill" type="Sprite2D" parent="Node2D" unique_id=266426154]
+[node name="Fill" type="Sprite2D" parent="Node2D" unique_id=269571367]
 visible = false
 z_index = -1
 scale = Vector2(0.708, 0.446)
-texture = SubResource("GradientTexture2D_saj2p")
+texture = ExtResource("3_kdyba")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=293284661]
+visible = false
 scale = Vector2(0.7078861, 0.44605377)
 collision_layer = 0
 collision_mask = 2

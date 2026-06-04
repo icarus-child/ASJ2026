@@ -6,19 +6,19 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_2xhni"]
 resource_local_to_scene = true
 
-[node name="ElectricCircle" type="RigidBody2D" unique_id=2521761]
+[node name="ElectricCircle" type="Node2D" unique_id=2125484534]
 z_index = -1
-collision_layer = 0
-collision_mask = 2
-lock_rotation = true
-contact_monitor = true
-max_contacts_reported = 1
-linear_damp_mode = 1
 script = ExtResource("1_2xhni")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1049832624]
 scale = Vector2(0.038975157, 0.038975157)
 texture = ExtResource("2_2xhni")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=487365507]
+[node name="Hitbox" type="Area2D" parent="." unique_id=967752369]
+scale = Vector2(0.038975157, 0.038975157)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=487365507]
+scale = Vector2(25.65737, 25.65737)
 shape = SubResource("CircleShape2D_2xhni")

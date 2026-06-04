@@ -1,6 +1,6 @@
-[gd_scene format=3 uid="uid://taqc48cjbdp6"]
+[gd_scene format=3 uid="uid://ddifuoenpvodw"]
 
-[ext_resource type="Script" uid="uid://dbunbv8y0bcjm" path="res://player/acid_target.gd" id="1_alqju"]
+[ext_resource type="Script" path="res://player/acid_target.gd" id="1_alqju"]
 [ext_resource type="Texture2D" uid="uid://cfi73juvhrdms" path="res://enemies/area_denial/acid_bubble.tres" id="2_46pkt"]
 
 [sub_resource type="Curve" id="Curve_yllr7"]

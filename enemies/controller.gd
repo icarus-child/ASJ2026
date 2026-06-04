@@ -9,7 +9,7 @@ var short_nav_trigger_distance: float = 400
 var short_nav_on_cooldown: bool = false
 var short_nav_cooldown: float = 2
 
-var slow_on_cooldown: bool = false
+var slow_on_cooldown: bool = true
 var slow_cooldown: float = 20
 
 var can_attack: bool = true
@@ -27,7 +27,7 @@ var ideal_distance: float = 750
 @onready var navigation_agent: NavigationAgent2D = $NavigationAgent2D
 @onready var avoid_shape: Area2D = $AvoidShape
 @onready var lob_attack: Spell = Lob.PSpell.new()
-@onready var slow_attack: Spell = ElectricCircle.PSpell.new()
+@onready var slow_attack: Spell = AcidLob.PSpell.new()
 
 
 func _ready() -> void:
@@ -36,6 +36,10 @@ func _ready() -> void:
 	timer.wait_time = randf_range(3, 6)
 	timer.timeout.connect(_update_navigation_target)
 	add_child(timer)
+	
+	add_child(_create_timer(randf_range(1, 4),
+		func() -> void: slow_on_cooldown = false
+	))
 
 
 func _physics_process(delta: float) -> void:
@@ -49,9 +53,9 @@ func _physics_process(delta: float) -> void:
 				func() -> void: short_nav_on_cooldown = false
 			)
 		)
-	if distance_to_player <= attack_range and not slow_on_cooldown and false:
+	if distance_to_player <= attack_range and not slow_on_cooldown and can_attack:
 		var attack_direction := player.global_position
-		sprite.flip_h = attack_direction.x < 0
+		sprite.flip_h = global_position.direction_to(player.global_position).x < 0
 		anim.attack()
 		slow_attack.fire_attack(self, attack_direction)
 		slow_on_cooldown = true
@@ -77,7 +81,7 @@ func _physics_process(delta: float) -> void:
 		)
 	elif can_attack and distance_to_player <= attack_range:
 		var attack_direction := player.global_position
-		sprite.flip_h = attack_direction.x < 0
+		sprite.flip_h = global_position.direction_to(player.global_position).x < 0
 		anim.attack()
 		lob_attack.fire_attack(self, attack_direction)
 		can_attack = false
