@@ -5,7 +5,11 @@
 [ext_resource type="Texture2D" uid="uid://dv2jnqafk2mff" path="res://assets/enemies/grunt/Grunt_Hurt_Pose_Right_01.png" id="2_kcgqv"]
 [ext_resource type="Texture2D" uid="uid://biilieuj4cv2e" path="res://assets/enemies/grunt/Grunt_Walk_Pose_Right_01.png" id="2_yisfy"]
 [ext_resource type="Texture2D" uid="uid://wll32upo16ek" path="res://assets/shadow.png" id="3_15hvj"]
+[ext_resource type="AudioStream" uid="uid://dw7m54o1vnc2b" path="res://assets/sound/Baddy C hurt 1.wav" id="5_kcgqv"]
 [ext_resource type="Script" uid="uid://dn7bnqml7fonk" path="res://enemies/enemy_animation_tree.gd" id="5_u8hdr"]
+[ext_resource type="AudioStream" uid="uid://tp5aiouoa6rq" path="res://assets/sound/Baddy C hurt 2.wav" id="6_brp71"]
+[ext_resource type="AudioStream" uid="uid://df27dalgv3py4" path="res://assets/sound/Baddy C hurt 3.wav" id="7_ynhef"]
+[ext_resource type="AudioStream" uid="uid://bjtwtj0mpfjok" path="res://assets/sound/Player hurt.wav" id="9_ynhef"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2bghh"]
 radius = 61.204575
@@ -47,6 +51,13 @@ tracks/1/keys = {
 "values": [ExtResource("2_yisfy")]
 }
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_lod52"]
+playback_mode = 1
+streams_count = 3
+stream_0/stream = ExtResource("5_kcgqv")
+stream_1/stream = ExtResource("6_brp71")
+stream_2/stream = ExtResource("7_ynhef")
+
 [sub_resource type="Animation" id="Animation_15hvj"]
 resource_name = "attack"
 tracks/0/type = "value"
@@ -61,6 +72,21 @@ tracks/0/keys = {
 "update": 1,
 "values": [ExtResource("2_15hvj")]
 }
+tracks/1/type = "audio"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("swing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": SubResource("AudioStreamRandomizer_lod52")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/1/use_blend = true
 
 [sub_resource type="Animation" id="Animation_kcgqv"]
 resource_name = "parry"
@@ -89,6 +115,21 @@ tracks/1/keys = {
 "update": 1,
 "values": [4, 0]
 }
+tracks/2/type = "audio"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ouch")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("9_ynhef")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/2/use_blend = true
 
 [sub_resource type="Animation" id="Animation_u8hdr"]
 resource_name = "idle"
@@ -197,3 +238,13 @@ process_mode = 3
 tree_root = SubResource("AnimationNodeStateMachine_ynhef")
 anim_player = NodePath("../AnimationPlayer")
 script = ExtResource("5_u8hdr")
+
+[node name="swing" type="AudioStreamPlayer2D" parent="." unique_id=1539917044]
+process_mode = 3
+position = Vector2(1, 0)
+
+[node name="ouch" type="AudioStreamPlayer2D" parent="." unique_id=949350712]
+process_mode = 3
+position = Vector2(3, 0)
+volume_db = -3.0
+pitch_scale = 1.2

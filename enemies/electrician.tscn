@@ -6,6 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://s1y32vxhafo2" path="res://assets/enemies/electrician/Electrician_Hurt_Pose_Right_01.png" id="4_1c1pl"]
 [ext_resource type="Texture2D" uid="uid://qqxsoc60xw0w" path="res://assets/enemies/electrician/Electrician_Walk_Pose_Right_01.png" id="4_ls2rm"]
 [ext_resource type="Script" uid="uid://dn7bnqml7fonk" path="res://enemies/enemy_animation_tree.gd" id="5_1c1pl"]
+[ext_resource type="AudioStream" uid="uid://beitrydrsdkxu" path="res://assets/sound/Baddy B hurt 1.wav" id="6_4hr46"]
+[ext_resource type="AudioStream" uid="uid://cgwb7iihfl2kk" path="res://assets/sound/Baddy B hurt 2.wav" id="7_1ff11"]
+[ext_resource type="AudioStream" uid="uid://cdxh7rg31tpp8" path="res://assets/sound/Baddy B hurt 3.wav" id="8_0il84"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2bghh"]
 radius = 61.204575
@@ -46,6 +49,12 @@ tracks/0/keys = {
 "values": [ExtResource("3_1c1pl")]
 }
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_bli8u"]
+streams_count = 3
+stream_0/stream = ExtResource("6_4hr46")
+stream_1/stream = ExtResource("7_1ff11")
+stream_2/stream = ExtResource("8_0il84")
+
 [sub_resource type="Animation" id="Animation_dbr6m"]
 resource_name = "parry"
 length = 0.53333336
@@ -73,6 +82,21 @@ tracks/1/keys = {
 "update": 1,
 "values": [4, 0]
 }
+tracks/2/type = "audio"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AudioStreamPlayer2D")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": SubResource("AudioStreamRandomizer_bli8u")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/2/use_blend = true
 
 [sub_resource type="Animation" id="Animation_vhge7"]
 resource_name = "idle"
@@ -176,3 +200,6 @@ process_mode = 3
 tree_root = SubResource("AnimationNodeStateMachine_1ff11")
 anim_player = NodePath("../AnimationPlayer")
 script = ExtResource("5_1c1pl")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=423665854]
+process_mode = 3

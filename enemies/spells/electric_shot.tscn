@@ -3,11 +3,6 @@
 [ext_resource type="Script" uid="uid://db1wssx5k7fb3" path="res://enemies/spells/electric_shot.gd" id="1_iacpl"]
 [ext_resource type="Texture2D" uid="uid://dy6am2kpb6v56" path="res://assets/enemies/electrician/enemy_shot.tres" id="3_cv3xs"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_iacpl"]
-radius = 4.0
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_feumd"]
-
 [sub_resource type="Gradient" id="Gradient_cv3xs"]
 interpolation_mode = 2
 interpolation_color_space = 2
@@ -32,6 +27,11 @@ tangential_accel_min = -100.0
 tangential_accel_max = 99.99999
 damping_max = 0.24800001
 scale_min = 0.099999994
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_iacpl"]
+radius = 4.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_feumd"]
 
 [sub_resource type="Curve" id="Curve_xuvx6"]
 _data = [Vector2(0.028436016, 0), 0.0, 0.0, 0, 0, Vector2(0.08530806, 1), 0.0, 0.0, 0, 0]
@@ -82,6 +82,12 @@ linear_damp_mode = 1
 script = ExtResource("1_iacpl")
 speed = 300.0
 
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=1775120702]
+amount = 20
+texture = SubResource("GradientTexture2D_o4wfu")
+lifetime = 0.2
+process_material = SubResource("ParticleProcessMaterial_65q27")
+
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1049832624]
 scale = Vector2(0.333, 0.333)
 texture = ExtResource("3_cv3xs")
@@ -96,12 +102,6 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=38254022]
 shape = SubResource("CircleShape2D_feumd")
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=1775120702]
-amount = 20
-texture = SubResource("GradientTexture2D_o4wfu")
-lifetime = 0.2
-process_material = SubResource("ParticleProcessMaterial_65q27")
-
 [node name="Particles2D" type="GPUParticles2D" parent="." unique_id=229841019]
 amount = 64
 texture = ExtResource("3_cv3xs")
@@ -110,3 +110,5 @@ speed_scale = 0.46
 randomness = 0.44
 fixed_fps = 60
 process_material = SubResource("ParticleProcessMaterial_cv3xs")
+
+[node name="WallHit" type="AudioStreamPlayer2D" parent="." unique_id=124573455]

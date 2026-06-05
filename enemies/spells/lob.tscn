@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dqybuslh80c1l" path="res://icon.svg" id="2_n34b5"]
 [ext_resource type="AudioStream" uid="uid://bnxwtm4jiqtxv" path="res://assets/sound/Thunk A.wav" id="3_x0lkn"]
 [ext_resource type="AudioStream" uid="uid://dicvmn0nnnucf" path="res://assets/sound/Magic gain A.wav" id="4_i5iv7"]
+[ext_resource type="AudioStream" uid="uid://d1ymm8hj2pe6s" path="res://assets/sound/Danger acid loop.wav" id="5_i5iv7"]
 
 [sub_resource type="Gradient" id="Gradient_lyew0"]
 offsets = PackedFloat32Array(0.9318182, 1)
@@ -81,9 +82,9 @@ _data = {
 [sub_resource type="AudioStreamSynchronized" id="AudioStreamSynchronized_d3krv"]
 stream_count = 2
 stream_0/stream = ExtResource("3_x0lkn")
-stream_0/volume = 0.0
+stream_0/volume = -5.0
 stream_1/stream = ExtResource("4_i5iv7")
-stream_1/volume = -10.0
+stream_1/volume = -5.0
 
 [node name="Lob" type="RigidBody2D" unique_id=440662529]
 z_index = 2
@@ -106,4 +107,8 @@ autoplay = &"lob"
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=487822781]
 stream = SubResource("AudioStreamSynchronized_d3krv")
+autoplay = true
+
+[node name="loop" type="AudioStreamPlayer2D" parent="." unique_id=169566432]
+stream = ExtResource("5_i5iv7")
 autoplay = true

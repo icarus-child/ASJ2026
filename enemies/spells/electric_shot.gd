@@ -43,7 +43,7 @@ class PSpell extends Spell:
 
 	func dummy() -> Node2D:
 		var spell := spell_scene.instantiate()
-		(spell.get_child(2).get_child(0) as CollisionShape2D).disabled = true
+		(spell.get_child(3).get_child(0) as CollisionShape2D).disabled = true
 		return spell
 
 	func range() -> float:
@@ -52,8 +52,8 @@ class PSpell extends Spell:
 	func fire_attack(caster: Node2D, heading: Vector2) -> void:
 		var projectile := spell_scene.instantiate() as ElectricShot
 		if caster is Player:
-			(projectile.get_child(0) as Sprite2D).texture = projectile.ally_shot
-			(projectile.get_child(2) as Area2D).collision_mask = 32
+			(projectile.get_child(1) as Sprite2D).texture = projectile.ally_shot
+			(projectile.get_child(3) as Area2D).collision_mask = 32
 		projectile.position = caster.position
 		projectile.linear_velocity = heading.normalized() * projectile.speed
 		caster.add_sibling(projectile)
