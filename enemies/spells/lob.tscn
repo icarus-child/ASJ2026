@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://qrxnlvj3hle6"]
 
 [ext_resource type="Script" uid="uid://d1o4fm6jgqxk5" path="res://enemies/spells/lob.gd" id="1_lyew0"]
-[ext_resource type="Texture2D" uid="uid://dqybuslh80c1l" path="res://icon.svg" id="2_n34b5"]
 [ext_resource type="AudioStream" uid="uid://bnxwtm4jiqtxv" path="res://assets/sound/Thunk A.wav" id="3_x0lkn"]
 [ext_resource type="AudioStream" uid="uid://dicvmn0nnnucf" path="res://assets/sound/Magic gain A.wav" id="4_i5iv7"]
 [ext_resource type="AudioStream" uid="uid://d1ymm8hj2pe6s" path="res://assets/sound/Danger acid loop.wav" id="5_i5iv7"]
@@ -17,6 +16,16 @@ height = 21
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0, 0.5107143)
+
+[sub_resource type="Gradient" id="Gradient_x0lkn"]
+offsets = PackedFloat32Array(0.2642959, 0.4715865, 0.66592646, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.9207226, 0.39121953, 0.42717218, 1, 0.9207226, 0.39121953, 0.42717218, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_i5iv7"]
+gradient = SubResource("Gradient_x0lkn")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
 
 [sub_resource type="Animation" id="Animation_lyew0"]
 length = 0.001
@@ -97,8 +106,8 @@ scale = Vector2(1, 0.12)
 texture = SubResource("GradientTexture2D_n34b5")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1049832624]
-scale = Vector2(0.15593939, 0.15593939)
-texture = ExtResource("2_n34b5")
+scale = Vector2(0.6075688, 0.6075688)
+texture = SubResource("GradientTexture2D_i5iv7")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=382101441]
 reset_on_save = false

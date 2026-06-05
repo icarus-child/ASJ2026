@@ -8,6 +8,7 @@ resource_local_to_scene = true
 
 [node name="ElectricCircle" type="Node2D" unique_id=2125484534]
 z_index = -1
+scale = Vector2(1, 0.7451551)
 script = ExtResource("1_2xhni")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1049832624]

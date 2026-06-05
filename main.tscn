@@ -15,9 +15,8 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(-102, -230, -65, 1076, 
 sample_partition_type = 1
 agent_radius = 50.0
 
-[node name="Node2D" type="Node2D" unique_id=895117885]
+[node name="Node2D" type="Node" unique_id=1633412889]
 process_mode = 1
-y_sort_enabled = true
 
 [node name="Player" parent="." unique_id=142514294 instance=ExtResource("1_0xm2m")]
 position = Vector2(495, 147)
@@ -54,7 +53,5 @@ position = Vector2(809, 701)
 
 [node name="Grunt" parent="." unique_id=1295719413 instance=ExtResource("7_272bh")]
 position = Vector2(174, 318)
-
-[connection signal="take_damage" from="Player/AcidTarget" to="Player" method="take_damage"]
 
 [editable path="Player"]

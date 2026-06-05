@@ -10,17 +10,17 @@ position = Vector2(40, 40)
 script = ExtResource("1_nb4k0")
 padding = 75.0
 
-[node name="SpellSlot" parent="." unique_id=1338756288 instance=ExtResource("2_ks8t7")]
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1089956351]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="SpellSlot" parent="HBoxContainer" unique_id=1338756288 instance=ExtResource("2_ks8t7")]
 position = Vector2(809, 576)
 
-[node name="SpellSlot2" parent="." unique_id=1885587259 instance=ExtResource("2_ks8t7")]
+[node name="SpellSlot2" parent="HBoxContainer" unique_id=1885587259 instance=ExtResource("2_ks8t7")]
 position = Vector2(944, 576)
 slot_number = 1
 
-[node name="SpellSlot3" parent="." unique_id=318228316 instance=ExtResource("2_ks8t7")]
+[node name="SpellSlot3" parent="HBoxContainer" unique_id=318228316 instance=ExtResource("2_ks8t7")]
 position = Vector2(1079, 576)
 slot_number = 2
-
-[node name="SpellSlot4" parent="." unique_id=665227784 instance=ExtResource("2_ks8t7")]
-position = Vector2(1079, 445)
-slot_number = 3
