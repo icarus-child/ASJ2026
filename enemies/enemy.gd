@@ -55,7 +55,7 @@ func take_damage(damage: int = 1) -> void:
 
 
 func _attempt_spawn_healthpack() -> void:
-	if randf() <= 1.0/5:
+	if randf() <= 5.0/5:
 		var health_pack: Node2D = health_pack_scene.instantiate()
 		health_pack.global_position = global_position
 		add_sibling(health_pack)

@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://281mvehs1hd0"]
 
 [ext_resource type="Script" uid="uid://b11xl85gbd31" path="res://player/health_pack.gd" id="1_g6q53"]
-[ext_resource type="Texture2D" uid="uid://dqybuslh80c1l" path="res://icon.svg" id="1_tmcrj"]
+[ext_resource type="Texture2D" uid="uid://70tvbig2m3g3" path="res://assets/player/HealthPotion_V1.png" id="2_g6q53"]
 
 [sub_resource type="Gradient" id="Gradient_lyew0"]
-offsets = PackedFloat32Array(0.9318182, 1)
+offsets = PackedFloat32Array(0.26768348, 1)
 colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_mvg1d"]
@@ -13,10 +13,40 @@ width = 21
 height = 21
 fill = 1
 fill_from = Vector2(0.5, 0.5)
-fill_to = Vector2(0, 0.5107143)
+fill_to = Vector2(0, 0.5517494)
+
+[sub_resource type="Gradient" id="Gradient_g6q53"]
+colors = PackedColorArray(0.76364434, 0.47033143, 0.46325058, 1, 0.66266, 0.25442743, 0.20874378, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_u6eg0"]
+gradient = SubResource("Gradient_g6q53")
+width = 20
+height = 20
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+
+[sub_resource type="Curve" id="Curve_g6q53"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_u6eg0"]
+curve = SubResource("Curve_g6q53")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_g6q53"]
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = 78.59
+initial_velocity_max = 78.59
+gravity = Vector3(0, 9.8, 0)
+scale_curve = SubResource("CurveTexture_u6eg0")
+turbulence_enabled = true
+turbulence_noise_strength = 3.48
+turbulence_influence_min = 0.257
+turbulence_influence_max = 0.257
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tmcrj"]
-radius = 21.0
+radius = 30.149628
 
 [sub_resource type="Animation" id="Animation_tmcrj"]
 length = 0.001
@@ -47,7 +77,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.76666665, 1.5),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(0, -15), Vector2(0, -27), Vector2(0, -15)]
+"values": [Vector2(0, -30), Vector2(0, -40), Vector2(0, -30)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_u6eg0"]
@@ -57,27 +87,45 @@ _data = {
 }
 
 [node name="HealthPack" type="Node2D" unique_id=267672596]
+y_sort_enabled = true
 script = ExtResource("1_g6q53")
 
 [node name="Shadow" type="Sprite2D" parent="." unique_id=1241547900]
 modulate = Color(1, 1, 1, 0.627451)
-position = Vector2(0, 17)
-scale = Vector2(2, 0.24)
+z_index = -1
+position = Vector2(0, 1)
+scale = Vector2(1.986266, 0.5904903)
 texture = SubResource("GradientTexture2D_mvg1d")
 
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=1106989323]
+position = Vector2(0, -38)
+scale = Vector2(2.9090908, 2.9090908)
+texture = SubResource("GradientTexture2D_u6eg0")
+process_material = SubResource("ParticleProcessMaterial_g6q53")
+
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=374796421]
+y_sort_enabled = true
 position = Vector2(0, -15)
 scale = Vector2(0.34375, 0.34375)
-texture = ExtResource("1_tmcrj")
+texture = ExtResource("2_g6q53")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="Sprite2D" unique_id=971438744]
+position = Vector2(0, 5.818184)
+scale = Vector2(2.9090908, 2.9090908)
+texture = SubResource("GradientTexture2D_u6eg0")
+process_material = SubResource("ParticleProcessMaterial_g6q53")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1229150551]
-position = Vector2(1, 0)
+position = Vector2(1, -16)
 collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=319322461]
+position = Vector2(0, -9)
 shape = SubResource("CircleShape2D_tmcrj")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1934129350]
 libraries/ = SubResource("AnimationLibrary_u6eg0")
 autoplay = &"bob"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1352775463]

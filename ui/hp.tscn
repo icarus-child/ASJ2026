@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://dqybuslh80c1l" path="res://icon.svg" id="1_fdjou"]
 [ext_resource type="Script" path="res://ui/hp.gd" id="2_ya2sx"]
+[ext_resource type="Texture2D" uid="uid://70tvbig2m3g3" path="res://assets/player/HealthPotion_V1.png" id="3_cbw3q"]
 
 [node name="Hp" type="Sprite2D" unique_id=785864400]
 self_modulate = Color(0.17, 0.17, 0.17, 1)
@@ -11,24 +12,24 @@ script = ExtResource("2_ya2sx")
 
 [node name="HP1" type="Sprite2D" parent="." unique_id=1513231909]
 position = Vector2(-32, -32)
-texture = ExtResource("1_fdjou")
+texture = ExtResource("3_cbw3q")
 region_enabled = true
 region_rect = Rect2(0, 0, 64, 64)
 
 [node name="HP2" type="Sprite2D" parent="." unique_id=1136525695]
 position = Vector2(-32, 32)
-texture = ExtResource("1_fdjou")
+texture = ExtResource("3_cbw3q")
 region_enabled = true
 region_rect = Rect2(0, 64, 64, 64)
 
 [node name="HP3" type="Sprite2D" parent="." unique_id=1017921037]
 position = Vector2(32, 32)
-texture = ExtResource("1_fdjou")
+texture = ExtResource("3_cbw3q")
 region_enabled = true
 region_rect = Rect2(64, 64, 64, 64)
 
 [node name="HP4" type="Sprite2D" parent="." unique_id=1843000204]
 position = Vector2(32, -32)
-texture = ExtResource("1_fdjou")
+texture = ExtResource("3_cbw3q")
 region_enabled = true
 region_rect = Rect2(64, 0, 64, 64)

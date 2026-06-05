@@ -8,6 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://bpru4j6ak3h0q" path="res://player/Wizard_Walk_Pose_Right_01.png" id="3_rgyib"]
 [ext_resource type="Texture2D" uid="uid://dmysmjf284xer" path="res://player/Wizard_Parry_Pose_Right_01.png" id="4_hg6s5"]
 [ext_resource type="Script" uid="uid://hl2jdxa4x3nq" path="res://player/camera_target.gd" id="4_yw30f"]
+[ext_resource type="Texture2D" uid="uid://baao8rehdtwwg" path="res://assets/enemies/controller/target.png" id="5_c35mf"]
+[ext_resource type="Shader" uid="uid://kau4shpoaiwu" path="res://player/heal.gdshader" id="6_65viv"]
 [ext_resource type="Texture2D" uid="uid://cewsm0mqta8qc" path="res://player/Wizard_Attack_Pose_Right_01.png" id="6_boad6"]
 [ext_resource type="Script" uid="uid://ultb40nadr46" path="res://player/animation_tree.gd" id="8_rgyib"]
 [ext_resource type="AudioStream" uid="uid://c6dbfyutwp377" path="res://assets/sound/Bag Woosh A.wav" id="9_wodsf"]
@@ -22,6 +24,9 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8t03j"]
 shader = ExtResource("2_hg6s5")
 shader_parameter/hit = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_65viv"]
+shader = ExtResource("6_65viv")
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g6k8r"]
 height = 46.0
@@ -224,6 +229,12 @@ material = SubResource("ShaderMaterial_8t03j")
 position = Vector2(0, -22)
 texture = ExtResource("3_rgyib")
 offset = Vector2(9, 0)
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=1198717455]
+visible = false
+texture = ExtResource("5_c35mf")
+lifetime = 2.0
+process_material = SubResource("ShaderMaterial_65viv")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1511822475]
 position = Vector2(0, 7)
