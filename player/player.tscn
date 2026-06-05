@@ -231,7 +231,7 @@ texture = ExtResource("3_rgyib")
 offset = Vector2(9, 0)
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=1198717455]
-visible = false
+emitting = false
 texture = ExtResource("5_c35mf")
 lifetime = 2.0
 process_material = SubResource("ShaderMaterial_65viv")

@@ -213,7 +213,9 @@ texture = SubResource("GradientTexture2D_r5eot")
 [node name="Plus" type="Sprite2D" parent="Node2D" unique_id=1089391137]
 z_index = -1
 material = SubResource("ShaderMaterial_vhept")
-scale = Vector2(0.014582977, 0.014582977)
+rotation = 0.6646594
+scale = Vector2(0.0131004555, 0.013100455)
+skew = 0.24147761
 texture = ExtResource("2_qetnu")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1191188161]
