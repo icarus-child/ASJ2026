@@ -27,7 +27,6 @@ func _hit_area_acid() -> void:
 
 
 func _spawn_acid() -> void:
-	print("hit")
 	var acid: Node2D = acid_scene.instantiate()
 	acid.global_position = global_position
 	add_sibling(acid)
