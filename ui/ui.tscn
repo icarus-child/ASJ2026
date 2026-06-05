@@ -11,16 +11,26 @@ script = ExtResource("1_nb4k0")
 padding = 75.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1089956351]
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
 
 [node name="SpellSlot" parent="HBoxContainer" unique_id=1338756288 instance=ExtResource("2_ks8t7")]
-position = Vector2(809, 576)
+position = Vector2(-270, -39)
+scale = Vector2(0.6765519, 0.6765519)
 
 [node name="SpellSlot2" parent="HBoxContainer" unique_id=1885587259 instance=ExtResource("2_ks8t7")]
-position = Vector2(944, 576)
+position = Vector2(-152, -39)
+scale = Vector2(0.6765519, 0.6765519)
 slot_number = 1
 
 [node name="SpellSlot3" parent="HBoxContainer" unique_id=318228316 instance=ExtResource("2_ks8t7")]
-position = Vector2(1079, 576)
+position = Vector2(-41, -39)
+scale = Vector2(0.6765519, 0.6765519)
 slot_number = 2

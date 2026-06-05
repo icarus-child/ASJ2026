@@ -20,7 +20,7 @@ func _hit_area_acid() -> void:
 		if body is Area2D and (body as Area2D).collision_layer == 2:
 			hit_player = true
 			var player := body.get_parent() as Player
-			player.parry_hit(PlayerResources.acquire_spell.bind(Lob.PSpell.new()), 
+			player.parry_hit(PlayerResources.acquire_spell.bind(Lob.PSpell.new()),
 				func() -> void:
 					player.take_damage(2)
 					_spawn_acid(global_position)

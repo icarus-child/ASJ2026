@@ -1,0 +1,83 @@
+[gd_scene format=3 uid="uid://281mvehs1hd0"]
+
+[ext_resource type="Script" uid="uid://b11xl85gbd31" path="res://player/health_pack.gd" id="1_g6q53"]
+[ext_resource type="Texture2D" uid="uid://dqybuslh80c1l" path="res://icon.svg" id="1_tmcrj"]
+
+[sub_resource type="Gradient" id="Gradient_lyew0"]
+offsets = PackedFloat32Array(0.9318182, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_mvg1d"]
+gradient = SubResource("Gradient_lyew0")
+width = 21
+height = 21
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0, 0.5107143)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tmcrj"]
+radius = 21.0
+
+[sub_resource type="Animation" id="Animation_tmcrj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -15)]
+}
+
+[sub_resource type="Animation" id="Animation_g6q53"]
+resource_name = "bob"
+length = 1.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.76666665, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, -15), Vector2(0, -27), Vector2(0, -15)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_u6eg0"]
+_data = {
+&"RESET": SubResource("Animation_tmcrj"),
+&"bob": SubResource("Animation_g6q53")
+}
+
+[node name="HealthPack" type="Node2D" unique_id=267672596]
+script = ExtResource("1_g6q53")
+
+[node name="Shadow" type="Sprite2D" parent="." unique_id=1241547900]
+modulate = Color(1, 1, 1, 0.627451)
+position = Vector2(0, 17)
+scale = Vector2(2, 0.24)
+texture = SubResource("GradientTexture2D_mvg1d")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=374796421]
+position = Vector2(0, -15)
+scale = Vector2(0.34375, 0.34375)
+texture = ExtResource("1_tmcrj")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1229150551]
+position = Vector2(1, 0)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=319322461]
+shape = SubResource("CircleShape2D_tmcrj")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1934129350]
+libraries/ = SubResource("AnimationLibrary_u6eg0")
+autoplay = &"bob"

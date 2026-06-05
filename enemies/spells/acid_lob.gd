@@ -12,6 +12,8 @@ class PSpell extends Spell:
 	const ally_colour: GradientTexture2D = preload("res://assets/enemies/controller/ally_target.tres")
 	const ally_colour_fill: GradientTexture2D = preload("res://assets/enemies/controller/ally_target_fill.tres")
 
+	const acid_shot: GradientTexture2D = preload("res://assets/enemies/controller/enemy_lob_acid.tres")
+
 	func dummy() -> Node2D:
 		var d: Node = projectile_scene.instantiate()
 		(d.get_node("AnimationPlayer") as AnimationPlayer).active = false
@@ -23,6 +25,7 @@ class PSpell extends Spell:
 	func fire_attack(caster: Node2D, target_pos: Vector2) -> void:
 		var target := target_scene.instantiate() as Node2D
 		var projectile := projectile_scene.instantiate() as Lob
+		(projectile.get_child(1) as Sprite2D).texture = acid_shot
 		if caster is Player:
 			var sprites: Array[Sprite2D]
 			sprites.assign(target.get_child(0).get_children())

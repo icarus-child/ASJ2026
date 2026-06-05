@@ -2,8 +2,13 @@
 
 [ext_resource type="Texture2D" uid="uid://dqybuslh80c1l" path="res://icon.svg" id="1_pjtqy"]
 [ext_resource type="Script" uid="uid://c5fmqqsbp7qg0" path="res://ui/spell_slot.gd" id="2_j3ms3"]
+[ext_resource type="Texture2D" uid="uid://cx3o50j1aoeln" path="res://assets/ui/Spell_Inventory_UI_Art_V1.png" id="3_52ii6"]
 
 [node name="SpellSlot" type="Sprite2D" unique_id=1338756288]
 self_modulate = Color(0.076, 0.1615, 0.19, 1)
 texture = ExtResource("1_pjtqy")
 script = ExtResource("2_j3ms3")
+
+[node name="SpellInventoryUiArtV1" type="Sprite2D" parent="." unique_id=483384888]
+scale = Vector2(1.140625, 1.140625)
+texture = ExtResource("3_52ii6")

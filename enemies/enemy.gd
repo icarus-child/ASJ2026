@@ -7,6 +7,8 @@ extends CharacterBody2D
 
 @export var health: int
 
+var health_pack_scene: PackedScene = preload("res://player/health_pack.tscn")
+
 @onready var player: Player = get_parent().get_node("Player")
 @onready var anim: EnemyAnimTree = $AnimationTree
 
@@ -48,4 +50,12 @@ func take_damage(damage: int = 1) -> void:
 	if anim:
 		anim.hurt()
 	if health <= 0:
+		_attempt_spawn_healthpack()
 		_die()
+
+
+func _attempt_spawn_healthpack() -> void:
+	if randf() <= 1.0/5:
+		var health_pack: Node2D = health_pack_scene.instantiate()
+		health_pack.global_position = global_position
+		add_sibling(health_pack)

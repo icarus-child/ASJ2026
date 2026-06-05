@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://qrxnlvj3hle6"]
 
 [ext_resource type="Script" uid="uid://d1o4fm6jgqxk5" path="res://enemies/spells/lob.gd" id="1_lyew0"]
+[ext_resource type="Texture2D" uid="uid://claw12w7rgjqh" path="res://assets/enemies/controller/enemy_lob.tres" id="2_i5iv7"]
 [ext_resource type="AudioStream" uid="uid://bnxwtm4jiqtxv" path="res://assets/sound/Thunk A.wav" id="3_x0lkn"]
 [ext_resource type="AudioStream" uid="uid://dicvmn0nnnucf" path="res://assets/sound/Magic gain A.wav" id="4_i5iv7"]
 [ext_resource type="AudioStream" uid="uid://d1ymm8hj2pe6s" path="res://assets/sound/Danger acid loop.wav" id="5_i5iv7"]
@@ -16,16 +17,6 @@ height = 21
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0, 0.5107143)
-
-[sub_resource type="Gradient" id="Gradient_x0lkn"]
-offsets = PackedFloat32Array(0.2642959, 0.4715865, 0.66592646, 1)
-colors = PackedColorArray(1, 1, 1, 1, 0.9207226, 0.39121953, 0.42717218, 1, 0.9207226, 0.39121953, 0.42717218, 1, 1, 1, 1, 0)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_i5iv7"]
-gradient = SubResource("Gradient_x0lkn")
-fill = 1
-fill_from = Vector2(0.5, 0.5)
-fill_to = Vector2(0.5, 0)
 
 [sub_resource type="Animation" id="Animation_lyew0"]
 length = 0.001
@@ -52,6 +43,18 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimationPlayer2:current_animation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"glow"]
 }
 
 [sub_resource type="Animation" id="Animation_n34b5"]
@@ -81,11 +84,61 @@ tracks/1/keys = {
 "update": 1,
 "values": [true, false]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimationPlayer2:current_animation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"glow"]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_x0lkn"]
 _data = {
 &"RESET": SubResource("Animation_lyew0"),
 &"lob": SubResource("Animation_n34b5")
+}
+
+[sub_resource type="Animation" id="Animation_i5iv7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.6075688, 0.6075688)]
+}
+
+[sub_resource type="Animation" id="Animation_x0lkn"]
+resource_name = "glow"
+length = 0.6666667
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Sprite2D:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.33333334, 0.6666667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0.6075688, 0.6075688), Vector2(0.76, 0.76), Vector2(0.6075688, 0.6075688)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_i5iv7"]
+_data = {
+&"RESET": SubResource("Animation_i5iv7"),
+&"glow": SubResource("Animation_x0lkn")
 }
 
 [sub_resource type="AudioStreamSynchronized" id="AudioStreamSynchronized_d3krv"]
@@ -106,13 +159,18 @@ scale = Vector2(1, 0.12)
 texture = SubResource("GradientTexture2D_n34b5")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1049832624]
+position = Vector2(1, 0)
 scale = Vector2(0.6075688, 0.6075688)
-texture = SubResource("GradientTexture2D_i5iv7")
+texture = ExtResource("2_i5iv7")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=382101441]
 reset_on_save = false
 libraries/ = SubResource("AnimationLibrary_x0lkn")
 autoplay = &"lob"
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="." unique_id=1650895174]
+root_node = NodePath("../AnimationPlayer")
+libraries/ = SubResource("AnimationLibrary_i5iv7")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=487822781]
 stream = SubResource("AudioStreamSynchronized_d3krv")

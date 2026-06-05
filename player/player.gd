@@ -97,6 +97,10 @@ func take_damage(amount: int = 1) -> void:
 	PlayerResources.health -= amount
 
 
+func heal_damage(amount: int = 1) -> void:
+	PlayerResources.health += amount
+
+
 func signal_disconnect_all(target_signal: Signal) -> void:
 	for n: Dictionary in target_signal.get_connections():
 		var callable_variant: Variant = n.get("callable")
