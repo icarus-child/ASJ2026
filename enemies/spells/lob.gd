@@ -39,13 +39,13 @@ class PSpell extends Spell:
 			area.set_collision_mask_value(6, true)
 		target.global_position = target_pos
 		caster.add_sibling(target)
-		caster.add_sibling(_create_timer(1,
-			func() -> void:
-				projectile.position = caster.position
-				var heading := target_pos - caster.global_position
-				projectile.linear_velocity = heading / projectile.hang_time
-				caster.add_sibling(projectile)
-		))
+		# caster.add_sibling(_create_timer(1,
+		# 	func() -> void:
+		projectile.position = caster.position
+		var heading := target_pos - caster.global_position
+		projectile.linear_velocity = heading / projectile.hang_time
+		caster.add_sibling(projectile)
+		# ))
 
 	func _create_timer(duration: float, callback: Callable) -> Timer:
 		var timer := Timer.new()

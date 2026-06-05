@@ -51,7 +51,7 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id="Animation_13ycv"]
 resource_name = "RESET"
-length = 3.3
+length = 2.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -59,7 +59,7 @@ tracks/0/path = NodePath("../IndicatorOut:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 3),
+"times": PackedFloat32Array(0, 2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(1.045029, 0.6583092), Vector2(0.708, 0.445)]
@@ -71,7 +71,7 @@ tracks/1/path = NodePath("../IndicatorIn:scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 3),
+"times": PackedFloat32Array(0, 2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(0.44759643, 0.28196046), Vector2(0.708, 0.446)]
@@ -83,7 +83,7 @@ tracks/2/path = NodePath("../..")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(3, 3.3),
+"times": PackedFloat32Array(2, 2.3),
 "transitions": PackedFloat32Array(1, 1),
 "values": [{
 "args": [],
@@ -100,7 +100,7 @@ tracks/3/path = NodePath("../Fill:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 3),
+"times": PackedFloat32Array(0, 2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [false, true]
@@ -121,7 +121,7 @@ tracks/4/keys = {
 "start_offset": 0.0,
 "stream": ExtResource("4_lc0sk")
 }],
-"times": PackedFloat32Array(0, 3)
+"times": PackedFloat32Array(0, 2)
 }
 tracks/4/use_blend = true
 
