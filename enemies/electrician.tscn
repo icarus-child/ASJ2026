@@ -19,6 +19,9 @@ size = Vector2(86, 86)
 [sub_resource type="CircleShape2D" id="CircleShape2D_8ifd5"]
 radius = 100.005
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_4hr46"]
+radius = 755.0026
+
 [sub_resource type="Animation" id="Animation_1c1pl"]
 length = 0.001
 tracks/0/type = "value"
@@ -187,6 +190,14 @@ collision_mask = 64
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AvoidShape" unique_id=1514964437]
 shape = SubResource("CircleShape2D_8ifd5")
 debug_color = Color(0.9015615, 0.25354874, 0.46391654, 0.41960785)
+
+[node name="DetectionRange" type="Area2D" parent="." unique_id=1753569739]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionRange" unique_id=1493156383]
+shape = SubResource("CircleShape2D_4hr46")
+debug_color = Color(0.5017757, 0.47703832, 0.86888754, 0.41960785)
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1503169185]
 avoidance_enabled = true

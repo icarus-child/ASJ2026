@@ -5,11 +5,11 @@
 [ext_resource type="Texture2D" uid="uid://dv2jnqafk2mff" path="res://assets/enemies/grunt/Grunt_Hurt_Pose_Right_01.png" id="2_kcgqv"]
 [ext_resource type="Texture2D" uid="uid://biilieuj4cv2e" path="res://assets/enemies/grunt/Grunt_Walk_Pose_Right_01.png" id="2_yisfy"]
 [ext_resource type="Texture2D" uid="uid://wll32upo16ek" path="res://assets/shadow.png" id="3_15hvj"]
+[ext_resource type="AudioStream" uid="uid://dbqbqfpkdhijb" path="res://assets/sound/Whistle.wav" id="5_brp71"]
 [ext_resource type="AudioStream" uid="uid://dw7m54o1vnc2b" path="res://assets/sound/Baddy C hurt 1.wav" id="5_kcgqv"]
 [ext_resource type="Script" uid="uid://dn7bnqml7fonk" path="res://enemies/enemy_animation_tree.gd" id="5_u8hdr"]
 [ext_resource type="AudioStream" uid="uid://tp5aiouoa6rq" path="res://assets/sound/Baddy C hurt 2.wav" id="6_brp71"]
 [ext_resource type="AudioStream" uid="uid://df27dalgv3py4" path="res://assets/sound/Baddy C hurt 3.wav" id="7_ynhef"]
-[ext_resource type="AudioStream" uid="uid://bjtwtj0mpfjok" path="res://assets/sound/Player hurt.wav" id="9_ynhef"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2bghh"]
 radius = 61.204575
@@ -22,6 +22,9 @@ size = Vector2(106, 110)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8ifd5"]
 radius = 108.07842
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ynhef"]
+radius = 1052.2737
 
 [sub_resource type="Animation" id="Animation_yisfy"]
 resource_name = "RESET"
@@ -53,10 +56,9 @@ tracks/1/keys = {
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_lod52"]
 playback_mode = 1
-streams_count = 3
-stream_0/stream = ExtResource("5_kcgqv")
-stream_1/stream = ExtResource("6_brp71")
-stream_2/stream = ExtResource("7_ynhef")
+random_pitch = 1.122462
+streams_count = 1
+stream_0/stream = ExtResource("5_brp71")
 
 [sub_resource type="Animation" id="Animation_15hvj"]
 resource_name = "attack"
@@ -87,6 +89,12 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0)
 }
 tracks/1/use_blend = true
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ynhef"]
+streams_count = 3
+stream_0/stream = ExtResource("5_kcgqv")
+stream_1/stream = ExtResource("6_brp71")
+stream_2/stream = ExtResource("7_ynhef")
 
 [sub_resource type="Animation" id="Animation_kcgqv"]
 resource_name = "parry"
@@ -125,7 +133,7 @@ tracks/2/keys = {
 "clips": [{
 "end_offset": 0.0,
 "start_offset": 0.0,
-"stream": ExtResource("9_ynhef")
+"stream": SubResource("AudioStreamRandomizer_ynhef")
 }],
 "times": PackedFloat32Array(0)
 }
@@ -225,6 +233,14 @@ collision_mask = 64
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AvoidShape" unique_id=1514964437]
 shape = SubResource("CircleShape2D_8ifd5")
+
+[node name="DetectionRange" type="Area2D" parent="." unique_id=229249482]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionRange" unique_id=2006306708]
+shape = SubResource("CircleShape2D_ynhef")
+debug_color = Color(0.5017757, 0.47703832, 0.86888754, 0.41960785)
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1503169185]
 avoidance_enabled = true

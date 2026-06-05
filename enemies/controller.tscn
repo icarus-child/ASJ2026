@@ -16,6 +16,9 @@ size = Vector2(86, 86)
 [sub_resource type="CircleShape2D" id="CircleShape2D_8ifd5"]
 radius = 154.01299
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_yr6gm"]
+radius = 820.00244
+
 [sub_resource type="Animation" id="Animation_1c1pl"]
 length = 0.001
 tracks/0/type = "value"
@@ -177,7 +180,7 @@ texture = ExtResource("2_pgoh7")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1694667638]
 scale = Vector2(1.015598, 1.015598)
-texture = ExtResource("3_pgoh7")
+texture = ExtResource("3_bh577")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1971040039]
 scale = Vector2(0.6293247, 0.6293247)
@@ -198,6 +201,14 @@ collision_mask = 64
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AvoidShape" unique_id=1514964437]
 shape = SubResource("CircleShape2D_8ifd5")
 debug_color = Color(0.9015615, 0.25354874, 0.46391654, 0.41960785)
+
+[node name="DetectionRange" type="Area2D" parent="." unique_id=1251363973]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionRange" unique_id=1547798791]
+shape = SubResource("CircleShape2D_yr6gm")
+debug_color = Color(0.5017757, 0.47703832, 0.86888754, 0.41960785)
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1503169185]
 avoidance_enabled = true

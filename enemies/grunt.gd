@@ -22,9 +22,14 @@ var lunge_direction: Vector2
 
 
 func _custom_ready() -> void:
-	hitbox.body_entered.connect(_on_hit_player)
+	hitbox.area_entered.connect(_on_hit_player)
 
 func _physics_process(delta: float) -> void:
+	if not following_player:
+		_movement(delta)
+		move_and_slide()
+		velocity = get_real_velocity()
+		return
 	var distance_to_player := position.distance_to(player.position)
 	if distance_to_player <= attack_range and _has_line_of_sight() and not recovering_from_attack:
 		recovering_from_attack = true
@@ -96,7 +101,10 @@ func _get_separation_force() -> Vector2:
 
 
 func _update_navigation_target() -> void:
-	navigation_agent.target_position = player.global_position
+	if not following_player:
+		navigation_agent.target_position = _get_random_movement_target()
+	else:
+		navigation_agent.target_position = player.global_position
 
 
 func _die() -> void:
@@ -126,5 +134,5 @@ func _lunge() -> void:
 	))
 
 
-func _on_hit_player(_body: Node2D) -> void:
+func _on_hit_player(_body: Area2D) -> void:
 	player.take_damage(4)

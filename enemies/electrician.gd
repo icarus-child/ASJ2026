@@ -32,6 +32,11 @@ func _custom_ready() -> void:
 	pass
 
 func _physics_process(delta: float) -> void:
+	if not following_player:
+		_movement(delta)
+		move_and_slide()
+		velocity = get_real_velocity()
+		return
 	var distance_to_player := position.distance_to(player.position)
 	if distance_to_player <= blink_trigger_range and not blink_on_cooldown:
 		var target := _find_flank_position(true)
@@ -140,7 +145,10 @@ func _get_separation_force() -> Vector2:
 # Good distance + LOS → strafe / hold position
 # No LOS → move to regain visibility
 func _update_navigation_target() -> void:
-	navigation_agent.target_position = _find_flank_position()
+	if not following_player:
+		navigation_agent.target_position = _get_random_movement_target()
+	else:
+		navigation_agent.target_position = _find_flank_position()
 
 
 func _find_flank_position(teleport: bool = false) -> Vector2:

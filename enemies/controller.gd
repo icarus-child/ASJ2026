@@ -44,8 +44,18 @@ func _ready() -> void:
 		func() -> void: can_attack = true
 	))
 
+	if detection_range.has_overlapping_areas():
+		following_player = true
+	else:
+		detection_range.area_entered.connect(func(_body: Area2D) -> void: following_player = true)
+
 
 func _physics_process(delta: float) -> void:
+	if not following_player:
+		_movement(delta)
+		move_and_slide()
+		velocity = get_real_velocity()
+		return
 	var distance_to_player := position.distance_to(player.position)
 	if not short_nav_on_cooldown and distance_to_player <= short_nav_trigger_distance:
 		_update_navigation_target()
@@ -168,7 +178,10 @@ func _get_separation_force() -> Vector2:
 # Good distance + LOS → strafe / hold position
 # No LOS → move to regain visibility
 func _update_navigation_target() -> void:
-	navigation_agent.target_position = _find_flank_position()
+	if not following_player:
+		navigation_agent.target_position = _get_random_movement_target()
+	else:
+		navigation_agent.target_position = _find_flank_position()
 
 
 func _find_flank_position(teleport: bool = false) -> Vector2:

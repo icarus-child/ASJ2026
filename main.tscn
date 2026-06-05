@@ -4,7 +4,6 @@
 [ext_resource type="PackedScene" uid="uid://b5k8yiknx6yhx" path="res://enemies/controller.tscn" id="2_lquwl"]
 [ext_resource type="TileSet" uid="uid://74uvo3fcruv3" path="res://tile_set.tres" id="3_1bvp3"]
 [ext_resource type="AudioStream" uid="uid://bqf8ikxhrfv8i" path="res://assets/music/Wizard city funk masterloop.wav" id="5_7mycd"]
-[ext_resource type="PackedScene" uid="uid://bghrag6aan4bj" path="res://enemies/electrician.tscn" id="5_272bh"]
 [ext_resource type="PackedScene" uid="uid://bi7880g0wx2x8" path="res://ui/ui.tscn" id="5_lquwl"]
 [ext_resource type="PackedScene" uid="uid://281mvehs1hd0" path="res://player/health_pack.tscn" id="6_7mycd"]
 [ext_resource type="PackedScene" uid="uid://dj7intpg1gv1b" path="res://enemies/grunt.tscn" id="7_272bh"]
@@ -53,14 +52,14 @@ position = Vector2(547, 340)
 [node name="Enemies" type="Node2D" parent="." unique_id=27241167]
 y_sort_enabled = true
 
-[node name="Electrician" parent="Enemies" unique_id=136528141 instance=ExtResource("5_272bh")]
-position = Vector2(919, 221)
-
-[node name="Controller" parent="Enemies" unique_id=1794130473 instance=ExtResource("2_lquwl")]
-position = Vector2(677, 583)
-
 [node name="Grunt" parent="Enemies" unique_id=1057874499 instance=ExtResource("7_272bh")]
-position = Vector2(377, 271)
+position = Vector2(1879, 867)
+
+[node name="Grunt2" parent="Enemies" unique_id=1794130473 instance=ExtResource("7_272bh")]
+position = Vector2(871, 145)
+
+[node name="Controller" parent="Enemies" unique_id=2136037629 instance=ExtResource("2_lquwl")]
+position = Vector2(619, 440)
 
 [connection signal="take_damage" from="Player/AcidTarget" to="Player" method="take_damage"]
 
