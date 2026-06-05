@@ -1,6 +1,5 @@
 [gd_scene format=3 uid="uid://cfq3bkhk20pq3"]
 
-[ext_resource type="Texture2D" uid="uid://dqybuslh80c1l" path="res://icon.svg" id="1_oul6g"]
 [ext_resource type="Script" uid="uid://cgt8i2arm7reo" path="res://player/player.gd" id="1_rkbax"]
 [ext_resource type="Texture2D" uid="uid://wll32upo16ek" path="res://assets/shadow.png" id="2_2ieo8"]
 [ext_resource type="Shader" uid="uid://sca5p05glnc6" path="res://assets/player/damage.gdshader" id="2_hg6s5"]
@@ -11,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://baao8rehdtwwg" path="res://assets/enemies/controller/target.png" id="5_c35mf"]
 [ext_resource type="Shader" uid="uid://kau4shpoaiwu" path="res://player/heal.gdshader" id="6_65viv"]
 [ext_resource type="Texture2D" uid="uid://cewsm0mqta8qc" path="res://player/Wizard_Attack_Pose_Right_01.png" id="6_boad6"]
+[ext_resource type="Texture2D" uid="uid://bipn3ttua5tpo" path="res://assets/ui/Reticle_V1.png" id="7_65viv"]
 [ext_resource type="Script" uid="uid://ultb40nadr46" path="res://player/animation_tree.gd" id="8_rgyib"]
 [ext_resource type="AudioStream" uid="uid://c6dbfyutwp377" path="res://assets/sound/Bag Woosh A.wav" id="9_wodsf"]
 [ext_resource type="Texture2D" uid="uid://4627nbakiyxs" path="res://player/Wizard_Hurt_Pose_Right_01.png" id="10_2ieo8"]
@@ -211,6 +211,7 @@ streams_count = 1
 stream_0/stream = ExtResource("15_tqiix")
 
 [node name="Player" type="CharacterBody2D" unique_id=142514294]
+y_sort_enabled = true
 collision_mask = 257
 motion_mode = 1
 script = ExtResource("1_rkbax")
@@ -220,6 +221,7 @@ acid_speed = 300.0
 acid_accel = 1000.0
 
 [node name="Shadow" type="Sprite2D" parent="." unique_id=1087250698]
+z_index = -3
 position = Vector2(0, 19)
 scale = Vector2(0.63841206, 0.63841206)
 texture = ExtResource("2_2ieo8")
@@ -284,8 +286,8 @@ one_shot = true
 
 [node name="AimTarget" type="Sprite2D" parent="." unique_id=1603199398]
 process_physics_priority = 1
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("1_oul6g")
+z_index = 20
+texture = ExtResource("7_65viv")
 script = ExtResource("3_g1dw6")
 aim_range = 500.0
 

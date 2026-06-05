@@ -48,6 +48,8 @@ class PSpell extends Spell:
 		return 400
 
 	func fire_attack(caster: Node2D, heading: Vector2) -> void:
+		if heading == Vector2.ZERO:
+			heading = Vector2.RIGHT
 		var projectile := spell_scene.instantiate() as ElectricShot
 		if caster is Player:
 			(projectile.get_child(1) as Sprite2D).texture = projectile.ally_shot

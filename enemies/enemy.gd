@@ -9,7 +9,7 @@ extends CharacterBody2D
 
 var health_pack_scene: PackedScene = preload("res://player/health_pack.tscn")
 
-@onready var player: Player = get_parent().get_node("Player")
+@onready var player: Player = get_parent().get_parent().get_node("Player")
 @onready var anim: EnemyAnimTree = $AnimationTree
 
 

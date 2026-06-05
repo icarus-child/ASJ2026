@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dln77uqn68mds"]
 
-[ext_resource type="Texture2D" uid="uid://dqybuslh80c1l" path="res://icon.svg" id="1_uqo2l"]
+[ext_resource type="Texture2D" uid="uid://dlkqs2qumre7m" path="res://assets/enemies/electrician/enemy_ring.tres" id="1_uqo2l"]
 
 [node name="ElectricCircleIcon" type="Sprite2D" unique_id=989157874]
+scale = Vector2(0.17770861, 0.17770861)
 texture = ExtResource("1_uqo2l")
