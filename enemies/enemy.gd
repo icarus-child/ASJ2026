@@ -64,6 +64,7 @@ func _has_line_of_sight(from: Vector2 = global_position) -> bool:
 
 func take_damage(damage: int = 1) -> void:
 	health -= damage
+	following_player = true
 	if anim:
 		anim.hurt()
 	if health <= 0:
