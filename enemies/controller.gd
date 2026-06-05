@@ -12,7 +12,7 @@ var short_nav_cooldown: float = 2
 var slow_on_cooldown: bool = true
 var slow_cooldown: float = 20
 
-var can_attack: bool = true
+var can_attack: bool = false
 var min_attack_cooldown: float = 4
 var max_attack_cooldown: float = 6
 
@@ -39,6 +39,9 @@ func _ready() -> void:
 	
 	add_child(_create_timer(randf_range(1, 4),
 		func() -> void: slow_on_cooldown = false
+	))
+	add_child(_create_timer(randf_range(1, 3),
+		func() -> void: can_attack = true
 	))
 
 

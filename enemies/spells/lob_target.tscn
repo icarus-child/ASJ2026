@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://b7sufs0k2g3hj" path="res://enemies/spells/lob_target.gd" id="1_7kic1"]
 [ext_resource type="Texture2D" uid="uid://bv7orgqv24utl" path="res://assets/enemies/controller/enemy_target.tres" id="2_13ycv"]
 [ext_resource type="Texture2D" uid="uid://bgwvb008ffjaw" path="res://assets/enemies/controller/enemy_target_fill.tres" id="3_kdyba"]
+[ext_resource type="AudioStream" uid="uid://fs3souqdi4sd" path="res://assets/sound/Ouch.wav" id="4_lc0sk"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_saj2p"]
 radius = 221.88904
@@ -45,6 +46,8 @@ tracks/2/keys = {
 "update": 1,
 "values": [false]
 }
+
+[sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_7xsgm"]
 
 [sub_resource type="Animation" id="Animation_13ycv"]
 resource_name = "RESET"
@@ -102,6 +105,25 @@ tracks/3/keys = {
 "update": 1,
 "values": [false, true]
 }
+tracks/4/type = "audio"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../../AudioStreamPlayer2D")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": SubResource("AudioStreamGenerator_7xsgm")
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("4_lc0sk")
+}],
+"times": PackedFloat32Array(0, 3)
+}
+tracks/4/use_blend = true
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7kic1"]
 _data = {
@@ -156,3 +178,5 @@ libraries/ = SubResource("AnimationLibrary_7kic1")
 root_node = NodePath("../Node2D/Target")
 tree_root = SubResource("AnimationNodeAnimation_7kic1")
 anim_player = NodePath("../AnimationPlayer")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=2104465564]

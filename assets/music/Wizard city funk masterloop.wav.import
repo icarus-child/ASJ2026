@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://bqf8ikxhrfv8i"
-path="res://.godot/imported/Wizard city funk masterloop.wav-6dda94e117e98124954307715abbe3ef.sample"
+path="res://.godot/imported/Wizard city funk masterloop.wav-d0272f0e279dcdc9c6d22dff9cd4f896.sample"
 
 [deps]
 
-source_file="res://assets/sound/Wizard city funk masterloop.wav"
-dest_files=["res://.godot/imported/Wizard city funk masterloop.wav-6dda94e117e98124954307715abbe3ef.sample"]
+source_file="res://assets/music/Wizard city funk masterloop.wav"
+dest_files=["res://.godot/imported/Wizard city funk masterloop.wav-d0272f0e279dcdc9c6d22dff9cd4f896.sample"]
 
 [params]
 

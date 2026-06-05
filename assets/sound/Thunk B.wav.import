@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dgvkmme43kgv7"
+path="res://.godot/imported/Thunk B.wav-f81b55a7ee7850c6b94a3fdfe8a72471.sample"
+
+[deps]
+
+source_file="res://assets/sound/Thunk B.wav"
+dest_files=["res://.godot/imported/Thunk B.wav-f81b55a7ee7850c6b94a3fdfe8a72471.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

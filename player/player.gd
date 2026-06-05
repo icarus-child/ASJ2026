@@ -19,7 +19,9 @@ extends CharacterBody2D
 
 func _ready() -> void:
 	parry_freeze_timer.timeout.connect(func() -> void: get_tree().paused = false)
-	parry_early_window.timeout.connect(_disable_parrybox)
+	parry_early_window.timeout.connect(func () -> void:
+		_disable_parrybox()
+	)
 	# hit_recolor_timer.timeout.connect(shader.set_shader_parameter.bind("hit", false))
 
 
@@ -39,6 +41,7 @@ func _physics_process(delta: float) -> void:
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("parry") and parry_cooldown_timer.is_stopped() and PlayerResources.can_acquire_spell():
+		($ParryStart as AudioStreamPlayer).play()
 		_enable_parrybox()
 		anim.parry()
 		if not parry_late_window.is_stopped() and not parry_cooldown_timer.is_stopped():
@@ -46,6 +49,7 @@ func _input(event: InputEvent) -> void:
 			defer_parry.call()
 		parry_early_window.start()
 		parry_cooldown_timer.start()
+
 
 var defer_parry: Callable
 
@@ -59,6 +63,8 @@ func parry_hit(parried: Callable, hit: Callable) -> void:
 		return
 
 	var on_parry: Callable = func() -> void:
+		($ParryStart as AudioStreamPlayer).stop()
+		($Parry as AudioStreamPlayer).play()
 		parried.call()
 		parry_freeze_timer.start()
 		get_tree().paused = true
@@ -85,10 +91,11 @@ func parry_hit(parried: Callable, hit: Callable) -> void:
 		parry_late_window.start()
 		defer_parry = on_parry
 
-# Parry has failed
+
 func take_damage(amount: int = 1) -> void:
 	anim.hurt()
 	PlayerResources.health -= amount
+
 
 func signal_disconnect_all(target_signal: Signal) -> void:
 	for n: Dictionary in target_signal.get_connections():

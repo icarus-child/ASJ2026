@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dr3r5ek7w7s1g"
+path="res://.godot/imported/Baddy C hurt.wav-5ec99f1e5207b6e43fa94b9f78758ada.sample"
+
+[deps]
+
+source_file="res://assets/sound/Baddy C hurt.wav"
+dest_files=["res://.godot/imported/Baddy C hurt.wav-5ec99f1e5207b6e43fa94b9f78758ada.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

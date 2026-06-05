@@ -1,9 +1,9 @@
 [gd_scene format=4 uid="uid://bn2rgbcn54r44"]
 
 [ext_resource type="PackedScene" uid="uid://cfq3bkhk20pq3" path="res://player/player.tscn" id="1_0xm2m"]
-[ext_resource type="PackedScene" uid="uid://b5k8yiknx6yhx" path="res://enemies/controller.tscn" id="2_lquwl"]
 [ext_resource type="TileSet" uid="uid://74uvo3fcruv3" path="res://tile_set.tres" id="3_1bvp3"]
-[ext_resource type="AudioStream" uid="uid://bqf8ikxhrfv8i" path="res://assets/sound/Wizard city funk masterloop.wav" id="5_7mycd"]
+[ext_resource type="AudioStream" uid="uid://bqf8ikxhrfv8i" path="res://assets/music/Wizard city funk masterloop.wav" id="5_7mycd"]
+[ext_resource type="PackedScene" uid="uid://bghrag6aan4bj" path="res://enemies/electrician.tscn" id="5_272bh"]
 [ext_resource type="PackedScene" uid="uid://bi7880g0wx2x8" path="res://ui/ui.tscn" id="5_lquwl"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_1bvp3"]
@@ -41,18 +41,12 @@ navigation_visibility_mode = 1
 [node name="WizardCityFunkFull" type="AudioStreamPlayer" parent="." unique_id=1623276968]
 process_mode = 3
 stream = ExtResource("5_7mycd")
+volume_db = -10.0
 autoplay = true
 
-[node name="Controller" parent="." unique_id=1794130473 instance=ExtResource("2_lquwl")]
-position = Vector2(1160, 14)
+[node name="Electrician" parent="." unique_id=1794130473 instance=ExtResource("5_272bh")]
+position = Vector2(919, 221)
 
-[node name="Controller2" parent="." unique_id=1398307081 instance=ExtResource("2_lquwl")]
-position = Vector2(382, 321)
-
-[node name="Controller3" parent="." unique_id=1235188320 instance=ExtResource("2_lquwl")]
-position = Vector2(1825, 574)
-
-[node name="Controller4" parent="." unique_id=1304541668 instance=ExtResource("2_lquwl")]
-position = Vector2(762, 802)
+[connection signal="take_damage" from="Player/AcidTarget" to="Player" method="take_damage"]
 
 [editable path="Player"]
