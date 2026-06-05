@@ -1,8 +1,6 @@
 class_name ElectricShot
 extends RigidBody2D
 
-@export var speed: float = 400
-
 var ally_shot: GradientTexture2D = preload("res://assets/enemies/electrician/ally_shot.tres")
 
 @onready var particles: GPUParticles2D = $Particles2D
@@ -55,7 +53,7 @@ class PSpell extends Spell:
 			(projectile.get_child(1) as Sprite2D).texture = projectile.ally_shot
 			(projectile.get_child(3) as Area2D).collision_mask = 32
 		projectile.position = caster.position
-		projectile.linear_velocity = heading.normalized() * projectile.speed
+		projectile.linear_velocity = heading.normalized() * 600
 		caster.add_sibling(projectile)
 		if caster is Player:
 			projectile.particles.texture = projectile.ally_shot

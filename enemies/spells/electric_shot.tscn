@@ -80,7 +80,6 @@ contact_monitor = true
 max_contacts_reported = 1
 linear_damp_mode = 1
 script = ExtResource("1_iacpl")
-speed = 300.0
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=1775120702]
 amount = 20
