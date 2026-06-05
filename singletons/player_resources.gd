@@ -1,5 +1,7 @@
 extends Node
 
+signal gameover
+
 var max_health: int = 20
 var _health: int = max_health
 var health: int:

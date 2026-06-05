@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b11xl85gbd31" path="res://player/health_pack.gd" id="1_g6q53"]
 [ext_resource type="Texture2D" uid="uid://70tvbig2m3g3" path="res://assets/player/HealthPotion_V1.png" id="2_g6q53"]
+[ext_resource type="AudioStream" uid="uid://dlnnqi0grtlef" path="res://assets/sound/Bottle Open Heal.wav" id="3_u6eg0"]
 
 [sub_resource type="Gradient" id="Gradient_lyew0"]
 offsets = PackedFloat32Array(0.26768348, 1)
@@ -15,11 +16,11 @@ fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0, 0.5517494)
 
-[sub_resource type="Gradient" id="Gradient_g6q53"]
+[sub_resource type="Gradient" id="Gradient_t2myp"]
 colors = PackedColorArray(0.76364434, 0.47033143, 0.46325058, 1, 0.66266, 0.25442743, 0.20874378, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_u6eg0"]
-gradient = SubResource("Gradient_g6q53")
+gradient = SubResource("Gradient_t2myp")
 width = 20
 height = 20
 fill = 1
@@ -30,7 +31,7 @@ fill_to = Vector2(0.5, 0)
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_u6eg0"]
+[sub_resource type="CurveTexture" id="CurveTexture_cypcm"]
 curve = SubResource("Curve_g6q53")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_g6q53"]
@@ -39,7 +40,7 @@ spread = 180.0
 initial_velocity_min = 78.59
 initial_velocity_max = 78.59
 gravity = Vector3(0, 9.8, 0)
-scale_curve = SubResource("CurveTexture_u6eg0")
+scale_curve = SubResource("CurveTexture_cypcm")
 turbulence_enabled = true
 turbulence_noise_strength = 3.48
 turbulence_influence_min = 0.257
@@ -129,3 +130,4 @@ libraries/ = SubResource("AnimationLibrary_u6eg0")
 autoplay = &"bob"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1352775463]
+stream = ExtResource("3_u6eg0")

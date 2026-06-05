@@ -9,5 +9,11 @@ func _on_area_enter(body: Area2D) -> void:
 	if PlayerResources.health == PlayerResources.max_health:
 		return
 	player.heal_damage(4)
-	($AudioStreamPlayer as AudioStreamPlayer).play()
+	var audio_stream: AudioStreamPlayer = $AudioStreamPlayer as AudioStreamPlayer
+	audio_stream.finished.connect(call_deferred.bind("queue_free"))
+	audio_stream.play()
+	remove_child(audio_stream)
+	# audio_stream.position = position
+	get_parent().add_child(audio_stream)
+
 	queue_free()
