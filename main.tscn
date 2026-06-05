@@ -19,6 +19,7 @@ process_mode = 1
 y_sort_enabled = true
 
 [node name="Player" parent="." unique_id=142514294 instance=ExtResource("1_0xm2m")]
+y_sort_enabled = true
 position = Vector2(495, 147)
 
 [node name="Camera2D" type="Camera2D" parent="Player/CameraTarget" parent_id_path=PackedInt32Array(142514294, 1228419122) index="0" unique_id=1787109863]
@@ -49,5 +50,9 @@ position = Vector2(919, 221)
 
 [node name="HealthPack" parent="." unique_id=267672596 instance=ExtResource("6_7mycd")]
 position = Vector2(547, 340)
+
+[node name="Enemies" type="Node2D" parent="." unique_id=27241167]
+
+[connection signal="take_damage" from="Player/AcidTarget" to="Player" method="take_damage"]
 
 [editable path="Player"]
