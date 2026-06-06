@@ -38,8 +38,10 @@ func _ready() -> void:
 
 func _load_level(level_index: int) -> void:
 	var tree_scene := get_tree().current_scene
-	var level: Node = tree_scene.get_child(4)
-	level.call_deferred("queue_free")
+	print(tree_scene.get_child_count())
+	if tree_scene.get_child_count() > 4:
+		var level: Node = tree_scene.get_child(4)
+		level.call_deferred("queue_free")
 	tree_scene.call_deferred("add_child", levels[level_index].instantiate())
 
 
@@ -48,6 +50,7 @@ func restart_game() -> void:
 	health = max_health
 	spells.resize(0)
 	spells.resize(3)
+	current_level = 0
 	# _load_level(0)
 
 

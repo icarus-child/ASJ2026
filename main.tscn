@@ -2,11 +2,13 @@
 
 [ext_resource type="Texture2D" uid="uid://wimut6swudts" path="res://assets/ui/TitleScreenEdit.png" id="3_7mycd"]
 [ext_resource type="Script" uid="uid://c8jmerdbc6jen" path="res://start_game.gd" id="3_272bh"]
-[ext_resource type="PackedScene" uid="uid://dlv31bfd7icp0" path="res://levels/level_one.tscn" id="3_h2yge"]
 [ext_resource type="Script" uid="uid://dq4htk4kho3gj" path="res://game_over.gd" id="4_1bvp3"]
 [ext_resource type="Texture2D" uid="uid://b4e4vxdqcioce" path="res://assets/ui/GameOverScreen.png" id="4_lquwl"]
 [ext_resource type="AudioStream" uid="uid://bqf8ikxhrfv8i" path="res://assets/music/Wizard city funk masterloop.wav" id="5_7mycd"]
 [ext_resource type="PackedScene" uid="uid://bi7880g0wx2x8" path="res://ui/ui.tscn" id="5_lquwl"]
+[ext_resource type="PackedScene" uid="uid://dgwgx0lt3bpa2" path="res://enemies/area_denial/acid.tscn" id="7_272bh"]
+[ext_resource type="PackedScene" uid="uid://cuqus86aawhbc" path="res://enemies/spells/electric_shot.tscn" id="8_5vw27"]
+[ext_resource type="PackedScene" uid="uid://281mvehs1hd0" path="res://player/health_pack.tscn" id="9_kek77"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7mycd"]
 bg_color = Color(0, 0, 0, 1)
@@ -95,7 +97,15 @@ grow_horizontal = 2
 grow_vertical = 0
 text = "TRY AGAIN?"
 
-[node name="LevelOne" parent="." unique_id=496425850 instance=ExtResource("3_h2yge")]
+[node name="Node2D" type="Node2D" parent="." unique_id=1582935017]
+
+[node name="Camera2D" type="Camera2D" parent="Node2D" unique_id=499932394]
+
+[node name="Node2D" parent="Node2D" unique_id=1668714962 instance=ExtResource("7_272bh")]
+
+[node name="ElectricShot" parent="Node2D" unique_id=2521761 instance=ExtResource("8_5vw27")]
+
+[node name="HealthPack" parent="Node2D" unique_id=267672596 instance=ExtResource("9_kek77")]
 
 [connection signal="pressed" from="StartGame/Control/Button" to="StartGame/Control" method="_start_game"]
 [connection signal="pressed" from="Control/Control/Button" to="Control/Control" method="_restart_game"]
