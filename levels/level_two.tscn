@@ -47,13 +47,10 @@ script = ExtResource("3_ba5af")
 position = Vector2(1076, 892)
 
 [node name="Grunt2" parent="Enemies" unique_id=108392883 instance=ExtResource("4_d3qt7")]
-position = Vector2(470, 437)
-
-[node name="Controller" parent="Enemies" unique_id=903390349 instance=ExtResource("5_2wd80")]
-position = Vector2(652, 411)
+position = Vector2(1649, 259)
 
 [node name="Electrician" parent="Enemies" unique_id=1223885712 instance=ExtResource("6_e70pa")]
-position = Vector2(1320, 499)
+position = Vector2(759, 440)
 
 [node name="Controller2" parent="Enemies" unique_id=772425631 instance=ExtResource("5_2wd80")]
 position = Vector2(525, 1)
@@ -66,7 +63,5 @@ position = Vector2(1267, 741)
 
 [node name="Electrician3" parent="Enemies" unique_id=1027880349 instance=ExtResource("6_e70pa")]
 position = Vector2(1053, 13)
-
-[connection signal="take_damage" from="Player/AcidTarget" to="Player" method="take_damage"]
 
 [editable path="Player"]

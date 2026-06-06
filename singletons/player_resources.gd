@@ -50,7 +50,6 @@ func restart_game() -> void:
 	health = max_health
 	spells.resize(0)
 	spells.resize(3)
-	current_level = 0
 	# _load_level(0)
 
 
@@ -71,5 +70,10 @@ func can_acquire_spell() -> bool:
 
 func load_next_level() -> void:
 	current_level += 1
+	assert(current_level <= last_level)
+	_load_level(current_level)
+
+
+func load_current_level() -> void:
 	assert(current_level <= last_level)
 	_load_level(current_level)

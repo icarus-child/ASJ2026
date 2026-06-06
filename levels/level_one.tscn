@@ -57,8 +57,6 @@ position = Vector2(770, 775)
 position = Vector2(429, 804)
 
 [node name="Electrician3" parent="Enemies" unique_id=91383607 instance=ExtResource("5_4wl7b")]
-position = Vector2(236, 46)
-
-[connection signal="take_damage" from="Player/AcidTarget" to="Player" method="take_damage"]
+position = Vector2(806, 320)
 
 [editable path="Player"]

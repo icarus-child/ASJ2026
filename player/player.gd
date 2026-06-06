@@ -6,6 +6,8 @@ extends CharacterBody2D
 @export var acid_speed: float
 @export var acid_accel: float
 
+var immortal: bool = false
+
 @onready var hurtbox: CollisionShape2D = $Hurtbox/CollisionShape2D
 @onready var parrybox: CollisionShape2D = $Parrybox/CollisionShape2D
 @onready var parry_cooldown_timer: Timer = $ParryCooldown
@@ -93,8 +95,21 @@ func parry_hit(parried: Callable, hit: Callable) -> void:
 
 
 func take_damage(amount: int = 1) -> void:
+	if immortal:
+		return
 	anim.hurt()
 	PlayerResources.health -= amount
+	immortal = true
+	add_child(_create_timer(1, func() -> void: immortal = false))
+	
+
+func _create_timer(duration: float, callback: Callable) -> Timer:
+	var timer := Timer.new()
+	timer.one_shot = true
+	timer.autostart = true
+	timer.wait_time = duration
+	timer.timeout.connect(callback)
+	return timer
 
 
 func heal_damage(amount: int = 1) -> void:

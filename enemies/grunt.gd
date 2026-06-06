@@ -11,7 +11,7 @@ var attack_recovery: float = 1
 var recovering_from_attack: bool = false
 
 var attack_range: float = 200
-var lunge_velocity: float = 600
+var lunge_velocity: float = 500
 
 var lunge_direction: Vector2
 

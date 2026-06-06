@@ -9,7 +9,7 @@ var blink_on_cooldown: bool = false
 var blink_trigger_range: float = 300
 var blink_cooldown: float = 10
 
-var can_attack: bool = true
+var can_attack: bool = false
 var min_attack_cooldown: float = 2
 var max_attack_cooldown: float = 4
 
@@ -29,7 +29,13 @@ var beam_scene: PackedScene = preload("res://enemies/spells/teleport_beam.tscn")
 
 
 func _custom_ready() -> void:
-	pass
+	add_child(
+		_create_timer(
+			randf_range(min_attack_cooldown, max_attack_cooldown),
+			func() -> void: can_attack = true
+		)
+	)
+	
 
 func _physics_process(delta: float) -> void:
 	if not following_player:

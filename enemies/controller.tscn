@@ -203,6 +203,7 @@ shape = SubResource("CircleShape2D_8ifd5")
 debug_color = Color(0.9015615, 0.25354874, 0.46391654, 0.41960785)
 
 [node name="DetectionRange" type="Area2D" parent="." unique_id=1251363973]
+visible = false
 collision_layer = 0
 collision_mask = 2
 

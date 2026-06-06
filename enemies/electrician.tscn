@@ -196,6 +196,7 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionRange" unique_id=1493156383]
+visible = false
 shape = SubResource("CircleShape2D_4hr46")
 debug_color = Color(0.5017757, 0.47703832, 0.86888754, 0.41960785)
 
