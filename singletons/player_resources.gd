@@ -38,7 +38,7 @@ func _ready() -> void:
 
 func _load_level(level_index: int) -> void:
 	var tree_scene := get_tree().current_scene
-	var level: Node = tree_scene.get_child(3)
+	var level: Node = tree_scene.get_child(4)
 	level.call_deferred("queue_free")
 	tree_scene.call_deferred("add_child", levels[level_index].instantiate())
 
