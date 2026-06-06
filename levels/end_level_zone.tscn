@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://bmf1g20aibx6i"]
+
+[ext_resource type="Script" uid="uid://df0q6x1ukbrvb" path="res://levels/end_level_zone.gd" id="1_qwefj"]
+[ext_resource type="Texture2D" uid="uid://dqybuslh80c1l" path="res://icon.svg" id="1_t2m8q"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t2m8q"]
+size = Vector2(112, 114)
+
+[node name="EndLevelZone" type="Node2D" unique_id=1020104713]
+visible = false
+z_index = -2
+script = ExtResource("1_qwefj")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=982433500]
+texture = ExtResource("1_t2m8q")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1879787234]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1210807861]
+shape = SubResource("RectangleShape2D_t2m8q")
+disabled = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1418612717]
+visible = false
+
+[node name="Label" type="Label" parent="CanvasLayer" unique_id=2085224751]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "YOU WIN"

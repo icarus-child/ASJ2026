@@ -31,7 +31,7 @@ fill_to = Vector2(0.5, 0)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vhept"]
 shader = ExtResource("2_jk044")
-shader_parameter/color = Color(0.39787096, 0.6346132, 0.2611401, 1)
+shader_parameter/color = Color(0.94094646, 0.3068996, 0.28987995, 1)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_r5eot"]
 radius = 221.88904

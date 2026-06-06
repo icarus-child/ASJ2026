@@ -1,42 +1,19 @@
-[gd_scene format=4 uid="uid://bn2rgbcn54r44"]
+[gd_scene format=3 uid="uid://bn2rgbcn54r44"]
 
-[ext_resource type="PackedScene" uid="uid://cfq3bkhk20pq3" path="res://player/player.tscn" id="1_0xm2m"]
-[ext_resource type="PackedScene" uid="uid://b5k8yiknx6yhx" path="res://enemies/controller.tscn" id="2_lquwl"]
-[ext_resource type="TileSet" uid="uid://74uvo3fcruv3" path="res://tile_set.tres" id="3_1bvp3"]
+[ext_resource type="Texture2D" uid="uid://wimut6swudts" path="res://assets/ui/TitleScreenEdit.png" id="3_7mycd"]
+[ext_resource type="Script" uid="uid://c8jmerdbc6jen" path="res://start_game.gd" id="3_272bh"]
+[ext_resource type="PackedScene" uid="uid://dlv31bfd7icp0" path="res://levels/level_one.tscn" id="3_h2yge"]
+[ext_resource type="Script" uid="uid://dq4htk4kho3gj" path="res://game_over.gd" id="4_1bvp3"]
+[ext_resource type="Texture2D" uid="uid://b4e4vxdqcioce" path="res://assets/ui/GameOverScreen.png" id="4_lquwl"]
 [ext_resource type="AudioStream" uid="uid://bqf8ikxhrfv8i" path="res://assets/music/Wizard city funk masterloop.wav" id="5_7mycd"]
 [ext_resource type="PackedScene" uid="uid://bi7880g0wx2x8" path="res://ui/ui.tscn" id="5_lquwl"]
-[ext_resource type="PackedScene" uid="uid://281mvehs1hd0" path="res://player/health_pack.tscn" id="6_7mycd"]
-[ext_resource type="PackedScene" uid="uid://dj7intpg1gv1b" path="res://enemies/grunt.tscn" id="7_272bh"]
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_1bvp3"]
-vertices = PackedVector2Array(1714, 818, 1998, 974, 50, 974, 1230, 818, 562, 818, 206, 818, 50, -78, 206, 462, 1998, -78, 1714, 78, 1230, 78, 434, 462, 562, 590, 434, 590)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2), PackedInt32Array(3, 0, 2), PackedInt32Array(4, 3, 2), PackedInt32Array(5, 4, 2), PackedInt32Array(5, 2, 6), PackedInt32Array(7, 5, 6), PackedInt32Array(8, 1, 0), PackedInt32Array(8, 0, 9), PackedInt32Array(6, 8, 9), PackedInt32Array(6, 9, 10), PackedInt32Array(7, 6, 10), PackedInt32Array(11, 7, 10), PackedInt32Array(11, 10, 3), PackedInt32Array(3, 4, 12), PackedInt32Array(11, 3, 12), PackedInt32Array(11, 12, 13)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-102, -230, -65, 1076, 2116, 1074, 2122, -225)])
-sample_partition_type = 1
-agent_radius = 50.0
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7mycd"]
+bg_color = Color(0, 0, 0, 1)
 
-[node name="Node2D" type="Node2D" unique_id=551024564]
+[node name="Main" type="Node2D" unique_id=551024564]
 process_mode = 1
 y_sort_enabled = true
-
-[node name="Player" parent="." unique_id=142514294 instance=ExtResource("1_0xm2m")]
-position = Vector2(495, 147)
-
-[node name="Camera2D" type="Camera2D" parent="Player/CameraTarget" parent_id_path=PackedInt32Array(142514294, 1228419122) index="0" unique_id=1787109863]
-zoom = Vector2(0.73, 0.73)
-process_callback = 0
-position_smoothing_enabled = true
-
-[node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=1347056112]
-y_sort_enabled = true
-position = Vector2(1, 0)
-navigation_polygon = SubResource("NavigationPolygon_1bvp3")
-
-[node name="TileMapLayer" type="TileMapLayer" parent="NavigationRegion2D" unique_id=952851721]
-y_sort_enabled = true
-position = Vector2(1, 0)
-tile_map_data = PackedByteArray("AAAAAP//BAAAAAAAAAAAAAAABAAAAAAAAAAAAAEABAAAAAAAAAAAAAIABAAAAAAAAAAAAAMABAAAAAAAAAAAAAQABAAAAAAAAAAAAAUABAAAAAAAAAAAAAYABAAAAAAAAAAAAAcABAAAAAAAAAABAP//BAAAAAAAAAABAAAABAAAAAAAAAABAAEABAAAAAAAAAABAAIABAAAAAAAAAABAAMABAAAAAAAAAABAAQABAAAAAAAAAABAAUABAAAAAAAAAABAAYABAAAAAAAAAABAAcABAAAAAAAAAACAP//BAAAAAAAAAACAAAABAAAAAAAAAACAAEABAAAAAAAAAACAAIABAAAAAAAAAACAAMABAAAAAAAAAACAAQABAADAAAAAAACAAUABAABAAAAAAACAAYABAAAAAAAAAACAAcABAAAAAAAAAADAP//BAAAAAAAAAADAAAABAAAAAAAAAADAAEABAAAAAAAAAADAAIABAAAAAAAAAADAAMABAAAAAAAAAADAAQABAAAAAAAAAADAAUABAABAAAAAAADAAYABAAAAAAAAAADAAcABAAAAAAAAAAEAP//BAAAAAAAAAAEAAAABAAAAAAAAAAEAAEABAAAAAAAAAAEAAIABAAAAAAAAAAEAAMABAAAAAAAAAAEAAQABAAAAAAAAAAEAAUABAAAAAAAAAAEAAYABAAAAAAAAAAEAAcABAAAAAAAAAAFAP//BAAAAAAAAAAFAAAABAAAAAAAAAAFAAEABAAAAAAAAAAFAAIABAAAAAAAAAAFAAMABAAAAAAAAAAFAAQABAAAAAAAAAAFAAUABAAAAAAAAAAFAAYABAAAAAAAAAAFAAcABAAAAAAAAAAGAP//BAAAAAAAAAAGAAAABAAAAAAAAAAGAAEABAAAAAAAAAAGAAIABAAAAAAAAAAGAAMABAAAAAAAAAAGAAQABAAAAAAAAAAGAAUABAAAAAAAAAAGAAYABAAAAAAAAAAGAAcABAAAAAAAAAAHAP//BAAAAAAAAAAHAAAABAAAAAAAAAAHAAEABAAAAAAAAAAHAAIABAAAAAAAAAAHAAMABAAAAAAAAAAHAAQABAAAAAAAAAAHAAUABAAAAAAAAAAHAAYABAAAAAAAAAAHAAcABAAAAAAAAAAIAP//BAAAAAAAAAAIAAAABAAAAAAAAAAIAAEABAAAAAAAAAAIAAIABAAAAAAAAAAIAAMABAAAAAAAAAAIAAQABAAAAAAAAAAIAAUABAAAAAAAAAAIAAYABAAAAAAAAAAIAAcABAAAAAAAAAAJAP//BAAAAAAAAAAJAAAABAAAAAAAAAAJAAEABAAAAAAAAAAJAAIABAAAAAAAAAAJAAMABAAAAAAAAAAJAAQABAAAAAAAAAAJAAUABAAAAAAAAAAJAAYABAAAAAAAAAAJAAcABAAAAAAAAAAKAP//BAAAAAAAAAAKAAAABAAAAAAAAAAKAAEABAADAAAAAAAKAAIABAADAAAAAAAKAAMABAADAAAAAAAKAAQABAADAAAAAAAKAAUABAABAAAAAAAKAAcABAAAAAAAAAALAP//BAAAAAAAAAALAAAABAAAAAAAAAALAAEABAADAAAAAAALAAIABAADAAAAAAALAAMABAADAAAAAAALAAQABAADAAAAAAALAAUABAABAAAAAAALAAcABAAAAAAAAAAMAP//BAAAAAAAAAAMAAAABAAAAAAAAAAMAAEABAADAAAAAAAMAAIABAADAAAAAAAMAAMABAADAAAAAAAMAAQABAADAAAAAAAMAAUABAABAAAAAAAMAAcABAAAAAAAAAANAP//BAAAAAAAAAANAAAABAAAAAAAAAANAAEABAAAAAAAAAANAAIABAAAAAAAAAANAAMABAAAAAAAAAANAAQABAAAAAAAAAANAAUABAAAAAAAAAANAAYABAAAAAAAAAANAAcABAAAAAAAAAAOAP//BAAAAAAAAAAOAAAABAAAAAAAAAAOAAEABAAAAAAAAAAOAAIABAAAAAAAAAAOAAMABAAAAAAAAAAOAAQABAAAAAAAAAAOAAUABAAAAAAAAAAOAAYABAAAAAAAAAAOAAcABAAAAAAAAAAPAP//BAAAAAAAAAAPAAAABAAAAAAAAAAPAAEABAAAAAAAAAAPAAIABAAAAAAAAAAPAAMABAAAAAAAAAAPAAQABAAAAAAAAAAPAAUABAAAAAAAAAAPAAYABAAAAAAAAAAPAAcABAAAAAAAAAAAAP7/BAABAAAAAAABAP7/BAABAAAAAAACAP7/BAABAAAAAAADAP7/BAABAAAAAAAEAP7/BAABAAAAAAAFAP7/BAABAAAAAAAGAP7/BAABAAAAAAAHAP7/BAABAAAAAAAIAP7/BAABAAAAAAAJAP7/BAABAAAAAAAKAP7/BAABAAAAAAALAP7/BAABAAAAAAAMAP7/BAABAAAAAAANAP7/BAABAAAAAAAOAP7/BAABAAAAAAAPAP7/BAABAAAAAAAQAP7/BAADAAAAAAAQAP//BAADAAAAAAAQAAAABAADAAAAAAAQAAEABAADAAAAAAAQAAIABAADAAAAAAAQAAMABAADAAAAAAAQAAQABAADAAAAAAAQAAUABAADAAAAAAAQAAYABAADAAAAAAAQAAcABAADAAAAAAAAAAgABAADAAAAAAABAAgABAADAAAAAAACAAgABAADAAAAAAADAAgABAADAAAAAAAEAAgABAADAAAAAAAFAAgABAADAAAAAAAGAAgABAADAAAAAAAHAAgABAADAAAAAAAIAAgABAADAAAAAAAJAAgABAADAAAAAAAKAAgABAADAAAAAAALAAgABAADAAAAAAAMAAgABAADAAAAAAANAAgABAADAAAAAAAOAAgABAADAAAAAAAPAAgABAADAAAAAAAQAAgABAADAAAAAAD///7/BAADAAAAAAD/////BAADAAAAAAD//wAABAADAAAAAAD//wEABAADAAAAAAD//wIABAADAAAAAAD//wMABAADAAAAAAD//wQABAADAAAAAAD//wUABAADAAAAAAD//wYABAADAAAAAAD//wcABAADAAAAAAD//wgABAADAAAAAAAKAAYABAAAAAAAAAALAAYABAAAAAAAAAAMAAYABAAAAAAAAAA=")
-tile_set = ExtResource("3_1bvp3")
 
 [node name="Ui" parent="." unique_id=1864841918 instance=ExtResource("5_lquwl")]
 
@@ -46,21 +23,79 @@ stream = ExtResource("5_7mycd")
 volume_db = -20.0
 autoplay = true
 
-[node name="HealthPack" parent="." unique_id=267672596 instance=ExtResource("6_7mycd")]
-position = Vector2(547, 340)
+[node name="StartGame" type="CanvasLayer" parent="." unique_id=958939843]
+process_mode = 3
 
-[node name="Enemies" type="Node2D" parent="." unique_id=27241167]
-y_sort_enabled = true
+[node name="Control" type="Control" parent="StartGame" unique_id=2034579988]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_272bh")
 
-[node name="Grunt" parent="Enemies" unique_id=1057874499 instance=ExtResource("7_272bh")]
-position = Vector2(1879, 867)
+[node name="TextureRect" type="TextureRect" parent="StartGame/Control" unique_id=310022322]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_7mycd")
+expand_mode = 2
+stretch_mode = 6
 
-[node name="Grunt2" parent="Enemies" unique_id=1794130473 instance=ExtResource("7_272bh")]
-position = Vector2(871, 145)
+[node name="Button" type="Button" parent="StartGame/Control" unique_id=638357104]
+layout_mode = 0
+offset_left = 812.0
+offset_top = 553.0
+offset_right = 1118.0
+offset_bottom = 615.0
+theme_override_font_sizes/font_size = 39
+theme_override_styles/normal = SubResource("StyleBoxFlat_7mycd")
+text = "CLICK TO BEGIN"
 
-[node name="Controller" parent="Enemies" unique_id=2136037629 instance=ExtResource("2_lquwl")]
-position = Vector2(619, 440)
+[node name="Control" type="CanvasLayer" parent="." unique_id=453225240]
+process_mode = 3
 
-[connection signal="take_damage" from="Player/AcidTarget" to="Player" method="take_damage"]
+[node name="Control" type="Control" parent="Control" unique_id=1653829360]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_1bvp3")
 
-[editable path="Player"]
+[node name="TextureRect" type="TextureRect" parent="Control/Control" unique_id=1894264445]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_lquwl")
+expand_mode = 2
+stretch_mode = 6
+
+[node name="Button" type="Button" parent="Control/Control" unique_id=2090883321]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -48.0
+offset_top = -68.0
+offset_right = 51.0
+offset_bottom = -37.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "TRY AGAIN?"
+
+[node name="LevelOne" parent="." unique_id=496425850 instance=ExtResource("3_h2yge")]
+
+[connection signal="pressed" from="StartGame/Control/Button" to="StartGame/Control" method="_start_game"]
+[connection signal="pressed" from="Control/Control/Button" to="Control/Control" method="_restart_game"]

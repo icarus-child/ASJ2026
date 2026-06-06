@@ -1,6 +1,18 @@
 extends Node
 
-signal gameover
+signal game_over
+signal level_done
+signal game_won
+signal health_changed(health: int)
+signal spell_changed(slot: int)
+
+var current_level: int = 0
+var last_level: int = 2
+var levels: Array[PackedScene] = [
+	preload("res://levels/level_one.tscn"),
+	preload("res://levels/level_two.tscn"),
+	preload("res://levels/level_three.tscn")
+]
 
 var max_health: int = 20
 var _health: int = max_health
@@ -14,16 +26,30 @@ var health: int:
 			health_changed.emit(new_health)
 		if _health == 0:
 			print("game over")
+			game_over.emit()
 
-signal health_changed(health: int)
 
 var spells: Array[Spell]
 
-signal spell_changed(slot: int)
 
 func _ready() -> void:
 	spells.resize(3)
-	#change_spells_size(4)
+
+
+func _load_level(level_index: int) -> void:
+	var tree_scene := get_tree().current_scene
+	var level: Node = tree_scene.get_child(3)
+	level.call_deferred("queue_free")
+	tree_scene.call_deferred("add_child", levels[level_index].instantiate())
+
+
+func restart_game() -> void:
+	get_tree().reload_current_scene()
+	health = max_health
+	spells.resize(0)
+	spells.resize(3)
+	# _load_level(0)
+
 
 func acquire_spell(spell: Spell) -> void:
 	for s in range(spells.size()):
@@ -32,12 +58,15 @@ func acquire_spell(spell: Spell) -> void:
 			spell_changed.emit(s)
 			break
 
+
 func can_acquire_spell() -> bool:
 	for s in spells:
 		if s == null:
 			return true
 	return false
 
-func change_spells_size(size: int) -> void:
-	spells.resize(size)
-	# update UI
+
+func load_next_level() -> void:
+	current_level += 1
+	assert(current_level <= last_level)
+	_load_level(current_level)

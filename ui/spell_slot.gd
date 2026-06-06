@@ -13,7 +13,7 @@ func _on_slot_change(slot: int) -> void:
 		return
 	
 	var spell := PlayerResources.spells[slot]
-	if spell == null:
+	if spell == null and _dummy:
 		_dummy.queue_free()
 		return
 	

@@ -10,7 +10,7 @@ extends CharacterBody2D
 var following_player: bool = false
 var health_pack_scene: PackedScene = preload("res://player/health_pack.tscn")
 
-@onready var player: Player = get_parent().get_parent().get_node("Player")
+@onready var player: Player = get_parent().get_parent().get_child(0)
 @onready var anim: EnemyAnimTree = $AnimationTree
 @onready var detection_range: Area2D = $DetectionRange
 
@@ -22,12 +22,12 @@ func _ready() -> void:
 	timer.timeout.connect(_update_navigation_target)
 	add_child(timer)
 
-	if detection_range.has_overlapping_areas():
-		following_player = true
-	else:
-		detection_range.area_entered.connect(func(_body: Area2D) -> void: following_player = true)
-
 	_custom_ready()
+
+
+func _process(_delta: float) -> void:
+	if not following_player and detection_range.has_overlapping_areas() and _has_line_of_sight():
+		following_player = true
 
 
 func _custom_ready() -> void:

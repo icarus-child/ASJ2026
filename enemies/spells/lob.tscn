@@ -149,7 +149,8 @@ stream_1/stream = ExtResource("4_i5iv7")
 stream_1/volume = -5.0
 
 [node name="Lob" type="RigidBody2D" unique_id=440662529]
-z_index = 2
+z_index = 19
+position = Vector2(1, 0)
 script = ExtResource("1_lyew0")
 
 [node name="Shadow" type="Sprite2D" parent="." unique_id=1598182493]

@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://cfq3bkhk20pq3"]
 
+[ext_resource type="Texture2D" uid="uid://dqybuslh80c1l" path="res://icon.svg" id="1_oul6g"]
 [ext_resource type="Script" uid="uid://cgt8i2arm7reo" path="res://player/player.gd" id="1_rkbax"]
 [ext_resource type="Texture2D" uid="uid://wll32upo16ek" path="res://assets/shadow.png" id="2_2ieo8"]
 [ext_resource type="Shader" uid="uid://sca5p05glnc6" path="res://assets/player/damage.gdshader" id="2_hg6s5"]
@@ -20,6 +21,7 @@
 [ext_resource type="AudioStream" uid="uid://bjtwtj0mpfjok" path="res://assets/sound/Player hurt.wav" id="13_32hag"]
 [ext_resource type="AudioStream" uid="uid://dfqhfifujqegw" path="res://assets/sound/Bag swoop.wav" id="15_tqiix"]
 [ext_resource type="AudioStream" uid="uid://dgvkmme43kgv7" path="res://assets/sound/Thunk B.wav" id="18_e7oew"]
+[ext_resource type="Script" uid="uid://c10mf2e8dxrfj" path="res://player/arrow.gd" id="22_bjvpn"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8t03j"]
 shader = ExtResource("2_hg6s5")
@@ -320,5 +322,14 @@ bus = &"ParryStart"
 stream = ExtResource("18_e7oew")
 volume_db = -5.0
 pitch_scale = 1.5
+
+[node name="Arrow" type="Sprite2D" parent="." unique_id=39899796]
+visible = false
+z_index = 20
+position = Vector2(3, -20)
+scale = Vector2(0.36335, 0.36335)
+texture = ExtResource("1_oul6g")
+offset = Vector2(299.98624, 0)
+script = ExtResource("22_bjvpn")
 
 [connection signal="take_damage" from="AcidTarget" to="." method="take_damage"]

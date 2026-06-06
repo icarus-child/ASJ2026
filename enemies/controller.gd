@@ -44,11 +44,6 @@ func _ready() -> void:
 		func() -> void: can_attack = true
 	))
 
-	if detection_range.has_overlapping_areas():
-		following_player = true
-	else:
-		detection_range.area_entered.connect(func(_body: Area2D) -> void: following_player = true)
-
 
 func _physics_process(delta: float) -> void:
 	if not following_player:
@@ -204,7 +199,7 @@ func _find_flank_position(teleport: bool = false) -> Vector2:
 		# get closest valid navmesh point
 		candidate = NavigationServer2D.map_get_closest_point(get_world_2d().navigation_map, candidate)
 		var score := _rate_position(candidate, ideal_distance, teleport)
-		_display_flanks_for_testing(score, candidate, i)
+		# _display_flanks_for_testing(score, candidate, i)
 
 		if score > best_score:
 			best_score = score
