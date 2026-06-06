@@ -38,7 +38,6 @@ func _ready() -> void:
 
 func _load_level(level_index: int) -> void:
 	var tree_scene := get_tree().current_scene
-	print(tree_scene.get_child_count())
 	if tree_scene.get_child_count() > 4:
 		var level: Node = tree_scene.get_child(4)
 		level.call_deferred("queue_free")

@@ -4,8 +4,6 @@ extends Node2D
 @export var max_radius: float = 400
 @export var speed: float = 5
 
-var ally_ring: GradientTexture2D = preload("res://assets/enemies/electrician/ally_ring.tres")
-
 @onready var sprite := $Sprite2D as Sprite2D
 @onready var shape := ($Hitbox/CollisionShape2D as CollisionShape2D).shape as CircleShape2D
 @onready var shape_scale_amount: float = shape.radius * speed
@@ -36,6 +34,7 @@ func _physics_process(delta: float) -> void:
 
 class PSpell extends Spell:
 	const spell_scene: PackedScene = preload("res://enemies/spells/electric_circle.tscn")
+	var ally_ring: GradientTexture2D = preload("res://assets/enemies/electrician/ally_ring.tres")
 
 	func dummy() -> Node2D:
 		return (load("res://enemies/spells/spell_icons/electric_circle_icon.tscn") as PackedScene).instantiate()
@@ -46,12 +45,12 @@ class PSpell extends Spell:
 	func fire_attack(caster: Node2D, heading: Vector2) -> void:
 		var projectile := spell_scene.instantiate() as ElectricCircle
 		if caster is Player:
+			(projectile.get_child(0) as Sprite2D).texture = ally_ring
 			(projectile.get_child(1) as Area2D).collision_mask = 32
 			var target := NavigationServer2D.map_get_closest_point(
 				caster.get_world_2d().navigation_map,
 				caster.global_position + heading
 			)
 			caster.global_position = target
-		if caster is not Player:
-			projectile.position = caster.position
-			caster.add_sibling(projectile)
+		projectile.position = caster.position
+		caster.add_sibling(projectile)
