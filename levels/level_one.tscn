@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://kskr7qxf3fwh" path="res://enemies.gd" id="3_hu4x8"]
 [ext_resource type="PackedScene" uid="uid://dj7intpg1gv1b" path="res://enemies/grunt.tscn" id="4_jj3p3"]
 [ext_resource type="PackedScene" uid="uid://bghrag6aan4bj" path="res://enemies/electrician.tscn" id="5_4wl7b"]
+[ext_resource type="PackedScene" uid="uid://b5k8yiknx6yhx" path="res://enemies/controller.tscn" id="7_hu4x8"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_7qlxi"]
 vertices = PackedVector2Array(1999, 434, 2068.9531, 434, 2068.8203, 462, 1999, 462, 1331, 306, 1331, -78, 1487, -78, 1487, 434, 1843, 434, 1843, 178, 1999, 178, 1999, 718, 1843, 718, 1843, 462, 1487, 462, 1487, 974, 1331, 974, 1331, 590, 975, 590, 975, 974, 51, 974, 51, -78, 975, -78, 975, 306)
@@ -58,5 +59,8 @@ position = Vector2(429, 804)
 
 [node name="Electrician3" parent="Enemies" unique_id=91383607 instance=ExtResource("5_4wl7b")]
 position = Vector2(806, 320)
+
+[node name="Controller" parent="Enemies" unique_id=234503450 instance=ExtResource("7_hu4x8")]
+position = Vector2(279, 540)
 
 [editable path="Player"]

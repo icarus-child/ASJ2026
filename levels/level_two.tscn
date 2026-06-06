@@ -16,6 +16,7 @@ sample_partition_type = 1
 agent_radius = 50.0
 
 [node name="LevelOne" type="Node2D" unique_id=496425850]
+y_sort_enabled = true
 
 [node name="Player" parent="." unique_id=142514294 instance=ExtResource("1_d0lx0")]
 position = Vector2(35, 424)

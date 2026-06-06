@@ -60,7 +60,7 @@ tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 2),
-"transitions": PackedFloat32Array(1, 1),
+"transitions": PackedFloat32Array(1, 5.098933),
 "update": 0,
 "values": [Vector2(1.045029, 0.6583092), Vector2(0.708, 0.445)]
 }
@@ -72,7 +72,7 @@ tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0, 2),
-"transitions": PackedFloat32Array(1, 1),
+"transitions": PackedFloat32Array(1, 5.1391263),
 "update": 0,
 "values": [Vector2(0.44759643, 0.28196046), Vector2(0.708, 0.446)]
 }
@@ -142,6 +142,7 @@ scale = Vector2(1.9689934, 1.9689934)
 
 [node name="Target" type="Sprite2D" parent="Node2D" unique_id=2085400641]
 z_index = -1
+position = Vector2(2.9802322e-08, 0)
 scale = Vector2(0.7078861, 0.44605377)
 texture = ExtResource("2_13ycv")
 
@@ -151,6 +152,7 @@ scale = Vector2(1.045029, 0.6583092)
 texture = ExtResource("2_13ycv")
 
 [node name="IndicatorIn" type="Sprite2D" parent="Node2D" unique_id=1324098431]
+visible = false
 z_index = -1
 scale = Vector2(0.44759643, 0.28196046)
 texture = ExtResource("2_13ycv")
@@ -166,6 +168,7 @@ visible = false
 scale = Vector2(0.7078861, 0.44605377)
 collision_layer = 0
 collision_mask = 2
+linear_damp_space_override = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=915727277]
 shape = SubResource("CircleShape2D_saj2p")
@@ -173,6 +176,7 @@ shape = SubResource("CircleShape2D_saj2p")
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=203360235]
 root_node = NodePath("../Node2D/Target")
 libraries/ = SubResource("AnimationLibrary_7kic1")
+autoplay = &"land"
 
 [node name="AnimationTree" type="AnimationTree" parent="." unique_id=1872031221]
 root_node = NodePath("../Node2D/Target")

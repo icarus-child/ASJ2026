@@ -16,6 +16,7 @@ sample_partition_type = 1
 agent_radius = 50.0
 
 [node name="LevelOne" type="Node2D" unique_id=496425850]
+y_sort_enabled = true
 
 [node name="Player" parent="." unique_id=142514294 instance=ExtResource("1_y5xn8")]
 position = Vector2(1076, 682)
@@ -84,7 +85,5 @@ position = Vector2(-128, 259)
 
 [node name="EndLevelZone" parent="." unique_id=1020104713 instance=ExtResource("7_xw12x")]
 position = Vector2(972, 630)
-
-[connection signal="take_damage" from="Player/AcidTarget" to="Player" method="take_damage"]
 
 [editable path="Player"]
